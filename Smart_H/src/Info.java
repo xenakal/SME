@@ -1,3 +1,7 @@
+/**
+ *  This class is used to transfer from sensors to Managers
+ */
+
 public class Info {
     public String name;
     public int value;
