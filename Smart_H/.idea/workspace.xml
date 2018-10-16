@@ -2,10 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b6d7b036-f4f7-4174-8bac-a1427ee0f251" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/Smart_H/Script.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Smart_H/Sensor.class" afterPath="$PROJECT_DIR$/out/production/Smart_H/Sensor.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Smart_H/Script.class" afterPath="$PROJECT_DIR$/out/production/Smart_H/Script.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Smart_H/Smart_Home.class" afterPath="$PROJECT_DIR$/out/production/Smart_H/Smart_Home.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Script.java" afterPath="$PROJECT_DIR$/src/Script.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Smart_Home.java" afterPath="$PROJECT_DIR$/src/Smart_Home.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -48,11 +48,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Smart_Home.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Smart_Home.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Smart_Home.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="433">
-              <caret line="22" column="0" lean-forward="true" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
+            <state relative-caret-position="288">
+              <caret line="9" column="5" lean-forward="false" selection-start-line="9" selection-start-column="5" selection-end-line="9" selection-end-column="5" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Script.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/Script.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="736">
+              <caret line="23" column="0" lean-forward="true" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -90,7 +100,9 @@
       <list>
         <option value="$PROJECT_DIR$/src/Light.java" />
         <option value="$PROJECT_DIR$/src/Sensor.java" />
+        <option value="$PROJECT_DIR$/src/LightManager.java" />
         <option value="$PROJECT_DIR$/src/Smart_Home.java" />
+        <option value="$PROJECT_DIR$/src/Script.java" />
       </list>
     </option>
   </component>
@@ -159,7 +171,7 @@
   <component name="RunManager" selected="Application.Smart_home">
     <configuration name="Smart_home" type="Application" factoryName="Application">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <option name="MAIN_CLASS_NAME" value="Smart_Home" />
+      <option name="MAIN_CLASS_NAME" value="Script" />
       <option name="VM_PARAMETERS" value="" />
       <option name="PROGRAM_PARAMETERS" value="" />
       <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
@@ -406,6 +418,22 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/Light.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="224">
+          <caret line="7" column="11" lean-forward="false" selection-start-line="7" selection-start-column="11" selection-end-line="7" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/LightManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="128">
+          <caret line="4" column="1" lean-forward="false" selection-start-line="4" selection-start-column="1" selection-end-line="4" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Sensor.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="64">
@@ -424,18 +452,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Light.java">
+    <entry file="file://$PROJECT_DIR$/src/Smart_Home.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="224">
-          <caret line="7" column="11" lean-forward="false" selection-start-line="7" selection-start-column="11" selection-end-line="7" selection-end-column="11" />
+        <state relative-caret-position="288">
+          <caret line="9" column="5" lean-forward="false" selection-start-line="9" selection-start-column="5" selection-end-line="9" selection-end-column="5" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Smart_Home.java">
+    <entry file="file://$PROJECT_DIR$/src/Script.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="433">
-          <caret line="22" column="0" lean-forward="true" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
+        <state relative-caret-position="736">
+          <caret line="23" column="0" lean-forward="true" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
           <folding />
         </state>
       </provider>
