@@ -1,3 +1,3 @@
 public interface FeatureManager {
-    public void react(String[] info);
+    public void react(Info[] info);
 }
