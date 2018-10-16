@@ -1,12 +1,13 @@
 import java.util.*;
 
-public class Sensor {
+public class Sensor extends Thread{
 
     private Light connected_light;
     private boolean l_switch = false; // false -> light off, true -> light on
     private boolean movement = false; // if movement is detected
     public List<Light> obsList = new LinkedList<Light>();    //TODO FEATUREMANAGER
     public Sensor(Light light){
+        System.out.println("ok in constructor of ligh");
         this.connected_light = light;
     }
 
