@@ -18,18 +18,15 @@ public class Smart_Home {
         light_sensor.sensor_on(); // senseur allumé: "sensor is on"
 
         light_sensor.start();
+
         light_sensor.detect_movement(); // movement = true
-        while(!light_sensor.synch){
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
 
-        light_sensor.sensor_on();
-        light_sensor.run(); // faut faire en sorte que ca tourne
-        light_sensor.detect_movement();
         light_sensor.sensor_off();
 
     }
