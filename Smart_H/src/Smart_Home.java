@@ -13,9 +13,9 @@ public class Smart_Home {
         Light living_light = new Light();
         Sensor light_sensor = new Sensor(living_light);
 
-        light_sensor.sensor_on();
-        light_sensor.run(); // faut faire en sorte que ca tourne
-        light_sensor.detect_movement();
+        light_sensor.sensor_on(); // senseur allumé: "sensor is on"
+        light_sensor.start();
+        light_sensor.detect_movement(); // movement = true
         light_sensor.sensor_off();
 
     }
