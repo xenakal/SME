@@ -16,6 +16,7 @@ abstract class AbsSensor {
         System.out.println("sensor is on");
         l_switch = true;
     }
+
     public void sensor_off(){
         System.out.println("sensor is off");
         l_switch = false;
@@ -26,6 +27,7 @@ abstract class AbsSensor {
             obsList.add(obs);
         }
     }
+
     public void detach(Light obs){
         obsList.remove(obs);
     }

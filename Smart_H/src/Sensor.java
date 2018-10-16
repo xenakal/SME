@@ -1,33 +1,41 @@
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 
-public class Sensor extends Thread{
+public class Sensor extends Thread {
 
     private Light connected_light;
-    private boolean l_switch = false; // false -> light off, true -> light on
-    private boolean movement = false; // if movement is detected
-    public boolean synch = false;
+    private boolean l_switch; // false -> light off, true -> light on
+    private boolean movement; // if movement is detected
+    private long startTime;
 
 
     public List<Light> obsList = new LinkedList<Light>();    //TODO FEATUREMANAGER
+
     public Sensor(Light light){
-        System.out.println("ok in constructor of ligh");
         this.connected_light = light;
+        l_switch = false;
+        movement = false;
     }
 
     public void sensor_on(){
         System.out.println("sensor is on");
         l_switch = true;
+        start();
     }
+
     public void sensor_off(){
         System.out.println("sensor is off");
         l_switch = false;
+        System.out.println(l_switch);
     }
 
-    public void detect_movement(){
-        movement = true;
+    public void detect(int value){
+        if(value==1)
+            movement = true;
     }
 
     private void light_on(){
+        startTime = System.currentTimeMillis();
         connected_light.turn_on();
     }
 
@@ -37,21 +45,20 @@ public class Sensor extends Thread{
 
     public void run(){
         while(l_switch){
-            if(!connected_light.on) { // light off
+            if(!connected_light.on){ // light off
                 if (movement) {
                     light_on();
-                    synch = true;
-                    break;
                 }
             }
             else{ // light on
-                if (!movement)
+                if(System.currentTimeMillis() - startTime >= 10000) { // bcp de temps sans mouvement
+                    System.out.println("timeout");
                     light_off();
-                    synch = true;
-                    break; 
-
+                }
+                if (!movement) {
+                    light_off();
+                }
             }
-
         }
     }
 
