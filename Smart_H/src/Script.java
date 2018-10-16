@@ -1,8 +1,8 @@
 public class Script {
 
-    public static void waitt(){
+    public static void waitt(int time){
         try {
-            Thread.sleep(1000);
+            Thread.sleep(time);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -19,10 +19,33 @@ public class Script {
 
         light_sensor.detect(1); // movement = true
 
-        waitt();
+        waitt(10002);
+        light_sensor.detect(1);
 
+
+        waitt(900);
         light_sensor.sensor_off();
 
+        light_sensor.sensor_on();
+
+        light_sensor.detect(1);
+        waitt(1000);
+        light_sensor.sensor_off();
+
+
+        /* Sould print:
+                sensor is on
+                light on
+                time out
+                light off
+                light on
+                sensor is off
+                light off
+                sensor is on
+                light is on
+                sensor is off
+                light is off
+         */
     }
 
 }
