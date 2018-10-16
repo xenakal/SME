@@ -1,3 +1,4 @@
+import java.lang.reflect.Array;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
@@ -9,7 +10,7 @@ public class Sensor extends Thread {
     private long startTime;
 
 
-    public List<Light> obsList = new LinkedList<Light>();    //TODO FEATUREMANAGER
+    public List<FeatureManager> obsList = new LinkedList<FeatureManager>();
 
     public Sensor(Light light){
         this.connected_light = light;
@@ -46,36 +47,38 @@ public class Sensor extends Thread {
         while(l_switch){
             if(!connected_light.on){ // light off
                 if (movement==1) {
-                    light_on();
+                    //this.advertise(); //TODO decomment this line
+                    light_on(); //TODO remove this line
                 }
             }
             else{ // light on
                 if(System.currentTimeMillis() - startTime >= 10000) { // bcp de temps sans mouvement
                     System.out.println("timeout");
-                    light_off();
+                    //this.advertise();
+                    light_off(); //TODO remove this line
                 }
                 if (movement==0) {
-                    light_off();
+                    //this.advertise();
+                    light_off(); //TODO remove this line
                 }
             }
         }
     }
 
-    public void attach(Light obs){
+    public void attach(FeatureManager obs){
         if (!obsList.contains(obs)){
             obsList.add(obs);
         }
     }
 
-    public void detach(Light obs){
+    public void detach(FeatureManager obs){
         obsList.remove(obs);
     }
 
     public void advertise(){
-        for (Light o: obsList
+        for (FeatureManager o: obsList
              ) {
             o.react(new Info("motion",  movement));
-            o.turn_on();
         }
     }
 
