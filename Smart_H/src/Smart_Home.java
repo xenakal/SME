@@ -15,7 +15,6 @@ public class Smart_Home {
         Sensor light_sensor = new Sensor(living_light);
         Smart_Home sh = new Smart_Home(light_sensor,living_light);
 
-
         light_sensor.sensor_on(); // senseur allumé: "sensor is on"
 
         light_sensor.start();
@@ -27,6 +26,10 @@ public class Smart_Home {
                 e.printStackTrace();
             }
         }
+
+        light_sensor.sensor_on();
+        light_sensor.run(); // faut faire en sorte que ca tourne
+        light_sensor.detect_movement();
         light_sensor.sensor_off();
 
     }

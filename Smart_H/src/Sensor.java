@@ -1,3 +1,5 @@
+import java.util.*;
+
 public class Sensor extends Thread{
 
     private Light connected_light;
@@ -6,6 +8,7 @@ public class Sensor extends Thread{
     public boolean synch = false;
 
 
+    public List<Light> obsList = new LinkedList<Light>();    //TODO FEATUREMANAGER
     public Sensor(Light light){
         System.out.println("ok in constructor of ligh");
         this.connected_light = light;
@@ -51,5 +54,24 @@ public class Sensor extends Thread{
 
         }
     }
+
+    public void attach(Light obs){
+        if (!obsList.contains(obs)){
+            obsList.add(obs);
+        }
+    }
+
+    public void detach(Light obs){
+        obsList.remove(obs);
+    }
+
+    public void advertise(){
+        for (Light o: obsList
+             ) {
+            //o.react(info);
+            o.turn_on();
+        }
+    }
+
 
 }
