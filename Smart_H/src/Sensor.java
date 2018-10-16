@@ -75,7 +75,7 @@ public class Sensor extends Thread {
     public void advertise(){
         for (Light o: obsList
              ) {
-            //o.react(info);
+            o.react(new Info("motion",  movement));
             o.turn_on();
         }
     }

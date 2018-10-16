@@ -26,7 +26,7 @@ public class Lightmanager implements FeatureManager{
         return lights;
     }
 
-    
+
     @Override
     public void react(Info[] infoTab) {
         for (Info info: infoTab
