@@ -5,7 +5,7 @@ public class Sensor extends Thread {
 
     private Light connected_light;
     private volatile boolean l_switch; // false -> light off, true -> light on
-    private boolean movement; // if movement is detected
+    private int movement; // if movement is detected (0==false)
     private long startTime;
 
 
@@ -14,7 +14,7 @@ public class Sensor extends Thread {
     public Sensor(Light light){
         this.connected_light = light;
         l_switch = false;
-        movement = false;
+        movement = 0;
     }
 
     public void sensor_on(){
@@ -30,7 +30,7 @@ public class Sensor extends Thread {
 
     public void detect(int value){
         if(value==1)
-            movement = true;
+            movement = 1; // true
     }
 
     private void light_on(){
@@ -45,7 +45,7 @@ public class Sensor extends Thread {
     public void run(){
         while(l_switch){
             if(!connected_light.on){ // light off
-                if (movement) {
+                if (movement==1) {
                     light_on();
                 }
             }
@@ -54,7 +54,7 @@ public class Sensor extends Thread {
                     System.out.println("timeout");
                     light_off();
                 }
-                if (!movement) {
+                if (movement==0) {
                     light_off();
                 }
             }
