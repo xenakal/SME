@@ -21,8 +21,6 @@ public class Script {
 
         waitt();
 
-        light_sensor.detect(1);
-
         light_sensor.sensor_off();
 
     }

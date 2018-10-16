@@ -4,7 +4,7 @@ import java.util.concurrent.TimeUnit;
 public class Sensor extends Thread {
 
     private Light connected_light;
-    private boolean l_switch; // false -> light off, true -> light on
+    private volatile boolean l_switch; // false -> light off, true -> light on
     private boolean movement; // if movement is detected
     private long startTime;
 
@@ -26,7 +26,6 @@ public class Sensor extends Thread {
     public void sensor_off(){
         System.out.println("sensor is off");
         l_switch = false;
-        System.out.println(l_switch);
     }
 
     public void detect(int value){
