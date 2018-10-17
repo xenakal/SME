@@ -44,20 +44,6 @@ public class Script {
         waitt(1000);
         light_sensor.sensor_off();
 
-
-        /* Sould print:
-                sensor is on
-                light on
-                time out
-                light off
-                light on
-                sensor is off
-                light off
-                sensor is on
-                light is on
-                sensor is off
-                light is off
-         */
     }
 
 }
