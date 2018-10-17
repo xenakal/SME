@@ -33,6 +33,7 @@ public class MotionDetector implements Runnable{
 
     public void detect(int value){
         if (value != movement){
+            startTime = System.currentTimeMillis();
             ischangedvalue = true;
             movement = value;
         }
@@ -48,7 +49,7 @@ public class MotionDetector implements Runnable{
         connected_light.turn_off();
     }
 
-    public void run(){
+    public void run2(){
         while(l_switch){
             if(!connected_light.on){ // light off
                 if (movement==1) {
@@ -68,23 +69,17 @@ public class MotionDetector implements Runnable{
         }
     }
 
-    public void newRun(){
-
-        while(l_switch){
-
-        }
-
-    }
-
-
-    public void run2(){
+    public void run(){
         while(l_switch){
             if(ischangedvalue){
-                ischangedvalue = false;
-                this.advertise();
+                if(movement == 1){
+                    this.advertise();
+                }else if(System.currentTimeMillis() - startTime >= 10000){ //mvt == 0 + delais ecoule
+                    advertise();
+                }
+
             }
             //sleep
-
         }
     }
 
@@ -99,11 +94,14 @@ public class MotionDetector implements Runnable{
     }
 
     public void advertise(){
+        ischangedvalue = false;
         for (FeatureManager o: obsList
              ) {
             o.react(new Info("motion",  movement));
         }
     }
+
+    //private Info makeinfo
 
 
 }
