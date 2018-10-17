@@ -41,34 +41,6 @@ public class MotionDetector implements Runnable{
 
     }
 
-    /*private void light_on(){
-        connected_light.turn_on();
-    }
-
-    private void light_off(){
-        connected_light.turn_off();
-    }*/
-
-    /*public void run2(){
-        while(l_switch){
-            if(!connected_light.on){ // light off
-                if (movement==1) {
-                    startTime = System.currentTimeMillis();
-                    this.advertise(); //TODO decomment this line
-                    //light_on(); //TODO remove this line
-                }
-            }
-            else{ // light on
-                if(System.currentTimeMillis() - startTime >= 10000) { // bcp de temps sans mouvement
-                    System.out.println("timeout");
-                    movement=0; // Du coup en fait ca va continuer à être "on", jusqu'à ce que il n'y ai plus de mouvements pdt 10 sec
-                    this.advertise();
-                    //light_off(); //TODO remove this line
-                }
-            }
-        }
-    }*/
-
     public void run(){
         while(l_switch){
             if(ischangedvalue){
@@ -77,7 +49,6 @@ public class MotionDetector implements Runnable{
                 }else if(System.currentTimeMillis() - startTime >= 10000){ //mvt == 0 + delais ecoule
                     advertise();
                 }
-
             }
             //sleep
         }
