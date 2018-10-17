@@ -21,7 +21,7 @@ public class Script {
         lightmanager.addLight(living_light2);
 
         //init sensors
-        Sensor light_sensor = new Sensor(living_light);
+        MotionDetector light_sensor = new MotionDetector(living_light);
         light_sensor.attach(lightmanager);
 
 
@@ -44,20 +44,6 @@ public class Script {
         waitt(1000);
         light_sensor.sensor_off();
 
-
-        /* Sould print:
-                sensor is on
-                light on
-                time out
-                light off
-                light on
-                sensor is off
-                light off
-                sensor is on
-                light is on
-                sensor is off
-                light is off
-         */
     }
 
 }
