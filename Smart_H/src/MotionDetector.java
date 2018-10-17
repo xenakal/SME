@@ -71,7 +71,6 @@ public class MotionDetector implements Runnable{
     public void run2(){
         while(l_switch){
             if(ischangedvalue){
-                ischangedvalue = false;
                 this.advertise();
             }
             //sleep
@@ -90,11 +89,14 @@ public class MotionDetector implements Runnable{
     }
 
     public void advertise(){
+        ischangedvalue = false;
         for (FeatureManager o: obsList
              ) {
             o.react(new Info("motion",  movement));
         }
     }
+
+    //private Info makeinfo
 
 
 }
