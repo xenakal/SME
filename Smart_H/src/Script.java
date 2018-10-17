@@ -12,8 +12,8 @@ public class Script {
     public static void main(String[] args){
 
         //Initialise Controlled devices
-        Light living_light = new Light();
-        Light living_light2 = new Light(); //une 2e lampe
+        Light living_light = new Light("living_1");
+        Light living_light2 = new Light("living_2"); //une 2e lampe
 
         //init manger
         Lightmanager lightmanager = new Lightmanager();
