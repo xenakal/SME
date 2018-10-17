@@ -29,20 +29,33 @@ public class Script {
 
         light_sensor.sensor_on(); // senseur allumé: "sensor is on" (run en boucle jusqu'au sensor_off)
 
-        light_sensor.detect(1); // movement = true
+        System.out.println("Mark rentre dans la piece");
+        light_sensor.detect(1); // mark rentre dans la piece
+        waitt(1000);
+        System.out.println("Mark bouge");
+        light_sensor.detect(1); // mark bouge
         waitt(1000);
         //light on
 
+        System.out.println("Mark bouge plus");
         light_sensor.detect(0);//mark ne bouge plus
         waitt(1000);
+        System.out.println("Mark bouge plus");
+        light_sensor.detect(0);//mark ne bouge plus
+        waitt(1000);
+        System.out.println("Mark bouge");
         light_sensor.detect(1);//mark rebouge
         waitt(1000);
+        System.out.println("Mark quitte la piece");
         light_sensor.detect(0);// mark quitte la piece
-        waitt(10012);
+        waitt(10512);
         //light off
+        System.out.println("Mark rentre dans la piece");
+        light_sensor.detect(1); // Mark rentre dans la piece
+        waitt(1000);
 
         waitt(9999);
-        light_sensor.sensor_off();
+        light_sensor.sensor_off(); //Mark eteint le sensor
 
     }
 
