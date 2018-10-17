@@ -5,7 +5,7 @@ import java.util.List;
  * Manage the activation/disactivation of lights  according to presence of people
  */
 
-public class Lightmanager implements FeatureManager{
+public class Lightmanager {//implements FeatureManager{
     private List<Light> lights ;
 
     public Lightmanager() {
@@ -27,7 +27,7 @@ public class Lightmanager implements FeatureManager{
     }
 
 
-    @Override
+    //@Override
     public void react(Info[] infoTab) {
         for (Info info: infoTab
              ) {
