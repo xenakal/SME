@@ -30,20 +30,20 @@ public class Lightmanager implements FeatureManager{
     @Override
     public void react(Info info) {
         //for (Info info: infoTab
-          //   ) {
-            switch (info.name) {
-                case "motion" :
-                    if (info.value == 1) {  //true = 1
-                        for (Light li : lights) {
-                            li.turn_on();
-                        }
-                    }else{
-                        for (Light li : lights) {
-                            li.turn_off();
-                        }
+        //   ) {
+        switch (info.name) {
+            case "motion" :
+                if (info.value == 1) {  //true = 1
+                    for (Light li : lights) {
+                        li.turn_on();
                     }
-                    break;
-                    default: break;
+                }else{
+                    for (Light li : lights) {
+                        li.turn_off();
+                    }
+                }
+                break;
+            default: break;
             //}
 
         }
