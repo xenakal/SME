@@ -2,7 +2,7 @@ import java.util.*;
 
 public class MotionDetector implements Runnable{
 
-    private Light connected_light;
+    //private Light connected_light;
     private volatile boolean l_switch; // false -> light off, true -> light on
     private int movement; // if movement is detected (0==false)
     private long startTime;
@@ -12,10 +12,10 @@ public class MotionDetector implements Runnable{
     public List<FeatureManager> obsList = new LinkedList<FeatureManager>();
 
     public MotionDetector(Light light){
-        this.connected_light = light;
+        //this.connected_light = light;
         l_switch = false;
         movement = 0;
-        connected_light.on = false;
+        //connected_light.on = false;
     }
 
     public void sensor_on(){
@@ -28,7 +28,7 @@ public class MotionDetector implements Runnable{
     public void sensor_off(){
         System.out.println("sensor is off");
         l_switch = false;
-        connected_light.turn_off();
+        //connected_light.turn_off();
     }
 
     public void detect(int value){
@@ -41,13 +41,13 @@ public class MotionDetector implements Runnable{
 
     }
 
-    private void light_on(){
+    /*private void light_on(){
         connected_light.turn_on();
     }
 
     private void light_off(){
         connected_light.turn_off();
-    }
+    }*/
 
     /*public void run2(){
         while(l_switch){
@@ -81,6 +81,8 @@ public class MotionDetector implements Runnable{
             }
             //sleep
         }
+        detect(0);//pas de capteur pas de mouvement
+        advertise();
     }
 
     public void attach(FeatureManager obs){
