@@ -34,7 +34,7 @@ public class MotionDetector implements Runnable{
     public void detect(int value){
         if (value != movement){
             startTime = System.currentTimeMillis();
-            ischangedvalue = true;
+            ischangedvalue = !ischangedvalue;  //pour mettre ischangedValue a false si double changement
             movement = value;
         }
 
@@ -49,7 +49,7 @@ public class MotionDetector implements Runnable{
         connected_light.turn_off();
     }
 
-    public void run2(){
+    /*public void run2(){
         while(l_switch){
             if(!connected_light.on){ // light off
                 if (movement==1) {
@@ -67,7 +67,7 @@ public class MotionDetector implements Runnable{
                 }
             }
         }
-    }
+    }*/
 
     public void run(){
         while(l_switch){

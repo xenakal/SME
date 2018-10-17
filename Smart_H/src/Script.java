@@ -30,15 +30,18 @@ public class Script {
         light_sensor.sensor_on(); // senseur allumé: "sensor is on" (run en boucle jusqu'au sensor_off)
 
         light_sensor.detect(1); // movement = true
+        waitt(1000);
         //light on
+
         light_sensor.detect(0);//mark ne bouge plus
         waitt(1000);
         light_sensor.detect(1);//mark rebouge
         waitt(1000);
         light_sensor.detect(0);// mark quitte la piece
-        waitt(10002);
+        waitt(10012);
         //light off
 
+        waitt(9999);
         light_sensor.sensor_off();
 
     }
