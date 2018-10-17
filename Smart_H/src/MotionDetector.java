@@ -68,6 +68,15 @@ public class MotionDetector implements Runnable{
         }
     }
 
+    public void newRun(){
+
+        while(l_switch){
+
+        }
+
+    }
+
+
     public void run2(){
         while(l_switch){
             if(ischangedvalue){

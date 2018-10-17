@@ -29,8 +29,6 @@ public class Lightmanager implements FeatureManager{
 
     @Override
     public void react(Info info) {
-        //for (Info info: infoTab
-        //   ) {
         switch (info.name) {
             case "motion" :
                 if (info.value == 1) {  //true = 1
@@ -44,8 +42,6 @@ public class Lightmanager implements FeatureManager{
                 }
                 break;
             default: break;
-            //}
-
         }
     }
 }
