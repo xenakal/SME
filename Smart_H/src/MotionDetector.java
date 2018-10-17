@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class Sensor implements Runnable{
+public class MotionDetector implements Runnable{
 
     private Light connected_light;
     private volatile boolean l_switch; // false -> light off, true -> light on
@@ -11,7 +11,7 @@ public class Sensor implements Runnable{
 
     public List<FeatureManager> obsList = new LinkedList<FeatureManager>();
 
-    public Sensor(Light light){
+    public MotionDetector(Light light){
         this.connected_light = light;
         l_switch = false;
         movement = 0;
@@ -41,7 +41,6 @@ public class Sensor implements Runnable{
     }
 
     private void light_on(){
-        startTime = System.currentTimeMillis();
         connected_light.turn_on();
     }
 
@@ -53,25 +52,21 @@ public class Sensor implements Runnable{
         while(l_switch){
             if(!connected_light.on){ // light off
                 if (movement==1) {
-                    //this.advertise(); //TODO decomment this line
-                    light_on(); //TODO remove this line
+                    startTime = System.currentTimeMillis();
+                    this.advertise(); //TODO decomment this line
+                    //light_on(); //TODO remove this line
                 }
             }
             else{ // light on
                 if(System.currentTimeMillis() - startTime >= 10000) { // bcp de temps sans mouvement
                     System.out.println("timeout");
-                    //this.advertise();
                     movement=0; // Du coup en fait ca va continuer à être "on", jusqu'à ce que il n'y ai plus de mouvements pdt 10 sec
-                    light_off(); //TODO remove this line
+                    this.advertise();
+                    //light_off(); //TODO remove this line
                 }
-//                if (movement==0) {
-//                    //this.advertise();
-//                    System.out.println();
-//                    light_off(); //TODO remove this line
-//                }
             }
         }
-    }*/
+    }
 
     public void run2(){
         while(l_switch){
