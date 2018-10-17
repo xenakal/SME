@@ -1,6 +1,4 @@
-import java.lang.reflect.Array;
 import java.util.*;
-import java.util.concurrent.TimeUnit;
 
 public class Sensor implements Runnable{
 
@@ -8,6 +6,7 @@ public class Sensor implements Runnable{
     private volatile boolean l_switch; // false -> light off, true -> light on
     private int movement; // if movement is detected (0==false)
     private long startTime;
+    private boolean ischangedvalue;  //inidique si la donnee a changee
 
 
     public List<FeatureManager> obsList = new LinkedList<FeatureManager>();
@@ -33,8 +32,12 @@ public class Sensor implements Runnable{
     }
 
     public void detect(int value){
-        if(value==1)
-            movement = 1; // true
+        if (value != movement){
+            ischangedvalue = true;
+            movement = value;
+        }
+
+
     }
 
     private void light_on(){
@@ -67,6 +70,17 @@ public class Sensor implements Runnable{
 //                    light_off(); //TODO remove this line
 //                }
             }
+        }
+    }*/
+
+    public void run2(){
+        while(l_switch){
+            if(ischangedvalue){
+                ischangedvalue = false;
+                this.advertise();
+            }
+            //sleep
+
         }
     }
 
