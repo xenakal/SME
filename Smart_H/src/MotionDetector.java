@@ -11,7 +11,7 @@ public class MotionDetector implements Runnable{
 
     public List<FeatureManager> obsList = new LinkedList<FeatureManager>();
 
-    public MotionDetector(Light light){
+    public MotionDetector(){
         //this.connected_light = light;
         l_switch = false;
         movement = 0;
@@ -74,7 +74,82 @@ public class MotionDetector implements Runnable{
         }
     }
 
-    //private Info makeinfo
-
+    public Info makeinfo(){
+        return new Info("motion",  movement);
+    }
 
 }
+
+
+/*
+import java.util.*;
+
+
+public class MotionDetector extends AbsSensor{
+
+    //private Light connected_light;
+    //private volatile boolean l_switch; // false -> light off, true -> light on
+    private int movement; // if movement is detected (0==false)
+    private long startTime;
+    //private boolean ischangedvalue;  //inidique si la donnee a changee
+
+
+    public List<FeatureManager> obsList = new LinkedList<FeatureManager>();
+
+    public MotionDetector(){
+        super();
+        //l_switch = false;
+        //super.l_switch = false;
+        //super.obsList = new LinkedList<FeatureManager>();
+        //super.ischangedvalue = false;
+        movement = 0;
+                }
+
+
+public void reset(){
+        if( movement == 1){
+        super.ischangedvalue = ! super.ischangedvalue;
+        movement = 0;
+        }
+
+        }
+
+public void detect(int value){
+        //System.out.println("Before    detect " + value + " old mouvement " + movement + " chd " + super.ischangedvalue);
+        if (value != movement){
+        startTime = System.currentTimeMillis();
+        super.ischangedvalue = !super.ischangedvalue;  //pour mettre ischangedValue a false si double changement
+        movement = value;
+        }
+    //System.out.println("After    detect " + value + " mouvement " + movement + " chd " + super.ischangedvalue);
+
+
+        }
+
+@Override
+public void run(){
+        while(super.l_switch){
+        //System.out.println("run");
+        if(super.ischangedvalue){
+            System.out.println("changed");
+        if(this.movement == 1){
+        super.advertise();
+        }else if(System.currentTimeMillis() - this.startTime >= 10000){ //mvt == 0 + delais ecoule
+        advertise();
+        }
+        }
+        //sleep
+        }
+        reset();//pas de capteur pas de mouvement
+        advertise();
+        }
+
+
+
+public Info makeinfo(){
+        return new Info("motion",  movement);
+        }
+
+
+        }
+*/

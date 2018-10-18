@@ -21,7 +21,7 @@ public class Script {
         lightmanager.addLight(living_light2);
 
         //init sensors
-        MotionDetector light_sensor = new MotionDetector(living_light);
+        MotionDetector light_sensor = new MotionDetector();
         light_sensor.attach(lightmanager);
 
 
@@ -45,7 +45,7 @@ public class Script {
         waitt(1000);
         System.out.println("Mark bouge");
         light_sensor.detect(1);//mark rebouge
-        waitt(1000);
+        waitt(2000);
         System.out.println("Mark quitte la piece");
         light_sensor.detect(0);// mark quitte la piece
         waitt(10512);
