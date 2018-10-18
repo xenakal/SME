@@ -70,7 +70,7 @@ public class MotionDetector implements Runnable{
         ischangedvalue = false;
         for (FeatureManager o: obsList
              ) {
-            o.react(new Info("motion",  movement));
+            o.react(this.makeinfo());
         }
     }
 
