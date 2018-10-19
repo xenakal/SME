@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -7,19 +8,32 @@ import java.util.List;
 
 public class Lightmanager implements FeatureManager{
     private List<Light> lights ;
+    private  List<Rooms> rooms;
 
     public Lightmanager() {
-        lights = new LinkedList<Light>();
+        lights = new ArrayList<Light>();
+        rooms = new ArrayList<Rooms>();
     }
 
-    public void addLight(Light l){
+    public void add(Light l){
         if (!lights.contains(l)){
             lights.add(l);
         }
     }
 
-    public void removeLight(Light l){
+
+    public void add(Rooms r){
+        if (!rooms.contains(r)){
+            rooms.add(r);
+        }
+    }
+
+    public void remove(Light l){
         lights.remove(l);
+    }
+
+    public void remove(Rooms r){
+        rooms.remove(r);
     }
 
     public List<Light> getLights() {
@@ -35,9 +49,20 @@ public class Lightmanager implements FeatureManager{
                     for (Light li : lights) {
                         li.turn_on();
                     }
+                    for(Rooms r : rooms){
+                        for (Light l : r.getLight()){
+                            l.turn_on();
+                        }
+                    }
+
                 }else{
                     for (Light li : lights) {
                         li.turn_off();
+                    }
+                    for(Rooms r : rooms){
+                        for (Light l : r.getLight()){
+                            l.turn_off();
+                        }
                     }
                 }
                 break;
