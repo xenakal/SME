@@ -6,6 +6,7 @@ public class Rooms {
 
     private List<MotionDetector> motionDetectors;
     private List<Light> light;
+    private List<CoffeeMachine> coffeeMachines;
 
     /*public Rooms(MotionDetector[] sensor, Light[] light){
         this.light_sensor = sensor;
@@ -16,6 +17,7 @@ public class Rooms {
     public Rooms(){
         this.motionDetectors = new ArrayList<MotionDetector>();
         this.light = new ArrayList<Light>();
+        this.coffeeMachines = new ArrayList<CoffeeMachine>();
 
     }
 
@@ -27,11 +29,19 @@ public class Rooms {
         light.add(l);
     }
 
+    public void addDevice(CoffeeMachine cm){
+        coffeeMachines.add(cm);
+    }
+
     public List<MotionDetector> getMotionDetectors() {
         return motionDetectors;
     }
 
     public List<Light> getLight() {
         return light;
+    }
+
+    public List<CoffeeMachine> getCoffeeMachines() {
+        return coffeeMachines;
     }
 }

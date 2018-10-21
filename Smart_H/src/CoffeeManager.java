@@ -10,26 +10,50 @@ import java.util.List;
  */
 public class CoffeeManager implements FeatureManager{
 
-        private List<CoffeeMachine> machines ;
+    private List<CoffeeMachine> machines ;
+    private  List<Rooms> rooms;
 
-        public CoffeeManager() {
-            machines = new ArrayList<CoffeeMachine>();
+    public CoffeeManager() {
+        machines = new ArrayList<CoffeeMachine>();
+        rooms = new ArrayList<Rooms>();
+    }
+
+    public void add(CoffeeMachine o){
+        if (!machines.contains(o)){
+            machines.add(o);
         }
+    }
 
-        public void add(CoffeeMachine o){
-            if (!machines.contains(o)){
-                machines.add(o);
-            }
+    public void add(Rooms r){
+        if (!rooms.contains(r)){
+            rooms.add(r);
         }
+    }
 
-
-        public void remove(Light l){
+    public void remove(Light l){
             machines.remove(l);
         }
 
+    public void remove(Rooms r){
+        rooms.remove(r);
+    }
+
 
         public List<CoffeeMachine> getCoffeMachines() {
-            return machines;
+            List<CoffeeMachine> list = new ArrayList<CoffeeMachine>();
+            for(Rooms r : rooms){
+                for (CoffeeMachine cm : r.getCoffeeMachines()){
+                    if (!list.contains(cm)){
+                        list.add(cm);
+                    }
+                }
+            }
+            for (CoffeeMachine cm : machines){
+                if (!list.contains(cm)){
+                    list.add(cm);
+                }
+            }
+            return list;
         }
 
         //TODO ajouter dependance par rapport à l'heure
@@ -38,7 +62,7 @@ public class CoffeeManager implements FeatureManager{
             switch (info.name) {
                 case "motion" :
                     if (info.value == 1) {  //true = 1
-                        for (CoffeeMachine cm : machines) {
+                        for (CoffeeMachine cm : getCoffeMachines()) {
                             cm.makeCoffee();
                         }
 

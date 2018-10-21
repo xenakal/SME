@@ -17,6 +17,7 @@ public class Script {
         Light living_light = new Light("living_1");
         Light living_light2 = new Light("living_2"); //une 2e lampe
         Light kitchen_light = new Light("kitchen");
+        CoffeeMachine coffee = new CoffeeMachine("What else ...");
 
 
         //init sensors
@@ -37,23 +38,25 @@ public class Script {
         //kitchen
         Rooms kitchen = new Rooms();
         kitchen.addDevice(kitchen_light);
+        kitchen.addDevice(coffee);
 
 
         //init manger
         Lightmanager bedroom_lightmanager = new Lightmanager();
         Lightmanager living_lightmanager = new Lightmanager();
         Lightmanager open_kitchen_lightmanager = new Lightmanager();
+        CoffeeManager coffeeManager = new CoffeeManager();
         bedroom_lightmanager.add(bedroom);
         living_lightmanager.add(living);
         open_kitchen_lightmanager.add(living);        //allumerra la cuisine et le living
         open_kitchen_lightmanager.add(kitchen);      //allumerra la cuisine et le living
-
+        coffeeManager.add(kitchen);
 
         //lier un sensor à une/des lightmanager
         bedroom_motion_detector.attach(bedroom_lightmanager);
         living_motion_detector.attach(living_lightmanager);
         kitchen_motion_detector.attach(open_kitchen_lightmanager);
-
+        kitchen_motion_detector.attach(coffeeManager);
 
 
         //Smart_Home sh = new Smart_Home();

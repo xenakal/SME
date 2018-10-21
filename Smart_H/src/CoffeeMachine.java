@@ -11,6 +11,7 @@ public class CoffeeMachine {
             if(!isMakingCoffee){
                 isMakingCoffee = true;
                 System.out.println("Coffee machine :" +name + "have made a coffee");
+                isMakingCoffee = false;
             }
         }
 }
