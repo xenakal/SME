@@ -37,7 +37,20 @@ public class Lightmanager implements FeatureManager{
     }
 
     public List<Light> getLights() {
-        return lights;
+        List<Light> list = new ArrayList<Light>();
+        for(Rooms r : rooms){
+            for (Light l : r.getLight()){
+                if (!list.contains(l)){
+                    list.add(l);
+                }
+            }
+        }
+        for (Light l : lights){
+            if (!list.contains(l)){
+                list.add(l);
+            }
+        }
+        return list;
     }
 
 
@@ -46,7 +59,7 @@ public class Lightmanager implements FeatureManager{
         switch (info.name) {
             case "motion" :
                 if (info.value == 1) {  //true = 1
-                    for (Light li : lights) {
+                    for (Light li : lights) {   //remplacer par getLights ou pas car perte de rapidité
                         li.turn_on();
                     }
                     for(Rooms r : rooms){
