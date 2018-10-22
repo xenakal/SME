@@ -37,7 +37,8 @@ public class Lightmanager implements FeatureManager{
                     }
                 }else{
                     for (Light li : lights) {
-                        li.turn_off();
+                        if(li.on)
+                            li.turn_off();
                     }
                 }
                 break;
