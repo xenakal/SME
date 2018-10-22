@@ -17,7 +17,7 @@ public class Script {
 
         //init manger
         Lightmanager lightmanager = new Lightmanager();
-        lightmanager.addLight(living_light);
+        lightmanager.add(living_light);
         //lightmanager.addLight(living_light2);
 
         //init sensors
@@ -25,7 +25,7 @@ public class Script {
         light_sensor.attach(lightmanager);
 
 
-        Smart_Home sh = new Smart_Home(light_sensor,living_light);
+        //Smart_Home sh = new Smart_Home(light_sensor,living_light);
 
         light_sensor.sensor_on(); // senseur allumé: "sensor is on" (run en boucle jusqu'au sensor_off)
         System.out.println("detect1");
