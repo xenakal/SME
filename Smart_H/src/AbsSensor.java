@@ -42,8 +42,8 @@ abstract class AbsSensor implements Runnable{
 
 
     public void sensor_off(){
-        System.out.println("sensor is off");
         this.l_switch = false;
+        System.out.println("sensor is off");
     }
 
     public void attach(FeatureManager obs){

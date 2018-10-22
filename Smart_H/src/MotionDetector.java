@@ -3,7 +3,7 @@ import java.util.*;
 public class MotionDetector implements Runnable{
 
     //private Light connected_light;
-    private volatile boolean l_switch;
+    private volatile boolean l_switch; // false -> light off, true -> light on
     private int movement; // if movement is detected (0==false)
     private long startTime;
     private boolean ischangedvalue;  //inidique si la donnee a changee
@@ -46,12 +46,15 @@ public class MotionDetector implements Runnable{
             if(ischangedvalue){
                 if(movement == 1){
                     this.advertise();
-                }else if(System.currentTimeMillis() - startTime >= 1000){ //mvt == 0 + delais ecoule
+                }else if(System.currentTimeMillis() - startTime >= 10000){ //mvt == 0 & delais ecoule
+                    System.out.println("timeout");
                     advertise();
                 }
             }
             //sleep
         }
+        //System.out.println("après while");
+        //System.out.println("movement =" + movement);
         detect(0);//pas de capteur pas de mouvement
         advertise();
     }
@@ -80,9 +83,7 @@ public class MotionDetector implements Runnable{
 
 }
 
-
 /*
-import java.util.*;
 
 
 public class MotionDetector extends AbsSensor{
@@ -103,53 +104,54 @@ public class MotionDetector extends AbsSensor{
         //super.obsList = new LinkedList<FeatureManager>();
         //super.ischangedvalue = false;
         movement = 0;
-                }
+    }
 
 
-public void reset(){
+    public void reset(){
         if( movement == 1){
-        super.ischangedvalue = ! super.ischangedvalue;
-        movement = 0;
+            super.ischangedvalue = ! super.ischangedvalue;
+            movement = 0;
         }
 
-        }
+    }
 
-public void detect(int value){
+    public void detect(int value){
         //System.out.println("Before    detect " + value + " old mouvement " + movement + " chd " + super.ischangedvalue);
         if (value != movement){
-        startTime = System.currentTimeMillis();
-        super.ischangedvalue = !super.ischangedvalue;  //pour mettre ischangedValue a false si double changement
-        movement = value;
+            startTime = System.currentTimeMillis();
+            super.ischangedvalue = !super.ischangedvalue;  //pour mettre ischangedValue a false si double changement
+            movement = value;
         }
-    //System.out.println("After    detect " + value + " mouvement " + movement + " chd " + super.ischangedvalue);
+        //System.out.println("After    detect " + value + " mouvement " + movement + " chd " + super.ischangedvalue);
 
 
-        }
+    }
 
-@Override
-public void run(){
+    @Override
+    public void run(){
         while(super.l_switch){
-        //System.out.println("run");
-        if(super.ischangedvalue){
-            System.out.println("changed");
-        if(this.movement == 1){
-        super.advertise();
-        }else if(System.currentTimeMillis() - this.startTime >= 10000){ //mvt == 0 + delais ecoule
-        advertise();
-        }
-        }
-        //sleep
+            //System.out.println("run");
+            if(super.ischangedvalue){
+                System.out.println("changed");
+                if(this.movement == 1){
+                    super.advertise();
+                }else if(System.currentTimeMillis() - this.startTime >= 10000){ //mvt == 0 + delais ecoule
+                    advertise();
+                }
+            }
+            //sleep
         }
         reset();//pas de capteur pas de mouvement
         advertise();
-        }
+    }
 
 
 
-public Info makeinfo(){
+    public Info makeinfo(){
         return new Info("motion",  movement);
-        }
+    }
 
 
-        }
+}
+
 */
