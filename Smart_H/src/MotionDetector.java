@@ -3,7 +3,7 @@ import java.util.*;
 public class MotionDetector implements Runnable{
 
     //private Light connected_light;
-    private volatile boolean l_switch; // false -> light off, true -> light on
+    private volatile boolean l_switch;
     private int movement; // if movement is detected (0==false)
     private long startTime;
     private boolean ischangedvalue;  //inidique si la donnee a changee
@@ -46,7 +46,7 @@ public class MotionDetector implements Runnable{
             if(ischangedvalue){
                 if(movement == 1){
                     this.advertise();
-                }else if(System.currentTimeMillis() - startTime >= 10000){ //mvt == 0 + delais ecoule
+                }else if(System.currentTimeMillis() - startTime >= 1000){ //mvt == 0 + delais ecoule
                     advertise();
                 }
             }

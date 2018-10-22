@@ -8,15 +8,16 @@ public class Light {
     }
 
     public void turn_on(){
-        on = true;
-        System.out.println(name + "Light on !");
+        if(!on){
+            on = true;
+            System.out.println(name + "Light on !");
+        }
     }
 
     public void turn_off(){
-        on = false;
-        System.out.println(name + "Light off !");
+        if(on){
+            on = false;
+            System.out.println(name + "Light off !");
+        }
     }
-
-
-
 }
