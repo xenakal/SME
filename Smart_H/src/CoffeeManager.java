@@ -59,9 +59,9 @@ public class CoffeeManager implements FeatureManager{
         //TODO ajouter dependance par rapport à l'heure
         @Override
         public void react(Info info) {
-            switch (info.name) {
+            switch (info.getName()) {
                 case "motion" :
-                    if (info.value == 1) {  //true = 1
+                    if (info.getValue() == 1) {  //true = 1
                         for (CoffeeMachine cm : getCoffeMachines()) {
                             cm.makeCoffee();
                         }

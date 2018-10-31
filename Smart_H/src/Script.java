@@ -63,31 +63,31 @@ public class Script {
 
 
 
-        System.out.println("First Test with bedroom");
+        System.out.println("# First Test with bedroom");
         bedroom_motion_detector.sensor_on(); // senseur allumé: "sensor is on" (run en boucle jusqu'au sensor_off)
 
         System.out.println("# Mark rentre dans la piece");
         bedroom_motion_detector.detect(1); // mark rentre dans la piece
         waitt(1000);
-        System.out.println("Mark bouge");
+        System.out.println("# Mark bouge");
         bedroom_motion_detector.detect(1); // mark bouge
         waitt(1000);
         //light on
 
-        System.out.println("Mark bouge plus");
+        System.out.println("# Mark bouge plus");
         bedroom_motion_detector.detect(0);//mark ne bouge plus
         waitt(1000);
-        System.out.println("Mark bouge plus");
+        System.out.println("# Mark bouge plus");
         bedroom_motion_detector.detect(0);//mark ne bouge plus
         waitt(1000);
-        System.out.println("Mark bouge");
+        System.out.println("# Mark bouge");
         bedroom_motion_detector.detect(1);//mark rebouge
         waitt(2000);
-        System.out.println("Mark quitte la piece");
+        System.out.println("# Mark quitte la piece");
         bedroom_motion_detector.detect(0);// mark quitte la piece
         waitt(11112);
         //light off
-        System.out.println("Mark rentre dans la piece");
+        System.out.println("# Mark rentre dans la piece");
         bedroom_motion_detector.detect(1); // Mark rentre dans la piece
         waitt(2000);
 
@@ -98,28 +98,28 @@ public class Script {
         waitt(50000);
 
 
-        System.out.println("Second scenario: Un petit tour de la maison");
-        System.out.println("Allumage des sensors");
+        System.out.println("# Second scenario: Un petit tour de la maison");
+        System.out.println("# Allumage des sensors");
         bedroom_motion_detector.sensor_on();
         living_motion_detector.sensor_on();
         kitchen_motion_detector.sensor_on();
 
-        System.out.println("Bob wake up and move in the bedroom");
+        System.out.println("# Bob wake up and move in the bedroom");
         bedroom_motion_detector.detect(1);
         waitt(2000);
-        System.out.println("Bob goes to the kitchen");
+        System.out.println("# Bob goes to the kitchen");
         waitt(4000);
         bedroom_motion_detector.detect(0);
         kitchen_motion_detector.detect(1);
         waitt(2000);
-        System.out.println("Bob drink the coffee");
+        System.out.println("# Bob drink the coffee");
         waitt(2000);
-        System.out.println("Bob goes in the living room");
+        System.out.println("# Bob goes in the living room");
         kitchen_motion_detector.detect(0);
         living_motion_detector.detect(1);
         waitt(4000);
 
-        System.out.println("Extinction des sensors");
+        System.out.println("# Extinction des sensors");
         bedroom_motion_detector.sensor_off();
         living_motion_detector.sensor_off();
         kitchen_motion_detector.sensor_off();
