@@ -83,4 +83,13 @@ public class Lightmanager implements FeatureManager{
             default: break;
         }
     }
+
+
+    public String ToString(){
+        String str =  "LightManager : " ;
+        for (Light l: getLights()) {
+            str = str + l.toString();
+        }
+        return str;
+    }
 }

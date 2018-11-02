@@ -18,12 +18,6 @@ public class Rooms {
     private Map<Enum.Actuator,FeatureManager> managerMap;
 
 
-    /*public Rooms(MotionDetector[] sensor, Light[] light){
-        this.light_sensor = sensor;
-        this.living_light = light;
-
-    }*/
-
     public Rooms(){
         this.motionDetectors = new ArrayList<MotionDetector>();
         this.motionDetectors = new ArrayList<MotionDetector>();
@@ -74,12 +68,34 @@ public class Rooms {
                 FeatureManager manager;
                 //TODO improve FeatureManager
                 switch (act){
-                    case light: manager= new Lightmanager();
-                    default:manager =new CoffeeManager(); //coffee
+                    case light: manager= new Lightmanager(); break;
+                    case coffee: manager =new CoffeeManager(); break;
+                    default:System.out.println("Error in makeManagerForUsedDevices : invalid actuator type");manager =new CoffeeManager(); //coffee
                 }
                 manager.add(this);
                 managerMap.put(act,manager);
             }
         }
+    }
+
+    public FeatureManager getManager(Enum.Actuator act){
+        return managerMap.get(act);
+    }
+
+    public String toString(){
+        String str =  "Room :"+ name ;
+        str = str + " \n sensors : \n";
+        for (AbsSensor s: motionDetectors) {
+            str = str + s.ToString() + "\n";
+        }
+        str = str + " \n actuator : \n";
+        for (Object act : actuatorMap.values()) {
+            str = str + act.toString() + "\n";
+        }
+        str = str + " \n manager : \n";
+        for (FeatureManager m : managerMap.values()) {
+            str = str + m.ToString() + "\n";
+        }
+        return str + "\n \n";
     }
 }

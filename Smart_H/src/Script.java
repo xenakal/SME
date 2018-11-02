@@ -11,6 +11,7 @@ public class Script {
 
     public static void main(String[] args){
         Smart_Home smart = new Smart_Home("config.json5");
+        System.out.println(smart.toString());
 /*
         //Creation de la maison
         //Initialise Controlled devices

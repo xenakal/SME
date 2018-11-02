@@ -14,8 +14,9 @@ import sun.management.Sensor;
 
 public class Smart_Home {
 
-        private Map<String, Rooms> rooms;
-        private Map<String,MotionDetector> sensorMap;  //TODO absSensor
+        private String name;
+        private Map<String, Rooms> roomsMap;
+        private Map<String,AbsSensor> sensorMap;  //utiliser qu'en local
 /*
 
         //Creation de la maison
@@ -52,8 +53,8 @@ public class Smart_Home {
         CoffeeManager coffeeManager = new CoffeeManager();*/
 
     public Smart_Home(String filename){
-        rooms = new HashMap<String, Rooms>();
-        sensorMap = new HashMap<String, MotionDetector>();//TODO Change to Abssensor
+        roomsMap = new HashMap<String, Rooms>();
+        sensorMap = new HashMap<String, AbsSensor>();
 
         JSONParser parser = new JSONParser();
 
@@ -62,18 +63,16 @@ public class Smart_Home {
             Object obj = parser.parse(new FileReader("/Users/DimiS/Documents/Maintenace & evolution M1Q1/SME/Smart_H/src/config.json5"));
             JSONObject jsonObject = (JSONObject) obj;
 
-            String name = (String) jsonObject.get("name");
-            System.out.println("Name: " + name);
+            name = (String) jsonObject.get("name");
 
             //lecture des pieces
             JSONArray roomList = (JSONArray) jsonObject.get("rooms");
-            System.out.println("\nRoom List:");
             Iterator roomIterator = roomList.iterator();
             while (roomIterator.hasNext()) {
                 JSONObject rjs = (JSONObject) roomIterator.next();
                 String roomname = (String) rjs.get("name");
                 Rooms r = new Rooms(roomname);
-                rooms.put(roomname, r);
+                roomsMap.put(roomname, r);
 
                 //ajout des sensor
                 JSONArray sensors = (JSONArray) rjs.get("sensor");
@@ -94,10 +93,11 @@ public class Smart_Home {
 
                 //ajout des device
                 JSONArray devices = (JSONArray) rjs.get("actuator");
-                Iterator deviceIterator = sensors.iterator();
+                Iterator deviceIterator = devices.iterator();
                 while (deviceIterator.hasNext()){
                     JSONObject dev = (JSONObject) deviceIterator.next();
-                    switch ((String) dev.get("type")){
+                    String type = (String) dev.get("type");
+                    switch (type){
                         case "light" : r.addDevice(new Light((String) dev.get("name"))); break;
                         case "coffee" : r.addDevice(new CoffeeMachine((String) dev.get("name")));break;
                     }
@@ -106,8 +106,21 @@ public class Smart_Home {
                     //cree un manager pour chaque type d'actuator
                     r.makeManagerForUsedDevices();
                 }
-
-                //TODO connecter les sensor et le manager ¿mettre les lien directement avec le sensor?
+                //TODO ajouter la possibilté de créer un nouveau manager
+                //TODO IMPROVE connecter les sensor et le manager ¿mettre les lien directement avec le sensor?
+                JSONArray connections  = (JSONArray) jsonObject.get("connection");
+                Iterator connectionIt = connections.iterator();
+                while (connectionIt.hasNext()){
+                    JSONObject connect = (JSONObject) connectionIt.next();
+                    AbsSensor sens = sensorMap.get((String) connect.get("sensorname"));
+                    Rooms location = roomsMap.get((String) connect.get("roomactuator"));
+                    String type = (String) connect.get("actuatortype");
+                    //TODO uncomment
+                    //System.out.println("type : " +type);
+                    //System.out.println("enumtype : " +Enum.convertToActu(type));
+                    //FeatureManager manager =  location.getManager(Enum.convertToActu(type));
+                    //sens.attach(manager);  //TODO on pourrais permettre de lier un senor a plusieur manager directement
+                }
             }
 
         } catch (Exception e) {
@@ -141,6 +154,19 @@ public class Smart_Home {
         kitchen_motion_detector.attach(open_kitchen_lightmanager);
 */
     }
+
+    public String toString(){
+        String str = "SmartHouse : "+name+"\n ";
+        for (Rooms r: roomsMap.values()) {
+            str = str + r.toString();
+        }
+        return str;
+    }
+
+    public Map<String, Rooms> getRoomsMap() {
+        return roomsMap;
+    }
+
 }
 
 

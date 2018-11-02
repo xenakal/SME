@@ -1,7 +1,7 @@
 import java.util.LinkedList;
 import java.util.List;
 
-abstract class AbsSensor implements Runnable{
+abstract class AbsSensor{
 
     protected String name;
     protected boolean l_switch ; // false -> light off, true -> light on
@@ -25,29 +25,16 @@ abstract class AbsSensor implements Runnable{
         this.name = name;
     }
 
-    //abstract void run();
     abstract void reset();
     abstract void detect(int value);
     abstract Info makeinfo();
+    abstract String ToString();
 
-    public void run(){
-        System.out.println("Abs loop");
-        while(this.l_switch){
-            if(this.ischangedvalue){
 
-                this.advertise();
-            }
-            //sleep 
-        }
-        this.reset();
-        this.advertise();
-    }
 
     public void sensor_on(){
         System.out.println("sensor is on");
         l_switch = true;
-        Thread thread = new Thread(this);
-        thread.start(); // commence la boucle qui va continuellement checker s'il y a des signaux
     }
 
 

@@ -14,4 +14,8 @@ public class CoffeeMachine {
                 isMakingCoffee = false;
             }
         }
+
+        public String toString(){
+            return "coffee machine : " +name + "  ";
+        }
 }

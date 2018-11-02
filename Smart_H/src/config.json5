@@ -7,7 +7,7 @@
         {"name" : "motionkitchen1", "type" : "motion", "activationcondition" : "presence"},
         {"name" : "motionkitchen2", "type" : "motion", "activationcondition" : "presence"}
       ],
-      "actuators" : [
+      "actuator" : [
         {"name" : "kitlight1", "type" : "light"},
         {"name" : "kitlight2", "type" : "light"},
         {"name": "what else...", "type" : "coffee"}
@@ -18,17 +18,17 @@
       "sensor":  [
         {"name" : "motionbedroom", "type" : "motion", "activationcondition" : "presence"}
       ],
-      "actuators" : [
+      "actuator" : [
         {"name" : "bedlight1", "type" : "light"},
         {"name" : "bedlight2", "type" : "light"},
       ]
     }
   ],
   "makeManagerforeachroom" : true,
-  "supplmananger" : [],
   "connection" : [
-    {"sensor" : {"name" : "motionbedroom","localisation" : "bedroom"},
-      "roomactuator": {"roomname" :"bedroom", "actuatortype": "light"},
+    {"sensorname" :  "motionkitchen1",
+      "roomactuator": "bedroom",
+      "actuatortype": "light"
     }
   ]
 }

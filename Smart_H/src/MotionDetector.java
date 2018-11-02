@@ -1,9 +1,9 @@
 import java.util.*;
 
-public class MotionDetector{
+public class MotionDetector extends AbsSensor{
 
     //private Light connected_light;
-    private String name;
+    //private String name;
     private volatile boolean l_switch; // false -> light off, true -> light on
     private int movement; // if movement is detected (0==false)
     private long startTime;
@@ -11,11 +11,15 @@ public class MotionDetector{
 
     public List<FeatureManager> obsList = new LinkedList<FeatureManager>();
 
-    public MotionDetector(){
     public MotionDetector(String name){
-        this.name = name;
+        super(name);
+        //this.name = name;
         l_switch = false;
         movement = 0;
+    }
+
+    public void reset() {
+        //TODO
     }
 
     public void sensor_on(){
@@ -70,6 +74,11 @@ public class MotionDetector{
 
     public Info makeinfo(){
         return new Info("motion",  movement);
+    }
+
+    public String ToString(){
+        return "      Motion detector : " +name;
+        //TODO afficher connection
     }
 
 }
