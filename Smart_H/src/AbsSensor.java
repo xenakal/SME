@@ -37,7 +37,7 @@ abstract class AbsSensor implements Runnable{
 
                 this.advertise();
             }
-            //sleep
+            //sleep 
         }
         this.reset();
         this.advertise();
