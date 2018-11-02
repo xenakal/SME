@@ -160,6 +160,14 @@ public class Smart_Home {
         return str;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public Map<String, AbsSensor> getSensorMap() {
+        return sensorMap;
+    }
+
     public Map<String, Rooms> getRoomsMap() {
         return roomsMap;
     }
