@@ -106,21 +106,18 @@ public class Smart_Home {
                     //cree un manager pour chaque type d'actuator
                     r.makeManagerForUsedDevices();
                 }
-                //TODO ajouter la possibilté de créer un nouveau manager
-                //TODO IMPROVE connecter les sensor et le manager ¿mettre les lien directement avec le sensor?
-                JSONArray connections  = (JSONArray) jsonObject.get("connection");
-                Iterator connectionIt = connections.iterator();
-                while (connectionIt.hasNext()){
-                    JSONObject connect = (JSONObject) connectionIt.next();
-                    AbsSensor sens = sensorMap.get((String) connect.get("sensorname"));
-                    Rooms location = roomsMap.get((String) connect.get("roomactuator"));
-                    String type = (String) connect.get("actuatortype");
-                    //TODO uncomment
-                    //System.out.println("type : " +type);
-                    //System.out.println("enumtype : " +Enum.convertToActu(type));
-                    //FeatureManager manager =  location.getManager(Enum.convertToActu(type));
-                    //sens.attach(manager);  //TODO on pourrais permettre de lier un senor a plusieur manager directement
-                }
+            }
+            //TODO ajouter la possibilté de créer un nouveau manager
+            //TODO IMPROVE connecter les sensor et le manager ¿mettre les lien directement avec le sensor?
+            JSONArray connections  = (JSONArray) jsonObject.get("connection");
+            Iterator connectionIt = connections.iterator();
+            while (connectionIt.hasNext()){
+                JSONObject connect = (JSONObject) connectionIt.next();
+                AbsSensor sens = sensorMap.get((String) connect.get("sensorname"));
+                Rooms location = roomsMap.get((String) connect.get("roomactuator"));
+                String type = (String) connect.get("actuatortype");
+                FeatureManager manager =  location.getManager(Enum.convertToActu(type));
+                sens.attach(manager);  //TODO on pourrais permettre de lier un senor a plusieur manager directement
             }
 
         } catch (Exception e) {

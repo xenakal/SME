@@ -76,9 +76,9 @@ public class MotionDetector extends AbsSensor{
         return new Info("motion",  movement);
     }
 
-    public String ToString(){
-        return "      Motion detector : " +name;
-        //TODO afficher connection
+    @Override
+    public String toString(){
+        return "      Motion detector : " + super.toString();
     }
 
 }

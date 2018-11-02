@@ -28,7 +28,15 @@ abstract class AbsSensor{
     abstract void reset();
     abstract void detect(int value);
     abstract Info makeinfo();
-    abstract String ToString();
+
+
+    public String toString(){
+        String str = this.name + " is connected to \n";
+        for (FeatureManager m: obsList) {
+            str = str + m.ToString() + "\n";
+        }
+        return str;
+    }
 
 
 

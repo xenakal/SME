@@ -86,7 +86,7 @@ public class Rooms {
         String str =  "Room :"+ name ;
         str = str + " \n sensors : \n";
         for (AbsSensor s: motionDetectors) {
-            str = str + s.ToString() + "\n";
+            str = str + s.toString() + "\n";
         }
         str = str + " \n actuator : \n";
         for (Object act : actuatorMap.values()) {
