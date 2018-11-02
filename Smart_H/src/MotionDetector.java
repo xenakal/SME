@@ -1,63 +1,49 @@
 import java.util.*;
 
-public class MotionDetector implements Runnable{
+public class MotionDetector{
 
     //private Light connected_light;
-    private volatile boolean l_switch; // false -> light off, true -> light on
     private int movement; // if movement is detected (0==false)
     private long startTime;
-    private boolean ischangedvalue;  //inidique si la donnee a changee
 
 
     public List<FeatureManager> obsList = new LinkedList<FeatureManager>();
 
     public MotionDetector(){
-        //this.connected_light = light;
-        l_switch = false;
         movement = 0;
-        //connected_light.on = false;
     }
 
     public void sensor_on(){
         System.out.println("sensor is on");
-        l_switch = true;
-        Thread thread = new Thread(this);
-        thread.start(); // commence la boucle qui va continuellement checker s'il y a des signaux
     }
 
     public void sensor_off(){
         System.out.println("sensor is off");
-        l_switch = false;
-        //connected_light.turn_off();
     }
 
     public void detect(int value){
+        // TODO: DÈS QU'ON DETECTE 0 ON FERME DIRECT LA LUMIÈRE (ON A DÉCIDÉ COMME CA) ET DU COUP ON ENLEVE COMPLETEMENT LE TEMPS
+        // TODO: AJOUTER DES SENSOR ETC POUR VOIR SI C'EST ADAPTABLE (AJOUTER UN THERMOMETRE)
+        // TODO: AJOUTER AUSSI DES FEATUREMANAGER DU COUP
         if (value != movement){
-            startTime = System.currentTimeMillis();
-            ischangedvalue = !ischangedvalue;  //pour mettre ischangedValue a false si double changement
             movement = value;
-            advertise();
-        }
-
-
-    }
-
-    public void run(){
-        while(l_switch){
-            if(ischangedvalue){
-                if(movement == 1){
-                    this.advertise();
-                }else if(System.currentTimeMillis() - startTime >= 10000){ //mvt == 0 & delais ecoule
-                    System.out.println("timeout");
-                    advertise();
-                }
+            if(movement == 1){ // movement is sensed
+                startTime = System.currentTimeMillis();
+                this.advertise();
+            }else if(System.currentTimeMillis() - startTime >= 10000){ //mvt == 0 & delais ecoule
+                System.out.println("timeout");
+                this.advertise();
             }
-            //sleep
         }
-        //System.out.println("après while");
-        //System.out.println("movement =" + movement);
-        detect(0);//pas de capteur pas de mouvement
-        advertise();
+        else if(value == 0) {
+            if(System.currentTimeMillis() - startTime >= 10000){
+                System.out.println("timeout");
+                this.advertise();
+            }
+
+        }
+        else if(value == 1) // movement detected but light already on
+            startTime = System.currentTimeMillis(); // reset timeout
     }
 
     public void attach(FeatureManager obs){
@@ -71,7 +57,6 @@ public class MotionDetector implements Runnable{
     }
 
     public void advertise(){
-        ischangedvalue = false;
         for (FeatureManager o: obsList
              ) {
             o.react(this.makeinfo());
