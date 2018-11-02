@@ -3,16 +3,26 @@ import java.util.List;
 
 abstract class AbsSensor implements Runnable{
 
-
+    protected String name;
     protected boolean l_switch ; // false -> light off, true -> light on
     protected List<FeatureManager> obsList ;
     protected boolean ischangedvalue ;
 
-    protected AbsSensor(){
+
+    protected AbsSensor(String name){
+        this.name = name;
         l_switch = false;
         obsList = new LinkedList<FeatureManager>();
         ischangedvalue = false;
 
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     //abstract void run();

@@ -10,7 +10,8 @@ public class Script {
 
 
     public static void main(String[] args){
-
+        Smart_Home smart = new Smart_Home("config.json5");
+/*
         //Creation de la maison
         //Initialise Controlled devices
         Light bedroom_light = new Light("bedroom");
@@ -122,7 +123,7 @@ public class Script {
         System.out.println("# Extinction des sensors");
         bedroom_motion_detector.sensor_off();
         living_motion_detector.sensor_off();
-        kitchen_motion_detector.sensor_off();
+        kitchen_motion_detector.sensor_off();*/
 
     }
 

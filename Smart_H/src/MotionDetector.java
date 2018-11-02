@@ -3,6 +3,7 @@ import java.util.*;
 public class MotionDetector implements Runnable{
 
     //private Light connected_light;
+    private String name;
     private volatile boolean l_switch; // false -> light off, true -> light on
     private int movement; // if movement is detected (0==false)
     private long startTime;
@@ -11,7 +12,8 @@ public class MotionDetector implements Runnable{
 
     public List<FeatureManager> obsList = new LinkedList<FeatureManager>();
 
-    public MotionDetector(){
+    public MotionDetector(String name){
+        this.name = name;
         //this.connected_light = light;
         l_switch = false;
         movement = 0;

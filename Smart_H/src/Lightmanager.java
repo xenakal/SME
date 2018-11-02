@@ -56,9 +56,9 @@ public class Lightmanager implements FeatureManager{
 
     @Override
     public void react(Info info) {
-        switch (info.name) {
+        switch (info.getName()) {
             case "motion" :
-                if (info.value == 1) {  //true = 1
+                if (info.getValue() == 1) {  //true = 1
                     for (Light li : lights) {   //remplacer par getLights ou pas car perte de rapidité
                         li.turn_on();
                     }
