@@ -25,6 +25,11 @@ public class Thermostat implements FeatureManager{
         }
     }
 
+    @Override
+    public String ToString() {
+        return null;
+    }
+
     public void remove(Light l){
         radiators.remove(l);
     }

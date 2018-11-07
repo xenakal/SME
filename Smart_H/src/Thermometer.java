@@ -6,6 +6,10 @@ public class Thermometer extends AbsSensor{
     private int temperature;
     public List<FeatureManager> obsList = new LinkedList<>();
 
+    protected Thermometer(String name) {
+        super(name);
+    }
+
     void reset() {}
 
     void detect(int value) {
