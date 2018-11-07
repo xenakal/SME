@@ -1,11 +1,8 @@
 import java.util.*;
 
-public class MotionDetector{
+public class MotionDetector extends AbsSensor{
 
-    //private Light connected_light;
     private int movement; // if movement is detected (0==false)
-    private long startTime;
-
 
     public List<FeatureManager> obsList = new LinkedList<FeatureManager>();
 
@@ -18,32 +15,16 @@ public class MotionDetector{
     }
 
     public void sensor_off(){
+        movement = 0;
         System.out.println("sensor is off");
+        this.advertise();
     }
 
     public void detect(int value){
-        // TODO: DÈS QU'ON DETECTE 0 ON FERME DIRECT LA LUMIÈRE (ON A DÉCIDÉ COMME CA) ET DU COUP ON ENLEVE COMPLETEMENT LE TEMPS
-        // TODO: AJOUTER DES SENSOR ETC POUR VOIR SI C'EST ADAPTABLE (AJOUTER UN THERMOMETRE)
-        // TODO: AJOUTER AUSSI DES FEATUREMANAGER DU COUP
-        if (value != movement){
+        if(value!=movement) {
             movement = value;
-            if(movement == 1){ // movement is sensed
-                startTime = System.currentTimeMillis();
-                this.advertise();
-            }else if(System.currentTimeMillis() - startTime >= 10000){ //mvt == 0 & delais ecoule
-                System.out.println("timeout");
-                this.advertise();
-            }
+            this.advertise();
         }
-        else if(value == 0) {
-            if(System.currentTimeMillis() - startTime >= 10000){
-                System.out.println("timeout");
-                this.advertise();
-            }
-
-        }
-        else if(value == 1) // movement detected but light already on
-            startTime = System.currentTimeMillis(); // reset timeout
     }
 
     public void attach(FeatureManager obs){
@@ -67,5 +48,6 @@ public class MotionDetector{
         return new Info("motion",  movement);
     }
 
+    public void reset(){}
 }
 
