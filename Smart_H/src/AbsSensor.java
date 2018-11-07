@@ -1,43 +1,48 @@
 import java.util.LinkedList;
 import java.util.List;
 
-abstract class AbsSensor implements Runnable{
+abstract class AbsSensor{
 
-
+    protected String name;
     protected boolean l_switch ; // false -> light off, true -> light on
     protected List<FeatureManager> obsList ;
     protected boolean ischangedvalue ;
 
-    protected AbsSensor(){
+
+    protected AbsSensor(String name){
+        this.name = name;
         l_switch = false;
         obsList = new LinkedList<FeatureManager>();
         ischangedvalue = false;
 
     }
 
-    //abstract void run();
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     abstract void reset();
     abstract void detect(int value);
     abstract Info makeinfo();
 
-    public void run(){
-        System.out.println("Abs loop");
-        while(this.l_switch){
-            if(this.ischangedvalue){
 
-                this.advertise();
-            }
-            //sleep
+    public String toString(){
+        String str = this.name + " is connected to \n";
+        for (FeatureManager m: obsList) {
+            str = str + m.ToString() + "\n";
         }
-        this.reset();
-        this.advertise();
+        return str;
     }
+
+
 
     public void sensor_on(){
         System.out.println("sensor is on");
         l_switch = true;
-        Thread thread = new Thread(this);
-        thread.start(); // commence la boucle qui va continuellement checker s'il y a des signaux
     }
 
 

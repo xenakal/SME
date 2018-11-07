@@ -20,4 +20,8 @@ public class Light {
             System.out.println(name + "Light off !");
         }
     }
+
+    public String toString(){
+        return "light : " +name + "  ";
+    }
 }

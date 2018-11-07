@@ -1,0 +1,39 @@
+{
+  "name": "Robinson's house",
+  "rooms": [
+    {
+      "name": "kitchen",
+      "sensor":  [
+        {"name" : "motionkitchen1", "type" : "motion", "activationcondition" : "presence"},
+        {"name" : "motionkitchen2", "type" : "motion", "activationcondition" : "presence"}
+      ],
+      "actuator" : [
+        {"name" : "kitlight1", "type" : "light"},
+        {"name" : "kitlight2", "type" : "light"},
+        {"name": "what else...", "type" : "coffee"}
+      ]
+    },
+    {
+      "name": "bedroom",
+      "sensor":  [
+        {"name" : "motionbedroom", "type" : "motion", "activationcondition" : "presence"}
+      ],
+      "actuator" : [
+        {"name" : "bedlight1", "type" : "light"},
+        {"name" : "bedlight2", "type" : "light"},
+      ]
+    }
+  ],
+  "makeManagerforeachroom" : true,
+  "connection" : [
+    {"sensorname" :  "motionkitchen1",
+      "roomactuator": "bedroom",
+      "actuatortype": "light"
+    },
+    {"sensorname" :  "motionkitchen1",
+      "roomactuator": "bedroom",
+      "actuatortype": "light"
+    }
+  ]
+}
+

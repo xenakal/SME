@@ -72,4 +72,12 @@ public class CoffeeManager implements FeatureManager{
             }
         }
 
+        public String ToString(){
+            String str =  "CoffeManager : " ;
+            for (CoffeeMachine c: getCoffeMachines()) {
+                str = str + c.toString();
+            }
+            return str;
+        }
+
 }

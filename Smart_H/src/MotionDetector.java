@@ -6,8 +6,14 @@ public class MotionDetector extends AbsSensor{
 
     public List<FeatureManager> obsList = new LinkedList<FeatureManager>();
 
-    public MotionDetector(){
+    public MotionDetector(String name){
+        super(name);
+        //this.name = name;
         movement = 0;
+    }
+
+    public void reset() {
+        //TODO
     }
 
     public void sensor_on(){
@@ -48,6 +54,10 @@ public class MotionDetector extends AbsSensor{
         return new Info("motion",  movement);
     }
 
-    public void reset(){}
+    @Override
+    public String toString(){
+        return "      Motion detector : " + super.toString();
+    }
+
 }
 
