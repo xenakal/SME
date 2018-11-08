@@ -1,15 +1,15 @@
 public class Script {
 
-    public static void waitt(int time){
-        try {
-            Thread.sleep(time);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+    // single script object
+    public static Script script = new Script();
+
+    // make the constructor private so it can't be accessed
+    private Script(){}
+
+    public static Script getScript(){
+        return script;
     }
-
-
-    public static void main(String[] args){
+    public static void execute(){
         Smart_Home smart = new Smart_Home("config.json5");
         System.out.println(smart.toString());
 
