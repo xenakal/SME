@@ -1,6 +1,6 @@
 public class Enum {
     public enum Actuator{
-        light,coffee
+        light,coffee,radiator
     }
 
     //transforme un string en un element de l'enumeration

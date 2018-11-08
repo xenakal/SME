@@ -3,20 +3,26 @@ import java.util.List;
 
 public class Thermometer extends AbsSensor{
 
-    private int temperature;
+    private int recorded_temp = 25;
     public List<FeatureManager> obsList = new LinkedList<>();
 
     protected Thermometer(String name) {
         super(name);
+     }
+
+    public void sensor_on(){
+        System.out.println("Thermometer is on");
+    }
+    public void sensor_off(){
+        System.out.println("Thermometer is off");
     }
 
     void reset() {}
 
     void detect(int value) {
-        if(value!=temperature){
-            temperature = value;
-            this.advertise();
-        }
+        System.out.println("# Température détectée: "+value);
+        recorded_temp = value;
+        this.advertise();
     }
 
     public void advertise(){
@@ -26,7 +32,19 @@ public class Thermometer extends AbsSensor{
         }
     }
 
+    public void detach(FeatureManager obs){
+        obsList.remove(obs);
+    }
+
+
+    public void attach(FeatureManager obs){
+        if (!obsList.contains(obs)){
+            obsList.add(obs);
+        }
+    }
+
+
     public Info makeinfo(){
-        return new Info("temperature",  temperature);
+        return new Info("temperature",  recorded_temp);
     }
 }

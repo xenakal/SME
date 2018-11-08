@@ -17,12 +17,12 @@ public class MotionDetector extends AbsSensor{
     }
 
     public void sensor_on(){
-        System.out.println("sensor is on");
+        System.out.println("Motion Detector is on");
     }
 
     public void sensor_off(){
         movement = 0;
-        System.out.println("sensor is off");
+        System.out.println("Motion Detector is off");
         this.advertise();
     }
 

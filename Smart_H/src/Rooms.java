@@ -11,7 +11,7 @@ public class Rooms {
     private List<Light> light;
     private List<CoffeeMachine> coffeeMachines;
     private List<Radiator> radiators;
-    private List<Thermostat> thermostats;
+    private List<Thermometer> thermometers;
 
     //Actuator
     private Map<Enum.Actuator,List> actuatorMap; //TODO regrouper les actuators
@@ -25,9 +25,8 @@ public class Rooms {
     public Rooms(){
         this.motionDetectors = new ArrayList<MotionDetector>();
         this.light = new ArrayList<Light>();
-        this.thermostats = new ArrayList<Thermostat>();
+        this.thermometers = new ArrayList<Thermometer>();
         this.radiators = new ArrayList<Radiator>();
-        this.motionDetectors = new ArrayList<MotionDetector>();
         this.actuatorMap = new HashMap<Enum.Actuator,List>();
         this.managerMap = new HashMap<Enum.Actuator,FeatureManager>();
     }
@@ -39,9 +38,10 @@ public class Rooms {
         this.managerMap = new HashMap<Enum.Actuator,FeatureManager>();
     }
 
-    public void addSensor(MotionDetector  md ){
+    public void addSensor(MotionDetector md ){
         motionDetectors.add(md);
     }
+    public void addSensor(Thermometer th) {thermometers.add(th);}
 
     public void addDevice(Light l){
         if (!actuatorMap.containsKey(Enum.Actuator.light)){
@@ -50,7 +50,13 @@ public class Rooms {
         this.getLight().add(l);
     }
 
-    public void addDevice(Radiator r) {radiators.add(r);}
+
+    public void addDevice(Radiator r) {
+        if (!actuatorMap.containsKey(Enum.Actuator.radiator)){
+            actuatorMap.put(Enum.Actuator.radiator,new ArrayList<Radiator>());
+        }
+        this.getRadiator().add(r);
+    }
 
     public void addDevice(CoffeeMachine cm){
         if (!actuatorMap.containsKey(Enum.Actuator.coffee)){
@@ -62,11 +68,11 @@ public class Rooms {
     public List<MotionDetector> getMotionDetectors() {
         return motionDetectors;
     }
-    public List<Thermostat> getThermostats() {return thermostats;}
+    public List<Thermometer> getThermometer() {return thermometers;}
     public List<Light> getLight() {
         return actuatorMap.get(Enum.Actuator.light);
     }
-    public List<Radiator> getRadiator() {return radiators;}
+    public List<Radiator> getRadiator() {return actuatorMap.get(Enum.Actuator.radiator);}
     public List<CoffeeMachine> getCoffeeMachines() {
         return actuatorMap.get(Enum.Actuator.coffee);
     }

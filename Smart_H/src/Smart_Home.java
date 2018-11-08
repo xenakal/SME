@@ -14,43 +14,10 @@ import sun.management.Sensor;
 
 public class Smart_Home {
 
-        private String name;
-        private Map<String, Rooms> roomsMap;
-        private Map<String,AbsSensor> sensorMap;  //utiliser qu'en local
-/*
+    private String name;
+    private Map<String, Rooms> roomsMap;
+    private Map<String,AbsSensor> sensorMap;  //utiliser qu'en local
 
-        //Creation de la maison
-        //Initialise Controlled devices
-        Light bedroom_light = new Light("bedroom");
-        Light living_light = new Light("living_1");
-        Light living_light2 = new Light("living_2"); //une 2e lampe
-        Light kitchen_light = new Light("kitchen");
-        CoffeeMachine coffee = new CoffeeMachine("What else ...");
-
-
-        //init sensors
-        MotionDetector bedroom_motion_detector = new MotionDetector();
-        MotionDetector living_motion_detector = new MotionDetector();
-        MotionDetector kitchen_motion_detector = new MotionDetector();
-
-
-
-        //Creation des piece
-        //bedroom
-        Rooms bedroom = new Rooms();
-
-        //living
-        Rooms living = new Rooms();
-
-        //kitchen
-        Rooms kitchen = new Rooms();
-
-
-        //init manger
-        Lightmanager bedroom_lightmanager = new Lightmanager();
-        Lightmanager living_lightmanager = new Lightmanager();
-        Lightmanager open_kitchen_lightmanager = new Lightmanager();
-        CoffeeManager coffeeManager = new CoffeeManager();*/
 
     public Smart_Home(String filename){
         roomsMap = new HashMap<String, Rooms>();
@@ -60,7 +27,7 @@ public class Smart_Home {
 
         try {
             //FileReader FR = new FileReader("/Users/DimiS/Documents/Maintenace & evolution M1Q1/SME/Smart_H/src/config.txt");
-            Object obj = parser.parse(new FileReader("/Users/DimiS/Documents/Maintenace & evolution M1Q1/SME/Smart_H/src/config.json5"));
+                Object obj = parser.parse(new FileReader("/home/xenakis/Documents/Cours/Master/Q7/SME/repo/Smart_H/src/config.json5"));
             JSONObject jsonObject = (JSONObject) obj;
 
             name = (String) jsonObject.get("name");
@@ -124,32 +91,6 @@ public class Smart_Home {
             e.printStackTrace();
         }
 
-/*
-        //Lier les devises aux piece des piece
-        //bedroom
-        bedroom.addDevice(bedroom_light);
-        //living
-        living.addDevice(living_light);
-        living.addDevice(living_light2);
-        //kitchen
-        kitchen.addDevice(kitchen_light);
-        kitchen.addDevice(coffee);
-
-
-        //init manager
-        bedroom_lightmanager.add(bedroom_light);
-        living_lightmanager.add(living);
-        open_kitchen_lightmanager.add(living);        //allumerra la cuisine et le living
-        open_kitchen_lightmanager.add(kitchen);      //allumerra la cuisine et le living
-        //coffeeManager.add(coffee);
-
-
-        //lier un sensor à une/des lightmanager
-        bedroom_motion_detector.attach(bedroom_lightmanager);
-        living_motion_detector.attach(living_lightmanager);
-        kitchen_motion_detector.attach(coffeeManager);
-        kitchen_motion_detector.attach(open_kitchen_lightmanager);
-*/
     }
 
     public String toString(){

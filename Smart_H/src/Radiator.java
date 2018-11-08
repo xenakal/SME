@@ -1,27 +1,38 @@
 public class Radiator {
 
     String name;
-    public boolean on = false;
-    private int temp;
+    private boolean on = false;
 
-    public Radiator(String name){this.name = name; temp = 25;}
+    public Radiator(String name){this.name = name;}
 
-    public void setTemp(int value){
-        if(on){
-            if(value < temp){
-                System.out.println("decreasing heat");
-            }
-            else if(value > temp){
-                System.out.println("Increasing heat");
-            }
-            else{
-                System.out.println("already at good temperature");
-            }
-            temp = value;
-        }
-        else{
-            System.out.println("seems the radiator is off !");
+    public void turn_on(){
+        if(!on){
+            on = true;
+            System.out.println(name + ": Radiator on !");
         }
     }
+
+    public void turn_off(){
+        if(on){
+            on = false;
+            System.out.println(name + ": Radiator off !");
+        }
+    }
+
+    public void increase_heat(){
+        System.out.println("radiator "+name+" increases heat");
+    }
+
+    public void decrease_heat(){
+        System.out.println("radiator "+name+" decreases heat");
+    }
+    public boolean getState(){
+        return on;
+    }
+
+    public String toString(){
+        return "radiator : " +name + "  ";
+    }
+
 
 }
