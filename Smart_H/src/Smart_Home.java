@@ -1,16 +1,11 @@
 
-import org.json.simple.*;
-import org.json.simple.parser.ParseException;
 import java.util.*;
-import java.io.*;
 import java.io.FileReader;
-import java.util.ArrayList;
 import java.util.Iterator;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
-import sun.management.Sensor;
 
 public class Smart_Home {
 
@@ -46,13 +41,13 @@ public class Smart_Home {
                 Iterator sensorIterator = sensors.iterator();
                 while (sensorIterator.hasNext()){
                     JSONObject sens = (JSONObject) sensorIterator.next();
-                    MotionDetector s; //TODO replace by AbsSensor s;
-                    switch ((String) sens.get("type")){
+                    AbsSensor s = factory.makeSensor((String) sens.get("type"),(String) sens.get("name")); //TODO replace by AbsSensor s;
+                    /*switch ((String) sens.get("type")){
                         case "motion" : s = new MotionDetector((String) sens.get("name")); break;
                         default:
                             System.out.println("Error in json parse");
                             s= new MotionDetector((String) sens.get("name"));
-                    }
+                    }*/
                     r.addSensor(s);
                     sensorMap.put((String) sens.get("name"),s);
                 }
@@ -64,10 +59,12 @@ public class Smart_Home {
                 while (deviceIterator.hasNext()){
                     JSONObject dev = (JSONObject) deviceIterator.next();
                     String type = (String) dev.get("type");
-                    switch (type){
-                        case "light" : r.addDevice(new Light((String) dev.get("name"))); break;
-                        case "coffee" : r.addDevice(new CoffeeMachine((String) dev.get("name")));break;
-                    }
+                    String name = (String) dev.get("name");
+                    r.addDevice( factory.makeActuator(type,name));
+                    //switch (type){
+                    //    case "light" : r.addDevice(new Light((String)dev.get("name") )); break;
+                    //    case "coffee" : r.addDevice(new CoffeeMachine((String) dev.get("name")));break;
+                    //}
                 }
                 if((Boolean) jsonObject.get("makeManagerforeachroom")){
                     //cree un manager pour chaque type d'actuator
