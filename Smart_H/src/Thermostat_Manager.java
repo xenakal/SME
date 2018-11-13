@@ -52,11 +52,28 @@ public class Thermostat_Manager implements FeatureManager{
     }
 
 
+    public List<Radiator> getRadiator() {
+        List<Radiator> list = new ArrayList<Radiator>();
+        for(Rooms r : rooms){
+            for (Actuator rad : r.getActuatorofType(Enum.Actuator.radiator)){
+                if (!list.contains((Radiator) rad)){
+                    list.add((Radiator) rad);
+                }
+            }
+        }
+        for (Radiator rad : radiators){
+            if (!list.contains(rad)){
+                list.add(rad);
+            }
+        }
+        return list;
+    }
+
     @Override
     public void react(Info info) {
         switch (info.getName()) {
             case "temperature" :
-                    for (Radiator rad : radiators) {   //remplacer par getLights ou pas car perte de rapidité
+                    for (Radiator rad : this.getRadiator()) {   //remplacer par getLights ou pas car perte de rapidité
                         setTemperature(rad,info.getValue());
                     }
                 break;

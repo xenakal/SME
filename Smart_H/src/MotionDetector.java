@@ -6,6 +6,11 @@ public class MotionDetector extends AbsSensor{
 
     public List<FeatureManager> obsList = new LinkedList<FeatureManager>();
 
+    @Override
+    public Enum.Sensor getType() {
+        return Enum.Sensor.motion;
+    }
+
     public MotionDetector(String name){
         super(name);
         //this.name = name;

@@ -1,13 +1,20 @@
-public class CoffeeMachine {
+public class CoffeeMachine implements Actuator{
 
         String name;
         public boolean isMakingCoffee = false;
 
-        public CoffeeMachine(String name) {
+
+    public CoffeeMachine(String name) {
             this.name = name;
         }
 
-        public void makeCoffee(){
+    @Override
+    public Enum.Actuator getType() {
+        return Enum.Actuator.coffee;
+    }
+
+
+    public void makeCoffee(){
             if(!isMakingCoffee){
                 isMakingCoffee = true;
                 System.out.println("Coffee machine :" +name + "have made a coffee");

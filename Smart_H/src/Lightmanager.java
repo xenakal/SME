@@ -39,9 +39,9 @@ public class Lightmanager implements FeatureManager{
     public List<Light> getLights() {
         List<Light> list = new ArrayList<Light>();
         for(Rooms r : rooms){
-            for (Light l : r.getLight()){
-                if (!list.contains(l)){
-                    list.add(l);
+            for (Actuator l : r.getActuatorofType(Enum.Actuator.coffee)){
+                if (!list.contains((Light) l)){
+                    list.add((Light) l);
                 }
             }
         }
@@ -59,24 +59,14 @@ public class Lightmanager implements FeatureManager{
         switch (info.getName()) {
             case "motion" :
                 if (info.getValue() == 1) {  //true = 1
-                    for (Light li : lights) {   //remplacer par getLights ou pas car perte de rapidité
+                    for (Light li : this.getLights()) {   //remplacer par getLights ou pas car perte de rapidité
                         li.turn_on();
-                    }
-                    for(Rooms r : rooms){
-                        for (Light l : r.getLight()){
-                            l.turn_on();
-                        }
                     }
 
                 }else{
-                    for (Light li : lights) {
+                    for (Light li : this.getLights()) {
                         if(li.on)
                             li.turn_off();
-                    }
-                    for(Rooms r : rooms){
-                        for (Light l : r.getLight()){
-                            l.turn_off();
-                        }
                     }
                 }
                 break;

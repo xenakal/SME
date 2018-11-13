@@ -42,9 +42,9 @@ public class CoffeeManager implements FeatureManager{
         public List<CoffeeMachine> getCoffeMachines() {
             List<CoffeeMachine> list = new ArrayList<CoffeeMachine>();
             for(Rooms r : rooms){
-                for (CoffeeMachine cm : r.getCoffeeMachines()){
-                    if (!list.contains(cm)){
-                        list.add(cm);
+                for (Actuator cm : r.getActuatorofType(Enum.Actuator.coffee)){
+                    if (!list.contains((CoffeeMachine) cm)){
+                        list.add((CoffeeMachine) cm);
                     }
                 }
             }

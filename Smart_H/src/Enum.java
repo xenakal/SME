@@ -8,6 +8,7 @@ public class Enum {
         switch (type) {
             case "light" : return Actuator.light;
             case "coffee": return Actuator.coffee;
+            case "radiator": return Actuator.radiator;
             default: System.out.println("Error : invalid Actuator type");return Actuator.light;
         }
     }
@@ -15,12 +16,13 @@ public class Enum {
         lightManager,coffeeManager
     }*/
     public enum Sensor{
-        motion
+        motion,temperature
     }
 
     public static Sensor convertToSensor(String type){
         switch (type) {
             case "motion" : return Sensor.motion;
+            case "temperature": return Sensor.temperature;
             default: System.out.println("Error : invalid Sensor type"); return Sensor.motion;
         }
     }

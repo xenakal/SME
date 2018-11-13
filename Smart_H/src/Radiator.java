@@ -1,9 +1,15 @@
-public class Radiator {
+public class Radiator implements Actuator{
 
     String name;
     private boolean on = false;
 
     public Radiator(String name){this.name = name;}
+
+    @Override
+    public Enum.Actuator getType() {
+        return Enum.Actuator.radiator;
+    }
+
 
     public void turn_on(){
         if(!on){

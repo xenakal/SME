@@ -1,7 +1,7 @@
 import java.util.LinkedList;
 import java.util.List;
 
-abstract class AbsSensor{
+abstract class AbsSensor extends Object{
 
     protected String name;
     protected List<FeatureManager> obsList ;
@@ -16,6 +16,7 @@ abstract class AbsSensor{
     public String getName() {
         return name;
     }
+    abstract Enum.Sensor getType();
 
     public void setName(String name) {
         this.name = name;

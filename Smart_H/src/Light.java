@@ -1,4 +1,4 @@
-public class Light {
+public class Light extends Object implements Actuator{
 
     String name;
     public boolean on = false;
@@ -6,6 +6,12 @@ public class Light {
     public Light(String name) {
         this.name = name;
     }
+
+    @Override
+    public Enum.Actuator getType() {
+        return Enum.Actuator.light;
+    }
+
 
     public void turn_on(){
         if(!on){

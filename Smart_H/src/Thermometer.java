@@ -6,6 +6,11 @@ public class Thermometer extends AbsSensor{
     private int recorded_temp = 25;
     public List<FeatureManager> obsList = new LinkedList<>();
 
+    @Override
+    Enum.Sensor getType() {
+        return Enum.Sensor.temperature;
+    }
+
     protected Thermometer(String name) {
         super(name);
      }
