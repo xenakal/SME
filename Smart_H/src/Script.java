@@ -1,17 +1,12 @@
 public class Script {
 
-    // single script object
-    public static Script script = new Script();
+    public static void main(String[] args){
+        //Smart_Home smart = Smart_Home.getSmartHome();
 
-    // make the constructor private so it can't be accessed
-    private Script(){}
-
-    public static Script getScript(){
-        return script;
-    }
-    public static void execute(){
+        //smart.Smart_Home_Init("config.json5");
         Smart_Home smart = new Smart_Home("config.json5");
         System.out.println(smart.toString());
+
 
         //Creation de la maison
         //Initialise Controlled devices
