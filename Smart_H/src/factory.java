@@ -20,26 +20,7 @@ public class factory {
                 //TODO launch error
         }
     }
-
-
-    public static ArrayList<? extends Actuator> makeListActuator(Enum.Actuator type){
-        switch (type){
-            case light : return new ArrayList<Light>();
-            case coffee : return new ArrayList<CoffeeMachine>();
-            default: System.out.print("Type error in Actuator factory, given type : "+type);return new ArrayList<Light>();
-            //TODO launch error
-        }
-    }
-
-    public static ArrayList<? extends AbsSensor> makeListSensor(Enum.Sensor type){
-        switch (type){
-            case motion : return new ArrayList<MotionDetector>();
-            default:
-                System.out.println("Error in json parse");
-                return new ArrayList<MotionDetector>();
-            //TODO launch error
-        }
-    }
+    
 
     public static FeatureManager makeManager(Enum.Actuator act){
         FeatureManager manager;
