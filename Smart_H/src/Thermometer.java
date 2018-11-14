@@ -4,7 +4,6 @@ import java.util.List;
 public class Thermometer extends AbsSensor{
 
     private int recorded_temp = 25;
-    public List<FeatureManager> obsList = new LinkedList<>();
 
     @Override
     Enum.Sensor getType() {
@@ -30,23 +29,6 @@ public class Thermometer extends AbsSensor{
         this.advertise();
     }
 
-    public void advertise(){
-        for (FeatureManager o: obsList
-                ) {
-            o.react(this.makeinfo());
-        }
-    }
-
-    public void detach(FeatureManager obs){
-        obsList.remove(obs);
-    }
-
-
-    public void attach(FeatureManager obs){
-        if (!obsList.contains(obs)){
-            obsList.add(obs);
-        }
-    }
 
 
     public Info makeinfo(){

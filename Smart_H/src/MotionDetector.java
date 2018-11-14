@@ -4,8 +4,6 @@ public class MotionDetector extends AbsSensor{
 
     private int movement; // if movement is detected (0==false)
 
-    public List<FeatureManager> obsList = new LinkedList<FeatureManager>();
-
     @Override
     public Enum.Sensor getType() {
         return Enum.Sensor.motion;
@@ -38,22 +36,6 @@ public class MotionDetector extends AbsSensor{
         }
     }
 
-    public void attach(FeatureManager obs){
-        if (!obsList.contains(obs)){
-            obsList.add(obs);
-        }
-    }
-
-    public void detach(FeatureManager obs){
-        obsList.remove(obs);
-    }
-
-    public void advertise(){
-        for (FeatureManager o: obsList
-             ) {
-            o.react(this.makeinfo());
-        }
-    }
 
     public Info makeinfo(){
         return new Info("motion",  movement);

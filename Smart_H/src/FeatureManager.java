@@ -7,5 +7,6 @@
 public interface FeatureManager {
     public void react(Info info);
     public void add(Rooms r);
+    public void remove(Rooms r);
     public String ToString();
 }

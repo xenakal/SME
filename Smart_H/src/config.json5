@@ -30,8 +30,8 @@
       "roomactuator": "bedroom",
       "actuatortype": "light"
     },
-    {"sensorname" :  "motionkitchen1",
-      "roomactuator": "bedroom",
+    {"sensorname" :  "motionkitchen2",
+      "roomactuator": "kitchen",
       "actuatortype": "light"
     }
   ]

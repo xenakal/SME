@@ -20,7 +20,7 @@ public class factory {
                 //TODO launch error
         }
     }
-    
+
 
     public static FeatureManager makeManager(Enum.Actuator act){
         FeatureManager manager;

@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class Rooms {
 
-    private String name = "no  name"; 
+    private String name = "no  name";
     //Sensor
     private Map<Enum.Sensor, List<AbsSensor>> sensorMap;
 

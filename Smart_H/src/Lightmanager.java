@@ -39,7 +39,7 @@ public class Lightmanager implements FeatureManager{
     public List<Light> getLights() {
         List<Light> list = new ArrayList<Light>();
         for(Rooms r : rooms){
-            for (Actuator l : r.getActuatorofType(Enum.Actuator.coffee)){
+            for (Actuator l : r.getActuatorofType(Enum.Actuator.light)){
                 if (!list.contains((Light) l)){
                     list.add((Light) l);
                 }
