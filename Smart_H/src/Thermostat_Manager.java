@@ -6,6 +6,23 @@ public class Thermostat_Manager implements FeatureManager{
 
     private String name;
     private int tolerance;  // tolerance on required temperature
+
+    public int getTolerance() {
+        return tolerance;
+    }
+
+    public void setTolerance(int tolerance) {
+        this.tolerance = tolerance;
+    }
+
+    public int getRequired_temperature() {
+        return required_temperature;
+    }
+
+    public void setRequired_temperature(int required_temperature) {
+        this.required_temperature = required_temperature;
+    }
+
     private int required_temperature;
     private List<Radiator> radiators ;
     private  List<Rooms> rooms;
@@ -74,14 +91,14 @@ public class Thermostat_Manager implements FeatureManager{
         switch (info.getName()) {
             case "temperature" :
                     for (Radiator rad : this.getRadiator()) {   //remplacer par getLights ou pas car perte de rapidité
-                        setTemperature(rad,info.getValue());
+                        applyTemperature(rad,info.getValue());
                     }
                 break;
             default: break;
         }
     }
 
-    private void setTemperature(Radiator rad, int value){
+    private void applyTemperature(Radiator rad, int value){
 
         if(value < required_temperature - tolerance){
             if(!rad.getState())
