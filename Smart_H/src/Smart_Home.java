@@ -9,11 +9,21 @@ import org.json.simple.parser.JSONParser;
 
 public class Smart_Home {
 
+
+    //private static Smart_Home sh = new Smart_Home();
+
     private String name;
     private Map<String, Rooms> roomsMap;
     private Map<String,AbsSensor> sensorMap;  //utiliser qu'en local
 
 
+    //private Smart_Home(){}
+
+    /*public static Smart_Home getSmartHome(){
+        return sh;
+    }*/
+
+    //public void Smart_Home_Init(String filename){
     public Smart_Home(String filename){
         roomsMap = new HashMap<String, Rooms>();
         sensorMap = new HashMap<String, AbsSensor>();
