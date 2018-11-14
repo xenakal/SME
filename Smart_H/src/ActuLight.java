@@ -1,9 +1,9 @@
-public class Light extends Object implements Actuator{
+public class ActuLight extends Object implements Actuator{
 
     String name;
     public boolean on = false;
 
-    public Light(String name) {
+    public ActuLight(String name) {
         this.name = name;
     }
 
@@ -16,14 +16,14 @@ public class Light extends Object implements Actuator{
     public void turn_on(){
         if(!on){
             on = true;
-            System.out.println(name + "Light on !");
+            System.out.println(name + "ActuLight on !");
         }
     }
 
     public void turn_off(){
         if(on){
             on = false;
-            System.out.println(name + "Light off !");
+            System.out.println(name + "ActuLight off !");
         }
     }
 

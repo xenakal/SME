@@ -1,9 +1,9 @@
-public class Radiator implements Actuator{
+public class ActuRadiator implements Actuator{
 
     String name;
     private boolean on = false;
 
-    public Radiator(String name){this.name = name;}
+    public ActuRadiator(String name){this.name = name;}
 
     @Override
     public Enum.Actuator getType() {
@@ -14,7 +14,7 @@ public class Radiator implements Actuator{
     public void turn_on(){
         if(!on){
             on = true;
-            System.out.println(name + ": Radiator on !");
+            System.out.println(name + ": ActuRadiator on !");
             System.out.println("radiator "+name+" increases heat");
         }
     }
@@ -22,7 +22,7 @@ public class Radiator implements Actuator{
     public void turn_off(){
         if(on){
             on = false;
-            System.out.println(name + ": Radiator off !");
+            System.out.println(name + ": ActuRadiator off !");
         }
     }
 

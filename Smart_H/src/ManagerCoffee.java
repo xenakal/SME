@@ -1,5 +1,3 @@
-import com.sun.xml.internal.bind.v2.TODO;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,17 +6,17 @@ import java.util.List;
 /**
  * Manage the coffe fabrication  according to presence of people
  */
-public class CoffeeManager implements FeatureManager{
+public class ManagerCoffee implements ManagerFeature {
 
-    private List<CoffeeMachine> machines ;
+    private List<ActuCoffeeMachine> machines ;
     private  List<Rooms> rooms;
 
-    public CoffeeManager() {
-        machines = new ArrayList<CoffeeMachine>();
+    public ManagerCoffee() {
+        machines = new ArrayList<ActuCoffeeMachine>();
         rooms = new ArrayList<Rooms>();
     }
 
-    public void add(CoffeeMachine o){
+    public void add(ActuCoffeeMachine o){
         if (!machines.contains(o)){
             machines.add(o);
         }
@@ -30,7 +28,7 @@ public class CoffeeManager implements FeatureManager{
         }
     }
 
-    public void remove(Light l){
+    public void remove(ActuLight l){
             machines.remove(l);
         }
 
@@ -39,16 +37,16 @@ public class CoffeeManager implements FeatureManager{
     }
 
 
-        public List<CoffeeMachine> getCoffeMachines() {
-            List<CoffeeMachine> list = new ArrayList<CoffeeMachine>();
+        public List<ActuCoffeeMachine> getCoffeMachines() {
+            List<ActuCoffeeMachine> list = new ArrayList<ActuCoffeeMachine>();
             for(Rooms r : rooms){
                 for (Actuator cm : r.getActuatorofType(Enum.Actuator.coffee)){
-                    if (!list.contains((CoffeeMachine) cm)){
-                        list.add((CoffeeMachine) cm);
+                    if (!list.contains((ActuCoffeeMachine) cm)){
+                        list.add((ActuCoffeeMachine) cm);
                     }
                 }
             }
-            for (CoffeeMachine cm : machines){
+            for (ActuCoffeeMachine cm : machines){
                 if (!list.contains(cm)){
                     list.add(cm);
                 }
@@ -62,7 +60,7 @@ public class CoffeeManager implements FeatureManager{
             switch (info.getName()) {
                 case "motion" :
                     if (info.getValue() == 1) {  //true = 1
-                        for (CoffeeMachine cm : getCoffeMachines()) {
+                        for (ActuCoffeeMachine cm : getCoffeMachines()) {
                             cm.makeCoffee();
                         }
 
@@ -74,7 +72,7 @@ public class CoffeeManager implements FeatureManager{
 
         public String ToString(){
             String str =  "CoffeManager : " ;
-            for (CoffeeMachine c: getCoffeMachines()) {
+            for (ActuCoffeeMachine c: getCoffeMachines()) {
                 str = str + c.toString();
             }
             return str;

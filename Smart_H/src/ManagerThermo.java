@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class Thermostat_Manager implements FeatureManager{
+public class ManagerThermo implements ManagerFeature {
 
     private String name;
     private int tolerance;  // tolerance on required temperature
@@ -24,18 +24,18 @@ public class Thermostat_Manager implements FeatureManager{
     }
 
     private int required_temperature;
-    private List<Radiator> radiators ;
+    private List<ActuRadiator> radiators ;
     private  List<Rooms> rooms;
 
-    public Thermostat_Manager(int required_temperature, int tolerance) {
+    public ManagerThermo(int required_temperature, int tolerance) {
         this.required_temperature = required_temperature;
         this.tolerance = tolerance;
-        radiators = new ArrayList<Radiator>();
+        radiators = new ArrayList<ActuRadiator>();
         rooms = new ArrayList<Rooms>();
     }
 
 
-    public void add(Radiator l){
+    public void add(ActuRadiator l){
         if (!radiators.contains(l)){
             radiators.add(l);
         }
@@ -50,7 +50,7 @@ public class Thermostat_Manager implements FeatureManager{
 
 
     public void all_off(){
-        for(Radiator rad : radiators){
+        for(ActuRadiator rad : radiators){
             rad.turn_off();
         }
     }
@@ -60,7 +60,7 @@ public class Thermostat_Manager implements FeatureManager{
         return null;
     }
 
-    public void remove(Light l){
+    public void remove(ActuLight l){
         radiators.remove(l);
     }
 
@@ -69,16 +69,16 @@ public class Thermostat_Manager implements FeatureManager{
     }
 
 
-    public List<Radiator> getRadiator() {
-        List<Radiator> list = new ArrayList<Radiator>();
+    public List<ActuRadiator> getRadiator() {
+        List<ActuRadiator> list = new ArrayList<ActuRadiator>();
         for(Rooms r : rooms){
             for (Actuator rad : r.getActuatorofType(Enum.Actuator.radiator)){
-                if (!list.contains((Radiator) rad)){
-                    list.add((Radiator) rad);
+                if (!list.contains((ActuRadiator) rad)){
+                    list.add((ActuRadiator) rad);
                 }
             }
         }
-        for (Radiator rad : radiators){
+        for (ActuRadiator rad : radiators){
             if (!list.contains(rad)){
                 list.add(rad);
             }
@@ -90,7 +90,7 @@ public class Thermostat_Manager implements FeatureManager{
     public void react(Info info) {
         switch (info.getName()) {
             case "temperature" :
-                    for (Radiator rad : this.getRadiator()) {   //remplacer par getLights ou pas car perte de rapidité
+                    for (ActuRadiator rad : this.getRadiator()) {   //remplacer par getLights ou pas car perte de rapidité
                         applyTemperature(rad,info.getValue());
                     }
                 break;
@@ -98,7 +98,7 @@ public class Thermostat_Manager implements FeatureManager{
         }
     }
 
-    private void applyTemperature(Radiator rad, int value){
+    private void applyTemperature(ActuRadiator rad, int value){
 
         if(value < required_temperature - tolerance){
             if(!rad.getState())

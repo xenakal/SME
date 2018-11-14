@@ -51,12 +51,12 @@ public class Smart_Home {
                 Iterator sensorIterator = sensors.iterator();
                 while (sensorIterator.hasNext()){
                     JSONObject sens = (JSONObject) sensorIterator.next();
-                    AbsSensor s = factory.makeSensor((String) sens.get("type"),(String) sens.get("name")); //TODO replace by AbsSensor s;
+                    AbsSensor s = Factory.makeSensor((String) sens.get("type"),(String) sens.get("name")); //TODO replace by AbsSensor s;
                     /*switch ((String) sens.get("type")){
-                        case "motion" : s = new MotionDetector((String) sens.get("name")); break;
+                        case "motion" : s = new SensorMotion((String) sens.get("name")); break;
                         default:
                             System.out.println("Error in json parse");
-                            s= new MotionDetector((String) sens.get("name"));
+                            s= new SensorMotion((String) sens.get("name"));
                     }*/
                     r.addSensor(s);
                     sensorMap.put((String) sens.get("name"),s);
@@ -70,10 +70,10 @@ public class Smart_Home {
                     JSONObject dev = (JSONObject) deviceIterator.next();
                     String type = (String) dev.get("type");
                     String name = (String) dev.get("name");
-                    r.addDevice( factory.makeActuator(type,name));
+                    r.addDevice( Factory.makeActuator(type,name));
                     //switch (type){
-                    //    case "light" : r.addDevice(new Light((String)dev.get("name") )); break;
-                    //    case "coffee" : r.addDevice(new CoffeeMachine((String) dev.get("name")));break;
+                    //    case "light" : r.addDevice(new ActuLight((String)dev.get("name") )); break;
+                    //    case "coffee" : r.addDevice(new ActuCoffeeMachine((String) dev.get("name")));break;
                     //}
                 }
                 if((Boolean) jsonObject.get("makeManagerforeachroom")){
@@ -90,7 +90,7 @@ public class Smart_Home {
                 AbsSensor sens = sensorMap.get((String) connect.get("sensorname"));
                 Rooms location = roomsMap.get((String) connect.get("roomactuator"));
                 String type = (String) connect.get("actuatortype");
-                FeatureManager manager =  location.getManager(Enum.convertToActu(type));
+                ManagerFeature manager =  location.getManager(Enum.convertToActu(type));
                 sens.attach(manager);  //TODO on pourrais permettre de lier un senor a plusieur manager directement
             }
 

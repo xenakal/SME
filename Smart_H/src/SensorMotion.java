@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class MotionDetector extends AbsSensor{
+public class SensorMotion extends AbsSensor{
 
     private int movement; // if movement is detected (0==false)
 
@@ -9,7 +9,7 @@ public class MotionDetector extends AbsSensor{
         return Enum.Sensor.motion;
     }
 
-    public MotionDetector(String name){
+    public SensorMotion(String name){
         super(name);
         //this.name = name;
         movement = 0;

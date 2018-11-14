@@ -1,5 +1,3 @@
-import sun.management.Sensor;
-
 import java.util.ArrayList;
         import java.util.HashMap;
         import java.util.List;
@@ -16,20 +14,20 @@ public class Rooms {
 
 
     //Manager
-    private Map<Enum.Actuator, FeatureManager> managerMap;
+    private Map<Enum.Actuator, ManagerFeature> managerMap;
 
 
     public Rooms() {
         this.sensorMap = new HashMap<Enum.Sensor, List<AbsSensor>>();
         this.actuatorMap = new HashMap<Enum.Actuator, List<Actuator>>();
-        this.managerMap = new HashMap<Enum.Actuator, FeatureManager>();
+        this.managerMap = new HashMap<Enum.Actuator, ManagerFeature>();
     }
 
     public Rooms(String name) {
         this.name = name;
         this.sensorMap = new HashMap<Enum.Sensor, List<AbsSensor>>();
         this.actuatorMap = new HashMap<Enum.Actuator, List<Actuator>>();
-        this.managerMap = new HashMap<Enum.Actuator, FeatureManager>();
+        this.managerMap = new HashMap<Enum.Actuator, ManagerFeature>();
     }
 
 
@@ -41,7 +39,7 @@ public class Rooms {
     }
 
     public void addSensor(String type, String name) {
-        AbsSensor s = factory.makeSensor(type, name);
+        AbsSensor s = Factory.makeSensor(type, name);
         this.addSensor(s);
     }
 
@@ -54,7 +52,7 @@ public class Rooms {
     }
 
     public void addDevice(String type, String name) {
-        Actuator a = factory.makeActuator(type, name);
+        Actuator a = Factory.makeActuator(type, name);
         this.addDevice(a);
     }
 
@@ -72,14 +70,14 @@ public class Rooms {
     public void makeManagerForUsedDevices(){
         for (Enum.Actuator act: Enum.Actuator.values()) {
             if(actuatorMap.containsKey(act)){
-                FeatureManager manager = factory.makeManager(act);
+                ManagerFeature manager = Factory.makeManager(act);
                 manager.add(this);
                 managerMap.put(act,manager);
             }
         }
     }
 
-    public FeatureManager getManager(Enum.Actuator act){
+    public ManagerFeature getManager(Enum.Actuator act){
         return managerMap.get(act);
     }
 
@@ -99,7 +97,7 @@ public class Rooms {
         }
 
         str = str + " \n manager : \n";
-        for (FeatureManager m : managerMap.values()) {
+        for (ManagerFeature m : managerMap.values()) {
             str = str + m.ToString() + "\n";
         }
         return str + "\n \n";
@@ -116,85 +114,85 @@ public class Rooms {
 
     private String name ="no  name";
     //Sensor
-    private List<MotionDetector> motionDetectors;
-    private List<Light> light;
-    private List<CoffeeMachine> coffeeMachines;
-    private List<Radiator> radiators;
-    private List<Thermometer> thermometers;
+    private List<SensorMotion> motionDetectors;
+    private List<ActuLight> light;
+    private List<ActuCoffeeMachine> coffeeMachines;
+    private List<ActuRadiator> radiators;
+    private List<SensorThermo> thermometers;
 
     //Actuator
     private Map<Enum.Actuator,List> actuatorMap; //TODO regrouper les actuators
-    //private List<Light> light;
-    //private List<CoffeeMachine> coffeeMachines;
+    //private List<ActuLight> light;
+    //private List<ActuCoffeeMachine> coffeeMachines;
 
     //Manager
-    private Map<Enum.Actuator,FeatureManager> managerMap;
+    private Map<Enum.Actuator,ManagerFeature> managerMap;
 
 
     public Rooms(){
-        this.motionDetectors = new ArrayList<MotionDetector>();
-        this.light = new ArrayList<Light>();
-        this.thermometers = new ArrayList<Thermometer>();
-        this.radiators = new ArrayList<Radiator>();
+        this.motionDetectors = new ArrayList<SensorMotion>();
+        this.light = new ArrayList<ActuLight>();
+        this.thermometers = new ArrayList<SensorThermo>();
+        this.radiators = new ArrayList<ActuRadiator>();
         this.actuatorMap = new HashMap<Enum.Actuator,List>();
-        this.managerMap = new HashMap<Enum.Actuator,FeatureManager>();
+        this.managerMap = new HashMap<Enum.Actuator,ManagerFeature>();
     }
 
     public Rooms(String name){
         this.name = name;
-        this.motionDetectors = new ArrayList<MotionDetector>();
+        this.motionDetectors = new ArrayList<SensorMotion>();
         this.actuatorMap = new HashMap<Enum.Actuator,List>();
-        this.managerMap = new HashMap<Enum.Actuator,FeatureManager>();
+        this.managerMap = new HashMap<Enum.Actuator,ManagerFeature>();
     }
 
-    public void addSensor(MotionDetector md ){
+    public void addSensor(SensorMotion md ){
         motionDetectors.add(md);
     }
-    public void addSensor(Thermometer th) {thermometers.add(th);}
+    public void addSensor(SensorThermo th) {thermometers.add(th);}
 
-    public void addDevice(Light l){
+    public void addDevice(ActuLight l){
         if (!actuatorMap.containsKey(Enum.Actuator.light)){
-            actuatorMap.put(Enum.Actuator.light,new ArrayList<Light>());
+            actuatorMap.put(Enum.Actuator.light,new ArrayList<ActuLight>());
         }
         this.getLight().add(l);
     }
 
 
-    public void addDevice(Radiator r) {
+    public void addDevice(ActuRadiator r) {
         if (!actuatorMap.containsKey(Enum.Actuator.radiator)){
-            actuatorMap.put(Enum.Actuator.radiator,new ArrayList<Radiator>());
+            actuatorMap.put(Enum.Actuator.radiator,new ArrayList<ActuRadiator>());
         }
         this.getRadiator().add(r);
     }
 
-    public void addDevice(CoffeeMachine cm){
+    public void addDevice(ActuCoffeeMachine cm){
         if (!actuatorMap.containsKey(Enum.Actuator.coffee)){
-            actuatorMap.put(Enum.Actuator.coffee,new ArrayList<CoffeeMachine>());
+            actuatorMap.put(Enum.Actuator.coffee,new ArrayList<ActuCoffeeMachine>());
         }
         this.getCoffeeMachines().add(cm);
     }
 
-    public List<MotionDetector> getMotionDetectors() {
+    public List<SensorMotion> getMotionDetectors() {
         return motionDetectors;
     }
-    public List<Thermometer> getThermometer() {return thermometers;}
-    public List<Light> getLight() {
+    public List<SensorThermo> getThermometer() {return thermometers;}
+    public List<ActuLight> getLight() {
         return actuatorMap.get(Enum.Actuator.light);
     }
-    public List<Radiator> getRadiator() {return actuatorMap.get(Enum.Actuator.radiator);}
-    public List<CoffeeMachine> getCoffeeMachines() {
+    public List<ActuRadiator> getRadiator() {return actuatorMap.get(Enum.Actuator.radiator);}
+    public List<ActuCoffeeMachine> getCoffeeMachines() {
         return actuatorMap.get(Enum.Actuator.coffee);
     }
 
     public void makeManagerForUsedDevices(){
         for (Enum.Actuator act: Enum.Actuator.values()) {
             if(actuatorMap.containsKey(act)){
-                FeatureManager manager;
-                //TODO improve FeatureManager
+                ManagerFeature manager;
+                //TODO improve ManagerFeature
                 switch (act){
-                    case light: manager= new Lightmanager(); break;
-                    case coffee: manager =new CoffeeManager(); break;
-                    default:System.out.println("Error in makeManagerForUsedDevices : invalid actuator type");manager =new CoffeeManager(); //coffee
+                    case light: manager= new ManagerLight(); break;
+                    case coffee: manager =new ManagerCoffee(); break;
+                    default:System.out.println("Error in makeManagerForUsedDevices : invalid actuator type");manager =new ManagerCoffee(); //coffee
                 }
                 manager.add(this);
                 managerMap.put(act,manager);
@@ -202,7 +200,7 @@ public class Rooms {
         }
     }
 
-    public FeatureManager getManager(Enum.Actuator act){
+    public ManagerFeature getManager(Enum.Actuator act){
         return managerMap.get(act);
     }
 
@@ -217,7 +215,7 @@ public class Rooms {
             str = str + act.toString() + "\n";
         }
         str = str + " \n manager : \n";
-        for (FeatureManager m : managerMap.values()) {
+        for (ManagerFeature m : managerMap.values()) {
             str = str + m.ToString() + "\n";
         }
         return str + "\n \n";

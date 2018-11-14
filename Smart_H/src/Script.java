@@ -10,20 +10,20 @@ public class Script {
 
         //Creation de la maison
         //Initialise Controlled devices
-        Light bedroom_light = new Light("bedroom");
-        Light living_light = new Light("living_1");
-        Light living_light2 = new Light("living_2"); //une 2e lampe
-        Light kitchen_light = new Light("kitchen");
-        CoffeeMachine coffee = new CoffeeMachine("What else ...");
-        Radiator living_radiator1 = new Radiator("living1");
-        Radiator living_radiator2 = new Radiator("living2");
+        ActuLight bedroom_light = new ActuLight("bedroom");
+        ActuLight living_light = new ActuLight("living_1");
+        ActuLight living_light2 = new ActuLight("living_2"); //une 2e lampe
+        ActuLight kitchen_light = new ActuLight("kitchen");
+        ActuCoffeeMachine coffee = new ActuCoffeeMachine("What else ...");
+        ActuRadiator living_radiator1 = new ActuRadiator("living1");
+        ActuRadiator living_radiator2 = new ActuRadiator("living2");
 
 
         //init sensors
-        MotionDetector bedroom_motion_detector = new MotionDetector("bedroom_detector");
-        MotionDetector living_motion_detector = new MotionDetector("living_detector");
-        MotionDetector kitchen_motion_detector = new MotionDetector("kitchen_detector");
-        Thermometer living_thermometer = new Thermometer("living_thermometer");
+        SensorMotion bedroom_motion_detector = new SensorMotion("bedroom_detector");
+        SensorMotion living_motion_detector = new SensorMotion("living_detector");
+        SensorMotion kitchen_motion_detector = new SensorMotion("kitchen_detector");
+        SensorThermo living_sensorThermo = new SensorThermo("living_sensorThermo");
 
 
         //Creation des piece
@@ -43,16 +43,16 @@ public class Script {
 
 
         //init manager
-        Lightmanager bedroom_lightmanager = new Lightmanager();
-        Lightmanager living_lightmanager = new Lightmanager();
-        Lightmanager open_kitchen_lightmanager = new Lightmanager();
-        CoffeeManager coffeeManager = new CoffeeManager();
-        Thermostat_Manager living_heatmanager = new Thermostat_Manager(25,1);
+        ManagerLight bedroom_lightmanager = new ManagerLight();
+        ManagerLight living_lightmanager = new ManagerLight();
+        ManagerLight open_kitchen_lightmanager = new ManagerLight();
+        ManagerCoffee managerCoffee = new ManagerCoffee();
+        ManagerThermo living_heatmanager = new ManagerThermo(25,1);
         bedroom_lightmanager.add(bedroom);
         living_lightmanager.add(living);
         open_kitchen_lightmanager.add(living);        //allumerra la cuisine et le living
         open_kitchen_lightmanager.add(kitchen);      //allumerra la cuisine et le living
-        coffeeManager.add(kitchen);
+        managerCoffee.add(kitchen);
         living_heatmanager.add(living_radiator1);
         living_heatmanager.add(living_radiator2);
 
@@ -60,8 +60,8 @@ public class Script {
         bedroom_motion_detector.attach(bedroom_lightmanager);
         living_motion_detector.attach(living_lightmanager);
         kitchen_motion_detector.attach(open_kitchen_lightmanager);
-        kitchen_motion_detector.attach(coffeeManager);
-        living_thermometer.attach(living_heatmanager);
+        kitchen_motion_detector.attach(managerCoffee);
+        living_sensorThermo.attach(living_heatmanager);
 
 
 
@@ -122,24 +122,24 @@ public class Script {
 
         System.out.println("# Scenario with Heat control");
         System.out.println("## La température à maintenir est de 25 °C, à 1 °C près");
-        living_thermometer.sensor_on(); // senseur allumé: "sensor is on"
+        living_sensorThermo.sensor_on(); // senseur allumé: "sensor is on"
 
         System.out.println("# Il commence à faire nuit et la température baisse");
-        living_thermometer.detect(20);
-        living_thermometer.detect(23);
-        living_thermometer.detect(26);
+        living_sensorThermo.detect(20);
+        living_sensorThermo.detect(23);
+        living_sensorThermo.detect(26);
         System.out.println("# Mais il y a une fête qui commence, des gens se rassemblent et la piece chauffe");
-        living_thermometer.detect(28); // mark bouge
+        living_sensorThermo.detect(28); // mark bouge
 
 
         System.out.println("# Les gens partent la soirée finie, il commence à faire froid");
-        living_thermometer.detect(23);//mark ne bouge plus
+        living_sensorThermo.detect(23);//mark ne bouge plus
         System.out.println("# Le matin arrive, la température monte");
-        living_thermometer.detect(27);// mark quitte la piece
+        living_sensorThermo.detect(27);// mark quitte la piece
 
         System.out.println("# On veut sauver la planette, on éteint le système de chauffage !");
 
-        living_thermometer.sensor_off(); //Mark eteint le sensor
+        living_sensorThermo.sensor_off(); //Mark eteint le sensor
         living_heatmanager.all_off();
         System.out.println();
         System.out.println();

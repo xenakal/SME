@@ -4,7 +4,7 @@
  * according to information send by the sensors
  */
 
-public interface FeatureManager {
+public interface ManagerFeature {
     public void react(Info info);
     public void add(Rooms r);
     public void remove(Rooms r);

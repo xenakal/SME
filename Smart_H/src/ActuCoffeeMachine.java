@@ -1,10 +1,10 @@
-public class CoffeeMachine implements Actuator{
+public class ActuCoffeeMachine implements Actuator{
 
         String name;
         public boolean isMakingCoffee = false;
 
 
-    public CoffeeMachine(String name) {
+    public ActuCoffeeMachine(String name) {
             this.name = name;
         }
 

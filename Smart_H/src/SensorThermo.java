@@ -1,7 +1,7 @@
 import java.util.LinkedList;
 import java.util.List;
 
-public class Thermometer extends AbsSensor{
+public class SensorThermo extends AbsSensor{
 
     private int recorded_temp = 25;
 
@@ -10,15 +10,15 @@ public class Thermometer extends AbsSensor{
         return Enum.Sensor.temperature;
     }
 
-    protected Thermometer(String name) {
+    protected SensorThermo(String name) {
         super(name);
      }
 
     public void sensor_on(){
-        System.out.println("Thermometer is on");
+        System.out.println("SensorThermo is on");
     }
     public void sensor_off(){
-        System.out.println("Thermometer is off");
+        System.out.println("SensorThermo is off");
     }
 
     void reset() {}
