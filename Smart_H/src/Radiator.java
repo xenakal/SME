@@ -15,6 +15,7 @@ public class Radiator implements Actuator{
         if(!on){
             on = true;
             System.out.println(name + ": Radiator on !");
+            System.out.println("radiator "+name+" increases heat");
         }
     }
 
@@ -25,13 +26,6 @@ public class Radiator implements Actuator{
         }
     }
 
-    public void increase_heat(){
-        System.out.println("radiator "+name+" increases heat");
-    }
-
-    public void decrease_heat(){
-        System.out.println("radiator "+name+" decreases heat");
-    }
     public boolean getState(){
         return on;
     }

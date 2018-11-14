@@ -86,12 +86,10 @@ public class Thermostat_Manager implements FeatureManager{
         if(value < required_temperature - tolerance){
             if(!rad.getState())
                 rad.turn_on();
-            rad.increase_heat();
         }
         else if(value > required_temperature + tolerance){
             if(!rad.getState())
-                rad.turn_on();
-            rad.decrease_heat();
+                rad.turn_off();
         }
         else{
             System.out.println("already at good temperature");
