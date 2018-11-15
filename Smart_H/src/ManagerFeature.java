@@ -9,4 +9,10 @@ public interface ManagerFeature {
     public void add(Rooms r);
     public void remove(Rooms r);
     public String ToString();
+
+    /**
+     * When the content of the rooms are modified, update the reaction of the manager
+     * @modify
+     */
+    public void update();
 }
