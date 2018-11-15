@@ -1,6 +1,6 @@
 public class Enum {
     public enum Actuator{
-        light,coffee,radiator
+        light,coffee,radiator,alarm
     }
 
     //transforme un string en un element de l'enumeration
@@ -9,6 +9,7 @@ public class Enum {
             case "light" : return Actuator.light;
             case "coffee": return Actuator.coffee;
             case "radiator": return Actuator.radiator;
+            case "alarm": return Actuator.alarm;
             default: System.out.println("Error : invalid Actuator type");return Actuator.light;
         }
     }

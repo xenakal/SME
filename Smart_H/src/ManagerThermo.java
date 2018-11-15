@@ -39,6 +39,7 @@ public class ManagerThermo implements ManagerFeature {
     public void add(ActuRadiator l){
         if (!radiators.contains(l)){
             radiators.add(l);
+            update();
         }
     }
 
@@ -46,29 +47,24 @@ public class ManagerThermo implements ManagerFeature {
     public void add(Rooms r){
         if (!rooms.contains(r)){
             rooms.add(r);
+            update();
         }
-    }
-
-
-    public void all_off(){
-        for(ActuRadiator rad : radiators){
-            rad.turn_off();
-        }
-    }
-
-    @Override
-    public String ToString() {
-        return null;
     }
 
     public void remove(ActuLight l){
         radiators.remove(l);
+        update();
     }
 
     public void remove(Rooms r){
         rooms.remove(r);
+        update();
     }
 
+    @Override
+    public void update() {
+        radiators = getRadiator();
+    }
 
     public List<ActuRadiator> getRadiator() {
         List<ActuRadiator> list = new ArrayList<ActuRadiator>();
@@ -87,11 +83,13 @@ public class ManagerThermo implements ManagerFeature {
         return list;
     }
 
+
+
     @Override
     public void react(Info info) {
         switch (info.getName()) {
             case "temperature" :
-                    for (ActuRadiator rad : this.getRadiator()) {   //remplacer par getLights ou pas car perte de rapidité
+                    for (ActuRadiator rad : radiators) {   //remplacer par getLights ou pas car perte de rapidité
                         applyTemperature(rad,info.getValue());
                     }
                 break;
@@ -112,5 +110,22 @@ public class ManagerThermo implements ManagerFeature {
         else{
             System.out.println("already at good temperature");
         }
+    }
+
+    public void all_off(){
+        for(ActuRadiator rad : radiators){
+            rad.turn_off();
+        }
+    }
+
+
+
+    @Override
+    public String ToString() {
+        String str =  "ThermoManager : " ;
+        for (ActuRadiator r: radiators) {
+            str = str + r.toString();
+        }
+        return str;
     }
 }

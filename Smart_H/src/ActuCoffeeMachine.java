@@ -1,7 +1,7 @@
 public class ActuCoffeeMachine implements Actuator{
 
-        String name;
-        public boolean isMakingCoffee = false;
+    String name;
+    public boolean isMakingCoffee = false;
 
 
     public ActuCoffeeMachine(String name) {
