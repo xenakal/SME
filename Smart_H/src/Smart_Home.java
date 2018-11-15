@@ -32,7 +32,7 @@ public class Smart_Home {
 
         try {
             //FileReader FR = new FileReader("/Users/DimiS/Documents/Maintenace & evolution M1Q1/SME/Smart_H/src/config.txt");
-                Object obj = parser.parse(new FileReader("/home/xenakis/Documents/Cours/Master/Q7/SME/repo/Smart_H/src/config.json5"));
+            Object obj = parser.parse(new FileReader(filename));
             JSONObject jsonObject = (JSONObject) obj;
 
             name = (String) jsonObject.get("name");
