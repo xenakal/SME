@@ -66,6 +66,9 @@ public class Rooms {
         return sensorMap.get(type);
     }
 
+    public ManagerFeature getManager(Enum.Actuator act){
+        return managerMap.get(act);
+    }
 
     public void makeManagerForUsedDevices(){
         for (Enum.Actuator act: Enum.Actuator.values()) {
@@ -77,9 +80,6 @@ public class Rooms {
         }
     }
 
-    public ManagerFeature getManager(Enum.Actuator act){
-        return managerMap.get(act);
-    }
 
     public String toString(){
         String str =  "Room :"+ name ;

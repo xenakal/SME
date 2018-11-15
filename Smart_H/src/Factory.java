@@ -4,6 +4,7 @@ public class Factory {
         switch (type){
             case "light" : return new ActuLight(name);
             case "coffee" : return new ActuCoffeeMachine(name);
+            case "radiator" : return new ActuRadiator(name);
             default: System.out.print("Type error in Actuator Factory, given type : "+type);return new ActuLight(name);
             //TODO launch error
         }
@@ -12,6 +13,9 @@ public class Factory {
     public static AbsSensor makeSensor(String type, String name){
         switch (type){
             case "motion" : return new SensorMotion(name);
+
+            case "thermo" : return new SensorThermo(name);
+
             default:
                 System.out.println("Error in json parse");
                 return new SensorMotion(name);

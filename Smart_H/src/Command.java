@@ -1,8 +1,103 @@
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.lang.reflect.Array;
+import java.util.List;
 
-public class Command {
+public class Command { // BROKER CLASS IN COMMAND PATTERN
 
-    Scanner userInput = new Scanner(System.in);
+    public static void start(){
 
+        Smart_Home sh = Smart_Home.getSmartHome();
+
+
+        try{
+            BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+            boolean end = false;
+            while(!end){
+                System.out.println("tell us what is happening in the house");
+                String in = br.readLine();
+                String[] in_arr = in.split(" "); // first word should be type of command
+                String command_type = in_arr[0];
+                switch (command_type) {
+                    case "detect": // second word is Room, third is Type (ex. motion or temperature) fourth is value
+                        Rooms room_detect = sh.getRoomsMap().get(in_arr[1]);
+                        if(room_detect==null)
+                            System.out.println("there is no such room !");
+                        Enum.Sensor sensor_type = Enum.Sensor.valueOf(in_arr[2]);
+                        List<AbsSensor> sensors = room_detect.getSensorOfType(sensor_type);
+                        if(sensors==null)
+                            System.out.println("there is no such room !");
+                        else {
+                            try {
+                                int detected_value = Integer.parseInt(in_arr[3]);
+                                for(AbsSensor sensor : sensors){
+                                    sensor.detect(detected_value);
+                                }
+                            } catch (Exception e) {
+                                System.out.println("Value should be an integer, try again please!");
+                            }
+                        }
+                        break;
+                    case "param":
+                        handle_param(sh, in_arr);
+                        break;
+                    case "config":
+                        break;
+                    case "exit":
+                        end = true;
+                        break;
+                    default:
+                        System.out.println("wrong type of command, please try again");
+                        System.out.println();
+                        System.out.println("The command read is:");
+                        System.out.println(in);
+                        break;
+
+                }
+            }
+        }
+        catch (Exception e){
+            System.out.println("Exception occured");
+        }
+
+    }
+
+    public static void handle_param(Smart_Home sh, String[] in_arr){
+
+        Rooms room = sh.getRoomsMap().get(in_arr[3]); // fourth argument is Room name
+
+        switch (Enum.Actuator.valueOf(in_arr[1])) { // second argument is manager type (light, radiator)
+            case light:
+                ManagerLight light_manager = (ManagerLight) room.getManager(Enum.Actuator.light);
+                // TODO: add light manager new method
+                break;
+            case radiator:
+                ManagerThermo thermo_manager = (ManagerThermo) room.getManager(Enum.Actuator.radiator);
+                int value = Integer.parseInt(in_arr[4]);
+
+                switch (in_arr[2]) { // third argument is specific command (setRequiredTemperature or setTolerance)
+                    case "setRequiredTemperature":
+                        thermo_manager.setRequired_temperature(value); // fifth argument is value
+                        break;
+
+                    case "setTolerance":
+                        thermo_manager.setTolerance(value);
+                        break;
+
+                    default:
+                        System.out.println("not a valid command for this type of manager");
+                        break;
+                }
+
+
+                break;
+
+            default:
+                System.out.println("not a valid manager type");
+                break;
+
+        }
+    }
 
 }
