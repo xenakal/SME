@@ -1,34 +1,32 @@
-import java.util.ArrayList;
-
-public class factory {
+public class Factory {
 
     public static Actuator makeActuator(String type, String name){
         switch (type){
-            case "light" : return new Light(name);
-            case "coffee" : return new CoffeeMachine(name);
-            default: System.out.print("Type error in Actuator factory, given type : "+type);return new Light(name);
+            case "light" : return new ActuLight(name);
+            case "coffee" : return new ActuCoffeeMachine(name);
+            default: System.out.print("Type error in Actuator Factory, given type : "+type);return new ActuLight(name);
             //TODO launch error
         }
     }
 
     public static AbsSensor makeSensor(String type, String name){
         switch (type){
-            case "motion" : return new MotionDetector(name);
+            case "motion" : return new SensorMotion(name);
             default:
                 System.out.println("Error in json parse");
-                return new MotionDetector(name);
+                return new SensorMotion(name);
                 //TODO launch error
         }
     }
 
 
-    public static FeatureManager makeManager(Enum.Actuator act){
-        FeatureManager manager;
-        //TODO improve FeatureManager
+    public static ManagerFeature makeManager(Enum.Actuator act){
+        ManagerFeature manager;
+        //TODO improve ManagerFeature
         switch (act){
-            case light: manager= new Lightmanager(); break;
-            case coffee: manager =new CoffeeManager(); break;
-            default:System.out.println("Error in makeManagerForUsedDevices : invalid actuator type");manager =new CoffeeManager(); //coffee
+            case light: manager= new ManagerLight(); break;
+            case coffee: manager =new ManagerCoffee(); break;
+            default:System.out.println("Error in makeManagerForUsedDevices : invalid actuator type");manager =new ManagerCoffee(); //coffee
                 //TODO launch error
         }
         return manager;
