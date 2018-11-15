@@ -102,6 +102,12 @@ public class Rooms {
         }
         return str + "\n \n";
     }
+
+    public void updateManagers(Enum.Actuator type){
+        for (ManagerFeature m: this.getManager(type)){
+            m.update();
+        }
+    }
 }
 
 /*
