@@ -16,23 +16,29 @@
     {
       "name": "bedroom",
       "sensor":  [
-        {"name" : "motionbedroom", "type" : "motion", "activationcondition" : "presence"}
+        {"name" : "motionbedroom", "type" : "motion", "activationcondition" : "presence"},
+        {"name" : "thermo_sensor_bedroom", "type" : "thermo", "activationcondition" : "NAN"}
       ],
       "actuator" : [
         {"name" : "bedlight1", "type" : "light"},
         {"name" : "bedlight2", "type" : "light"},
+        {"name" : "bedradiator", "type" : "radiator"}
       ]
     }
   ],
   "makeManagerforeachroom" : true,
   "connection" : [
-    {"sensorname" :  "motionkitchen1",
+    {"sensorname" :  "motionbedroom",
       "roomactuator": "bedroom",
       "actuatortype": "light"
     },
     {"sensorname" :  "motionkitchen2",
       "roomactuator": "kitchen",
       "actuatortype": "light"
+    }
+    {"sensorname" : "thermo_sensor_bedroom",
+      "roomactuator" : "bedroom",
+      "actuatortype" : "radiator"
     }
   ]
 }

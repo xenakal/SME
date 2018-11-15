@@ -6,6 +6,8 @@ public class ManagerThermo implements ManagerFeature {
 
     private String name;
     private int tolerance;  // tolerance on required temperature
+    private int required_temperature;
+
 
     public int getTolerance() {
         return tolerance;
@@ -23,7 +25,6 @@ public class ManagerThermo implements ManagerFeature {
         this.required_temperature = required_temperature;
     }
 
-    private int required_temperature;
     private List<ActuRadiator> radiators ;
     private  List<Rooms> rooms;
 
