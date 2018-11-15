@@ -47,7 +47,10 @@ public class Rooms {
     public void addDevice(Actuator a) {
         if (!actuatorMap.containsKey(a.getType())) {
             actuatorMap.put(a.getType(), new ArrayList<Actuator>());
-            this.getManager(a.getType()).update();
+            ManagerFeature m = this.getManager(a.getType());
+            if (m != null) {
+                m.update();
+            }
         }
         this.getActuatorofType(a.getType()).add(a);
     }
