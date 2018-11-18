@@ -19,7 +19,7 @@ public class Factory {
             default:
                 System.out.println("Error in json parse");
                 return null;
-                //TODO launch error 
+                //TODO launch error
         }
     }
 
