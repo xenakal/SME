@@ -21,23 +21,7 @@ public class Command { // BROKER CLASS IN COMMAND PATTERN
                 String command_type = in_arr[0];
                 switch (command_type) {
                     case "detect": // second word is Room, third is Type (ex. motion or temperature) fourth is value
-                        Rooms room_detect = sh.getRoomsMap().get(in_arr[1]);
-                        if(room_detect==null)
-                            System.out.println("there is no such room !");
-                        Enum.Sensor sensor_type = Enum.Sensor.valueOf(in_arr[2]);
-                        List<AbsSensor> sensors = room_detect.getSensorOfType(sensor_type);
-                        if(sensors==null)
-                            System.out.println("there is no such room !");
-                        else {
-                            try {
-                                int detected_value = Integer.parseInt(in_arr[3]);
-                                for(AbsSensor sensor : sensors){
-                                    sensor.detect(detected_value);
-                                }
-                            } catch (Exception e) {
-                                System.out.println("Value should be an integer, try again please!");
-                            }
-                        }
+                        handle_detect(sh, in_arr);
                         break;
                     case "param":
                         handle_param(sh, in_arr);
@@ -58,12 +42,37 @@ public class Command { // BROKER CLASS IN COMMAND PATTERN
             }
         }
         catch (Exception e){
-            System.out.println("Exception occured");
+            System.out.println("Some unexpected Exception occured :/ ");
         }
 
     }
-
-    public static void handle_param(Smart_Home sh, String[] in_arr){
+    private static void handle_detect(Smart_Home sh, String[] in_arr){
+        Rooms room_detect = sh.getRoomsMap().get(in_arr[1]);
+        if(room_detect==null)
+            System.out.println("there is no such room !");
+        try {
+            Enum.Sensor sensor_type = Enum.Sensor.valueOf(in_arr[2]);
+            List<AbsSensor> sensors = room_detect.getSensorOfType(sensor_type);
+            if (sensors == null)
+                System.out.println("there is no such room !");
+            else {
+                try {
+                    int detected_value = Integer.parseInt(in_arr[3]);
+                    for (AbsSensor sensor : sensors) {
+                        sensor.detect(detected_value);
+                    }
+                } catch (Exception e) {
+                    System.out.println("Value should be an integer, try again please!");
+                }
+            }
+        }
+        catch (Exception e){
+            if(e instanceof IllegalArgumentException){
+                System.out.println("invalid sensor type");
+            }
+        }
+    }
+    private static void handle_param(Smart_Home sh, String[] in_arr){
 
         Rooms room = sh.getRoomsMap().get(in_arr[3]); // fourth argument is Room name
 
