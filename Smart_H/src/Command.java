@@ -153,7 +153,6 @@ public class Command { // BROKER CLASS IN COMMAND PATTERN
                         break;
                 }
 
-
                 break;
 
             default:
@@ -164,7 +163,47 @@ public class Command { // BROKER CLASS IN COMMAND PATTERN
     }
 
     private static void handle_config(Smart_Home sh, String[] in_arr){
-
+        switch (in_arr[1]){ // second argument is the room or sensor or actuator option
+            case "room": // ajouter une chambre à la maison
+                String name = in_arr[2]; // third argument is name of the room to be added
+                sh.addRoom(name, new Rooms());
+                break;
+            case "sensor": // ajouter un senseur à une chambre
+                Rooms room = sh.getRoomsMap().get(in_arr[2]); // third argument is name of the room in which to add the sensor
+                String type = in_arr[3]; // forth argument is the type of the sensor
+                switch (type){
+                    case "motion":
+                        SensorMotion newSensMotion = new SensorMotion(in_arr[4]); // fifth argument is name of the sensor
+                        room.addSensor(newSensMotion);
+                        break;
+                    case "thermometer":
+                        SensorThermo newSensThermo = new SensorThermo(in_arr[4]); // fifth argument is name of the sensor
+                        room.addSensor(newSensThermo);
+                        break;
+                    default:
+                        System.out.println("not a correct type of sensor");
+                }
+                break;
+            case "actuator": // ajouter un actuateur à une chambre
+                Rooms aroom = sh.getRoomsMap().get(in_arr[2]); // third argument is name of the room in which to add the actuator
+                String atype = in_arr[3]; // forth argument is the type of the actuator
+                switch (atype){
+                    case "light":
+                        ActuLight newlight = new ActuLight(in_arr[4]); // fifth argument is name of the sensor
+                        aroom.addDevice(newlight);
+                        break;
+                    case "radiator":
+                        ActuRadiator newthermo = new ActuRadiator(in_arr[4]); // fifth argument is name of the sensor
+                        aroom.addDevice(newthermo);
+                        break;
+                    default:  
+                        System.out.println("not a correct type of actuator");
+                }
+                break;
+            default:
+                System.out.println("can't add a "+in_arr[1]+", sorry :/");
+                break;
+        }
     }
 
 

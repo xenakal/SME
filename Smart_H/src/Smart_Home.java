@@ -120,6 +120,11 @@ public class Smart_Home {
         return roomsMap;
     }
 
+    public void addRoom(String name, Rooms room){
+        roomsMap.put(name, room);
+        System.out.println("#Room "+name+" added to the rooms of the house ");
+    }
+
 }
 
 
