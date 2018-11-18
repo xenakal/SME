@@ -7,7 +7,7 @@ public class ManagerThermo implements ManagerFeature {
     private String name;
     private int tolerance;  // tolerance on required temperature
     private int required_temperature;
-
+    private int last_temp = 20;  // last recorded temperature
 
     public int getTolerance() {
         return tolerance;
@@ -23,7 +23,7 @@ public class ManagerThermo implements ManagerFeature {
     public int getRequired_temperature() {
         return required_temperature;
     }
-
+    public int getTemperature(){return last_temp;}
     public void setRequired_temperature(int required_temperature) {
 
         this.required_temperature = required_temperature;
@@ -101,6 +101,7 @@ public class ManagerThermo implements ManagerFeature {
                     for (ActuRadiator rad : radiators) {   //remplacer par getLights ou pas car perte de rapidité
                         applyTemperature(rad,info.getValue());
                     }
+                    last_temp = info.getValue();
                 break;
             default: break;
         }

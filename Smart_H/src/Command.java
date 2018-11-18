@@ -82,9 +82,12 @@ public class Command { // BROKER CLASS IN COMMAND PATTERN
                         int tol = thermo_manager.getTolerance();
                         System.out.println("#Tolerance is "+tol);
                         break;
-                    case "temperature":
+                    case "requiredTemperature":
                         int temp = thermo_manager.getRequired_temperature();
                         System.out.println("#Temperature is "+temp);
+                        break;
+                    case "temperature":
+                        thermo_manager.getTemperature(); // last recorded temperature
                         break;
                     default:
                         System.out.println("wrong attribute");
