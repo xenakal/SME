@@ -26,9 +26,11 @@ public class Factory {
 
     public static ManagerFeature makeManager(Enum.Actuator act){
         ManagerFeature manager;
+        // light,coffee,radiator,alarm
         //TODO improve ManagerFeature
         switch (act){
             case light: manager= new ManagerLight(); break;
+            case radiator: manager = new ManagerThermo(20,0); break;
             case coffee: manager =new ManagerCoffee(); break;
             default:System.out.println("Error in makeManagerForUsedDevices : invalid actuator type");manager = null; //coffee
                 //TODO launch error
