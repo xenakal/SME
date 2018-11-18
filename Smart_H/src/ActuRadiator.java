@@ -14,15 +14,15 @@ public class ActuRadiator implements Actuator{
     public void turn_on(){
         if(!on){
             on = true;
-            System.out.println(name + ": ActuRadiator on !");
-            System.out.println("radiator "+name+" increases heat");
+            System.out.println("# " + name + ": ActuRadiator on !");
+            System.out.println("# radiator "+name+" increases heat");
         }
     }
 
     public void turn_off(){
         if(on){
             on = false;
-            System.out.println(name + ": ActuRadiator off !");
+            System.out.println("# " + name + ": ActuRadiator off !");
         }
     }
 
@@ -31,7 +31,7 @@ public class ActuRadiator implements Actuator{
     }
 
     public String toString(){
-        return "radiator : " +name + "  ";
+        return "# "+ "radiator : " +name + "  ";
     }
 
 

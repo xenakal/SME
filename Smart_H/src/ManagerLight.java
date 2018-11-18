@@ -24,6 +24,15 @@ public class ManagerLight implements ManagerFeature {
         modeMap.put("all", lights);
     }
 
+    public void getStates(){
+        for(ActuLight li : lights){
+            if(li.getState())
+                System.out.println("Light "+li.name+" is on" );
+            else
+                System.out.println("Light "+li.name+" is off" );
+        }
+    }
+
     public void add(ActuLight l){
         if (!lights.contains(l)){
             lights.add(l);
@@ -122,7 +131,7 @@ public class ManagerLight implements ManagerFeature {
 
                 }else{
                     for (ActuLight li : myLight) {
-                        if(li.on)
+                        if(li.getState())
                             li.turn_off();
                     }
                 }

@@ -8,6 +8,7 @@ public class Command { // BROKER CLASS IN COMMAND PATTERN
 
     /*
     * How to use: Type a sequence of words with the following pattern
+    *   - first word "get" --> second word should be the Room --> third the actuator type --> fourth the attribute (tolerance, temperature, light_state)
     *   - first word "detect" --> second word should be the Room --> third the type of command (ex. motion) --> fourth the value
     *   - first word "param" --> second word should be the type of actuator --> third the type of command (ex. SetTemperature) --> fourth the Room -> fifth the value
     *   - first word "config" --> second word should be the Room, sensor or actuator to add --> third the Room where to add the actuator/sesor if applicable
@@ -27,6 +28,9 @@ public class Command { // BROKER CLASS IN COMMAND PATTERN
                 String[] in_arr = in.split(" "); // first word should be type of command
                 String command_type = in_arr[0];
                 switch (command_type) {
+                    case "get":
+                        handle_get(sh, in_arr);
+                        break;
                     case "detect": // second word is Room, third is Type (ex. motion or temperature) fourth is value
                         handle_detect(sh, in_arr);
                         break;
@@ -55,6 +59,43 @@ public class Command { // BROKER CLASS IN COMMAND PATTERN
 
     }
 
+    private static void handle_get(Smart_Home sh, String[] in_arr){
+        Rooms room = sh.getRoomsMap().get(in_arr[1]); // second argument is the room
+        Enum.Actuator actuator = Enum.Actuator.valueOf(in_arr[2]); // third argument is the actuator
+        String attribute = in_arr[3]; // fourth argument is the attribute (ex. tolerance, temperature, light_state)
+        switch (actuator) {
+            case light:
+                ManagerLight light_manager = (ManagerLight) room.getManager(actuator);
+                switch (attribute){
+                    case "light_state":
+                        light_manager.getStates();
+                        break;
+                    default:
+                        System.out.println("wrong attribute");
+                        break;
+                }
+                break;
+            case radiator:
+                ManagerThermo thermo_manager = (ManagerThermo) room.getManager(actuator);
+                switch (attribute){
+                    case "tolerance":
+                        int tol = thermo_manager.getTolerance();
+                        System.out.println("#Tolerance is "+tol);
+                        break;
+                    case "temperature":
+                        int temp = thermo_manager.getRequired_temperature();
+                        System.out.println("#Temperature is "+temp);
+                        break;
+                    default:
+                        System.out.println("wrong attribute");
+                        break;
+                }
+                break;
+            default:
+                System.out.println("not a valid actuator");
+        }
+    }
+
     private static void handle_detect(Smart_Home sh, String[] in_arr){
         Rooms room_detect = sh.getRoomsMap().get(in_arr[1]);
         if(room_detect==null)
@@ -77,7 +118,7 @@ public class Command { // BROKER CLASS IN COMMAND PATTERN
         }
         catch (Exception e){
             if(e instanceof IllegalArgumentException){
-                System.out.println("invalid sensor type");
+                System.out.println("Exception! invalid sensor type");
             }
         }
     }

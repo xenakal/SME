@@ -14,7 +14,10 @@ public class ManagerThermo implements ManagerFeature {
     }
 
     public void setTolerance(int tolerance) {
+
         this.tolerance = tolerance;
+        System.out.println("# new tolerance is " + tolerance);
+
     }
 
     public int getRequired_temperature() {
@@ -22,7 +25,9 @@ public class ManagerThermo implements ManagerFeature {
     }
 
     public void setRequired_temperature(int required_temperature) {
+
         this.required_temperature = required_temperature;
+        System.out.println("# new required temperature is " + required_temperature);
     }
 
     private List<ActuRadiator> radiators ;

@@ -1,7 +1,7 @@
 public class ActuLight extends Object implements Actuator{
 
     String name;
-    public boolean on = false;
+    private boolean on = false;
 
     public ActuLight(String name) {
         this.name = name;
@@ -12,6 +12,9 @@ public class ActuLight extends Object implements Actuator{
         return Enum.Actuator.light;
     }
 
+    public boolean getState(){
+        return on;
+    }
 
     public void turn_on(){
         if(!on){
