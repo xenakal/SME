@@ -5,7 +5,7 @@ public class Factory {
             case "light" : return new ActuLight(name);
             case "coffee" : return new ActuCoffeeMachine(name);
             case "radiator" : return new ActuRadiator(name);
-            default: System.out.print("Type error in Actuator Factory, given type : "+type);return new ActuLight(name);
+            default: System.out.print("Type error in Actuator Factory, given type : "+type);return null;
             //TODO launch error
         }
     }
@@ -18,8 +18,8 @@ public class Factory {
 
             default:
                 System.out.println("Error in json parse");
-                return new SensorMotion(name);
-                //TODO launch error
+                return null;
+                //TODO launch error 
         }
     }
 
@@ -30,7 +30,7 @@ public class Factory {
         switch (act){
             case light: manager= new ManagerLight(); break;
             case coffee: manager =new ManagerCoffee(); break;
-            default:System.out.println("Error in makeManagerForUsedDevices : invalid actuator type");manager =new ManagerCoffee(); //coffee
+            default:System.out.println("Error in makeManagerForUsedDevices : invalid actuator type");manager = null; //coffee
                 //TODO launch error
         }
         return manager;
