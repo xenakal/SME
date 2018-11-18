@@ -106,10 +106,16 @@ public class ManagerThermo implements ManagerFeature {
         if(value < required_temperature - tolerance){
             if(!rad.getState())
                 rad.turn_on();
+            else{
+                System.out.println("Radiator already on !");
+            }
         }
         else if(value > required_temperature + tolerance){
-            if(!rad.getState())
+            if(rad.getState())
                 rad.turn_off();
+            else{
+                System.out.println("Radiator already off !");
+            }
         }
         else{
             System.out.println("already at good temperature");

@@ -24,7 +24,7 @@ public class SensorThermo extends AbsSensor{
     void reset() {}
 
     void detect(int value) {
-        System.out.println("# Température détectée: "+value);
+        //System.out.println("# Température détectée: "+value);
         recorded_temp = value;
         this.advertise();
     }

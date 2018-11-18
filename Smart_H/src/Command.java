@@ -3,8 +3,15 @@ import java.io.InputStreamReader;
 import java.lang.reflect.Array;
 import java.util.List;
 
+
 public class Command { // BROKER CLASS IN COMMAND PATTERN
 
+    /*
+    * How to use: Type a sequence of words with the following pattern
+    *   - first word "detect" --> second word should be the Room --> third the type of command (ex. motion) --> fourth the value
+    *   - first word "param" --> second word should be the type of actuator --> third the type of command (ex. SetTemperature) --> fourth the Room -> fifth the value
+    *   - first word "config" --> second word should be the Room, sensor or actuator to add --> third the Room where to add the actuator/sesor if applicable
+    */
     public static void start(){
 
         Smart_Home sh = Smart_Home.getSmartHome();
@@ -15,7 +22,7 @@ public class Command { // BROKER CLASS IN COMMAND PATTERN
 
             boolean end = false;
             while(!end){
-                System.out.println("tell us what is happening in the house");
+                System.out.println("Tell us what is happening in the house");
                 String in = br.readLine();
                 String[] in_arr = in.split(" "); // first word should be type of command
                 String command_type = in_arr[0];
@@ -27,6 +34,7 @@ public class Command { // BROKER CLASS IN COMMAND PATTERN
                         handle_param(sh, in_arr);
                         break;
                     case "config":
+                        handle_config(sh, in_arr);
                         break;
                     case "exit":
                         end = true;
@@ -46,6 +54,7 @@ public class Command { // BROKER CLASS IN COMMAND PATTERN
         }
 
     }
+
     private static void handle_detect(Smart_Home sh, String[] in_arr){
         Rooms room_detect = sh.getRoomsMap().get(in_arr[1]);
         if(room_detect==null)
@@ -72,6 +81,7 @@ public class Command { // BROKER CLASS IN COMMAND PATTERN
             }
         }
     }
+
     private static void handle_param(Smart_Home sh, String[] in_arr){
 
         Rooms room = sh.getRoomsMap().get(in_arr[3]); // fourth argument is Room name
@@ -108,5 +118,10 @@ public class Command { // BROKER CLASS IN COMMAND PATTERN
 
         }
     }
+
+    private static void handle_config(Smart_Home sh, String[] in_arr){
+
+    }
+
 
 }

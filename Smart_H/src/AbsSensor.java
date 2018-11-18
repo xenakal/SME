@@ -38,12 +38,12 @@ abstract class AbsSensor extends Object{
 
 
     public void sensor_on(){
-        System.out.println("sensor is on");
+        System.out.println("#sensor is on");
     }
 
 
     public void sensor_off(){
-        System.out.println("sensor is off");
+        System.out.println("#sensor is off");
     }
 
     public void attach(ManagerFeature obs){
@@ -56,7 +56,7 @@ abstract class AbsSensor extends Object{
         obsList.remove(obs);
     }
     public void advertise(){
-        System.out.println("advertise");
+        //System.out.println("advertise");
         for (ManagerFeature o: obsList
         ) {
             o.react(this.makeinfo());
