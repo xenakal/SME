@@ -68,6 +68,11 @@ public class ManagerThermo implements ManagerFeature {
 
     public List<ActuRadiator> getRadiator() {
         List<ActuRadiator> list = new ArrayList<ActuRadiator>();
+        upDateRadiator(list);
+        return list;
+    }
+
+    public void upDateRadiator(List<ActuRadiator> list) {
         for(Rooms r : rooms){
             for (Actuator rad : r.getActuatorofType(Enum.Actuator.radiator)){
                 if (!list.contains((ActuRadiator) rad)){
@@ -80,7 +85,6 @@ public class ManagerThermo implements ManagerFeature {
                 list.add(rad);
             }
         }
-        return list;
     }
 
 

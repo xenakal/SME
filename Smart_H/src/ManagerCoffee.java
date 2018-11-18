@@ -47,6 +47,11 @@ public class ManagerCoffee implements ManagerFeature {
 
     public List<ActuCoffeeMachine> getCoffeMachines() {
         List<ActuCoffeeMachine> list = new ArrayList<ActuCoffeeMachine>();
+        upDateCoffeMachines(list);
+        return list;
+    }
+
+    public void upDateCoffeMachines(List<ActuCoffeeMachine> list ) {
         for(Rooms r : rooms){
             for (Actuator cm : r.getActuatorofType(Enum.Actuator.coffee)){
                 if (!list.contains((ActuCoffeeMachine) cm)){
@@ -59,7 +64,6 @@ public class ManagerCoffee implements ManagerFeature {
                 list.add(cm);
             }
         }
-        return list;
     }
 
     //TODO ajouter dependance par rapport à l'heure

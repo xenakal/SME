@@ -53,7 +53,7 @@ public class ManagerLight implements ManagerFeature {
 
     public void update(){
         //update "all"
-        lights = getLights();
+        updateLights(lights);
         //for all other mode suppress the removed lights
         for (List<ActuLight> lightList: modeMap.values()) {
             for (ActuLight li: lightList) {
@@ -89,6 +89,11 @@ public class ManagerLight implements ManagerFeature {
 
     public List<ActuLight> getLights() {
         List<ActuLight> list = new ArrayList<ActuLight>();
+        updateLights(list);
+        return list;
+    }
+
+    public void updateLights(List<ActuLight> list ) {
         for(Rooms r : rooms){
             for (Actuator l : r.getActuatorofType(Enum.Actuator.light)){
                 if (!list.contains((ActuLight) l)){
@@ -101,7 +106,6 @@ public class ManagerLight implements ManagerFeature {
                 list.add(l);
             }
         }
-        return list;
     }
 
 
@@ -130,7 +134,7 @@ public class ManagerLight implements ManagerFeature {
 
     public String ToString(){
         String str =  "LightManager : " ;
-        for (ActuLight l: getLights()) {
+        for (ActuLight l: modeMap.get("all")) {
             str = str + l.toString();
         }
         return str;
