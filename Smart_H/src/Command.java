@@ -11,7 +11,7 @@ public class Command { // BROKER CLASS IN COMMAND PATTERN
     *   - first word "get" --> second word should be the Room --> third the actuator type --> fourth the attribute (tolerance, temperature, light_state)
     *   - first word "detect" --> second word should be the Room --> third the type of command (ex. motion) --> fourth the value
     *   - first word "param" --> second word should be the type of actuator --> third the type of command (ex. SetTemperature) --> fourth the Room -> fifth the value
-    *   - first word "config" --> second word should be the Room, sensor or actuator to add --> third the Room where to add the actuator/sesor if applicable
+    *   - first word "config" --> second word should be the option "room", "sensor" or "actuator" --> third the Room where to add the actuator/sesor if applicable
     */
     public static void start(){
 
@@ -28,6 +28,9 @@ public class Command { // BROKER CLASS IN COMMAND PATTERN
                 String[] in_arr = in.split(" "); // first word should be type of command
                 String command_type = in_arr[0];
                 switch (command_type) {
+                    case "print_house":
+                        System.out.println(sh.toString());
+                        break;
                     case "get":
                         handle_get(sh, in_arr);
                         break;
@@ -84,10 +87,11 @@ public class Command { // BROKER CLASS IN COMMAND PATTERN
                         break;
                     case "requiredTemperature":
                         int temp = thermo_manager.getRequired_temperature();
-                        System.out.println("#Temperature is "+temp);
+                        System.out.println("#Goal Temperature is "+temp);
                         break;
                     case "temperature":
-                        thermo_manager.getTemperature(); // last recorded temperature
+                        int temp1 = thermo_manager.getTemperature(); // last recorded temperature
+                        System.out.println("#Temperature is "+temp1);
                         break;
                     default:
                         System.out.println("wrong attribute");
@@ -169,36 +173,15 @@ public class Command { // BROKER CLASS IN COMMAND PATTERN
                 sh.addRoom(name, new Rooms());
                 break;
             case "sensor": // ajouter un senseur à une chambre
-                Rooms room = sh.getRoomsMap().get(in_arr[2]); // third argument is name of the room in which to add the sensor
-                String type = in_arr[3]; // forth argument is the type of the sensor
-                switch (type){
-                    case "motion":
-                        SensorMotion newSensMotion = new SensorMotion(in_arr[4]); // fifth argument is name of the sensor
-                        room.addSensor(newSensMotion);
-                        break;
-                    case "thermometer":
-                        SensorThermo newSensThermo = new SensorThermo(in_arr[4]); // fifth argument is name of the sensor
-                        room.addSensor(newSensThermo);
-                        break;
-                    default:
-                        System.out.println("not a correct type of sensor");
-                }
+                Rooms sroom = sh.getRoomsMap().get(in_arr[2]); // third argument is name of the room in which to add the sensor
+                String type = in_arr[3]; // forth argument is the type of the sensor (thermo or motion)
+                String sname = in_arr[4];
+                sroom.addSensor(Factory.makeSensor(type,sname));
                 break;
             case "actuator": // ajouter un actuateur à une chambre
                 Rooms aroom = sh.getRoomsMap().get(in_arr[2]); // third argument is name of the room in which to add the actuator
                 String atype = in_arr[3]; // forth argument is the type of the actuator
-                switch (atype){
-                    case "light":
-                        ActuLight newlight = new ActuLight(in_arr[4]); // fifth argument is name of the sensor
-                        aroom.addDevice(newlight);
-                        break;
-                    case "radiator":
-                        ActuRadiator newthermo = new ActuRadiator(in_arr[4]); // fifth argument is name of the sensor
-                        aroom.addDevice(newthermo);
-                        break;
-                    default:  
-                        System.out.println("not a correct type of actuator");
-                }
+                aroom.addDevice(Factory.makeActuator(atype,in_arr[4]));
                 break;
             default:
                 System.out.println("can't add a "+in_arr[1]+", sorry :/");

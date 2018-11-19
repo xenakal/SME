@@ -11,6 +11,7 @@ public class Factory {
     }
 
     public static AbsSensor makeSensor(String type, String name){
+        // TODO: utiliser les types de ENUM
         switch (type){
             case "motion" : return new SensorMotion(name);
 
