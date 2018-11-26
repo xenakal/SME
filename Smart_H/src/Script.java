@@ -3,7 +3,7 @@ public class Script {
     public static void main(String[] args){
         Smart_Home smart = Smart_Home.getSmartHome();
 
-        smart.Smart_Home_Init("config.json5");
+        smart.Smart_Home_Init("/config.json5");
         //Smart_Home smart = new Smart_Home("config.json5");
         System.out.println(smart.toString());
 

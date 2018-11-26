@@ -23,7 +23,7 @@ public class Smart_Home {
         return sh;
     }
 
-    public void Smart_Home_Init(String filename){
+    public void smartHomeInit(String filename){
     //public Smart_Home(String filename){
         roomsMap = new HashMap<String, Rooms>();
         sensorMap = new HashMap<String, AbsSensor>();
@@ -61,6 +61,7 @@ public class Smart_Home {
                     r.addSensor(s);
                     sensorMap.put((String) sens.get("name"),s);
                 }
+
 
 
                 //ajout des device
@@ -120,7 +121,7 @@ public class Smart_Home {
         return roomsMap;
     }
 
-    public void addRoom(String name, Rooms room){
+    public void addRoom(String name, Rooms room){ // TODO: Rooms contient déjà un nom, du coup pas besoin de le remettre en argument ici
         roomsMap.put(name, room);
         System.out.println("#Room "+name+" added to the rooms of the house ");
     }
