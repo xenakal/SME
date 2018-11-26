@@ -39,7 +39,7 @@ public class Rooms {
     }
 
     public void addSensor(String type, String name) {
-        AbsSensor s = Factory.makeSensor(type, name);
+        AbsSensor s = Factory.getInstance().makeSensor(type, name);
         this.addSensor(s);
     }
 
@@ -56,7 +56,7 @@ public class Rooms {
     }
 
     public void addDevice(String type, String name) {
-        Actuator a = Factory.makeActuator(type, name);
+        Actuator a = Factory.getInstance().makeActuator(type, name);
         this.addDevice(a);
     }
 
@@ -77,7 +77,7 @@ public class Rooms {
     public void makeManagerForUsedDevices(){
         for (Enum.Actuator act: Enum.Actuator.values()) {
             if(actuatorMap.containsKey(act)){
-                ManagerFeature manager = Factory.makeManager(act);
+                ManagerFeature manager = Factory.getInstance().makeManager(act);
                 manager.add(this);
                 managerMap.put(act,manager);
             }

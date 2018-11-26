@@ -41,7 +41,7 @@ public class ManagerCoffee implements ManagerFeature {
     }
 
     public void update(){
-        machines = getCoffeMachines();
+        upDateCoffeMachines(machines);
     }
 
 

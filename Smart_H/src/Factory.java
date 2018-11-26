@@ -1,6 +1,12 @@
 public class Factory {
 
-    public static Actuator makeActuator(String type, String name){
+    private static  Factory factory = new Factory();
+
+    public static Factory getInstance(){
+        return factory;
+    }
+
+    public Actuator makeActuator(String type, String name){
         switch (type){
             case "light" : return new ActuLight(name);
             case "coffee" : return new ActuCoffeeMachine(name);
@@ -10,7 +16,7 @@ public class Factory {
         }
     }
 
-    public static AbsSensor makeSensor(String type, String name){
+    public AbsSensor makeSensor(String type, String name){
         // TODO: utiliser les types de ENUM
         switch (type){
             case "motion" : return new SensorMotion(name);
@@ -25,7 +31,7 @@ public class Factory {
     }
 
 
-    public static ManagerFeature makeManager(Enum.Actuator act){
+    public ManagerFeature makeManager(Enum.Actuator act){
         ManagerFeature manager;
         // light,coffee,radiator,alarm
         //TODO improve ManagerFeature

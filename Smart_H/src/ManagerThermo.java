@@ -68,7 +68,7 @@ public class ManagerThermo implements ManagerFeature {
 
     @Override
     public void update() {
-        radiators = getRadiator();
+        upDateRadiator(radiators);
     }
 
     public List<ActuRadiator> getRadiator() {

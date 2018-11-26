@@ -176,12 +176,12 @@ public class Command { // BROKER CLASS IN COMMAND PATTERN
                 Rooms sroom = sh.getRoomsMap().get(in_arr[2]); // third argument is name of the room in which to add the sensor
                 String type = in_arr[3]; // forth argument is the type of the sensor (thermo or motion)
                 String sname = in_arr[4];
-                sroom.addSensor(Factory.makeSensor(type,sname));
+                sroom.addSensor(Factory.getInstance().makeSensor(type,sname));
                 break;
             case "actuator": // ajouter un actuateur à une chambre
                 Rooms aroom = sh.getRoomsMap().get(in_arr[2]); // third argument is name of the room in which to add the actuator
                 String atype = in_arr[3]; // forth argument is the type of the actuator
-                aroom.addDevice(Factory.makeActuator(atype,in_arr[4]));
+                aroom.addDevice(Factory.getInstance().makeActuator(atype,in_arr[4]));
                 break;
             default:
                 System.out.println("can't add a "+in_arr[1]+", sorry :/");

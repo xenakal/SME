@@ -51,7 +51,7 @@ public class Smart_Home {
                 Iterator sensorIterator = sensors.iterator();
                 while (sensorIterator.hasNext()){
                     JSONObject sens = (JSONObject) sensorIterator.next();
-                    AbsSensor s = Factory.makeSensor((String) sens.get("type"),(String) sens.get("name")); //TODO replace by AbsSensor s;
+                    AbsSensor s = Factory.getInstance().makeSensor((String) sens.get("type"),(String) sens.get("name")); //TODO replace by AbsSensor s;
                     /*switch ((String) sens.get("type")){
                         case "motion" : s = new SensorMotion((String) sens.get("name")); break;
                         default:
@@ -70,7 +70,7 @@ public class Smart_Home {
                     JSONObject dev = (JSONObject) deviceIterator.next();
                     String type = (String) dev.get("type");
                     String name = (String) dev.get("name");
-                    r.addDevice( Factory.makeActuator(type,name));
+                    r.addDevice( Factory.getInstance().makeActuator(type,name));
                     //switch (type){
                     //    case "light" : r.addDevice(new ActuLight((String)dev.get("name") )); break;
                     //    case "coffee" : r.addDevice(new ActuCoffeeMachine((String) dev.get("name")));break;
