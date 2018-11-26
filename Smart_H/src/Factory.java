@@ -1,5 +1,6 @@
 public class Factory {
 
+    // TODO: singleton
     public static Actuator makeActuator(String type, String name){
         switch (type){
             case "light" : return new ActuLight(name);

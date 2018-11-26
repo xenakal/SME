@@ -45,7 +45,7 @@ public class Rooms {
 
 
     public void addDevice(Actuator a) {
-        if (!actuatorMap.containsKey(a.getType())) { // si un manager pour ce type d'actuateur n'existe pas
+        if (!actuatorMap.containsKey(a.getType())) {
             actuatorMap.put(a.getType(), new ArrayList<Actuator>());
             ManagerFeature m = this.getManager(a.getType());
             if (m != null) {

@@ -170,13 +170,17 @@ public class Command { // BROKER CLASS IN COMMAND PATTERN
         switch (in_arr[1]){ // second argument is the room or sensor or actuator option
             case "room": // ajouter une chambre à la maison
                 String name = in_arr[2]; // third argument is name of the room to be added
-                sh.addRoom(name, new Rooms());
+                sh.addRoom(name, new Rooms(name));
                 break;
             case "sensor": // ajouter un senseur à une chambre
                 Rooms sroom = sh.getRoomsMap().get(in_arr[2]); // third argument is name of the room in which to add the sensor
                 String type = in_arr[3]; // forth argument is the type of the sensor (thermo or motion)
                 String sname = in_arr[4];
-                sroom.addSensor(Factory.makeSensor(type,sname));
+                AbsSensor sens = Factory.makeSensor(type,sname);
+                sroom.addSensor(sens);
+                ManagerFeature manager =  sroom.getManager(Enum.convertToActu(type));
+                // TODO: CORRIGER
+                sens.attach(manager);
                 break;
             case "actuator": // ajouter un actuateur à une chambre
                 Rooms aroom = sh.getRoomsMap().get(in_arr[2]); // third argument is name of the room in which to add the actuator
