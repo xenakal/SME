@@ -3,7 +3,11 @@ import java.io.InputStreamReader;
 import java.lang.reflect.Array;
 import java.util.List;
 
-
+/* TODO:
+    - Do the Command correctly
+    - Add an actual exception and handle all exceptions
+    - JavaFx
+ */
 public class Command { // BROKER CLASS IN COMMAND PATTERN
 
     /*
@@ -40,9 +44,9 @@ public class Command { // BROKER CLASS IN COMMAND PATTERN
                     case "param":
                         handle_param(sh, in_arr);
                         break;
-                    case "config":
-                        handle_config(sh, in_arr);
-                        break;
+                    //case "config":
+                    //    handle_config(sh, in_arr);
+                    //    break;
                     case "exit":
                         end = true;
                         break;
@@ -52,7 +56,6 @@ public class Command { // BROKER CLASS IN COMMAND PATTERN
                         System.out.println("The command read is:");
                         System.out.println(in);
                         break;
-
                 }
             }
         }
