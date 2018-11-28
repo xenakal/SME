@@ -7,24 +7,24 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
-public class Smart_Home {
+public class SmartHome {
 
 
-    private static Smart_Home sh = new Smart_Home();
+    private static SmartHome sh = new SmartHome();
 
     private String name;
     private Map<String, Rooms> roomsMap;
     private Map<String,AbsSensor> sensorMap;  //utiliser qu'en local
 
 
-    private Smart_Home(){}
+    private SmartHome(){}
 
-    public static Smart_Home getSmartHome() {
+    public static SmartHome getSmartHome() {
         return sh;
     }
 
     public void smartHomeInit(String filename){
-    //public Smart_Home(String filename){
+    //public SmartHome(String filename){
         roomsMap = new HashMap<String, Rooms>();
         sensorMap = new HashMap<String, AbsSensor>();
 

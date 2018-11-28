@@ -1,6 +1,5 @@
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.lang.reflect.Array;
 import java.util.List;
 
 
@@ -15,7 +14,7 @@ public class Command { // BROKER CLASS IN COMMAND PATTERN
     */
     public static void start(){
 
-        Smart_Home sh = Smart_Home.getSmartHome();
+        SmartHome sh = SmartHome.getSmartHome();
 
 
         try{
@@ -62,7 +61,7 @@ public class Command { // BROKER CLASS IN COMMAND PATTERN
 
     }
 
-    private static void handle_get(Smart_Home sh, String[] in_arr){
+    private static void handle_get(SmartHome sh, String[] in_arr){
         Rooms room = sh.getRoomsMap().get(in_arr[1]); // second argument is the room
         Enum.Actuator actuator = Enum.Actuator.valueOf(in_arr[2]); // third argument is the actuator
         String attribute = in_arr[3]; // fourth argument is the attribute (ex. tolerance, temperature, light_state)
@@ -103,7 +102,7 @@ public class Command { // BROKER CLASS IN COMMAND PATTERN
         }
     }
 
-    private static void handle_detect(Smart_Home sh, String[] in_arr){
+    private static void handle_detect(SmartHome sh, String[] in_arr){
         Rooms room_detect = sh.getRoomsMap().get(in_arr[1]);
         if(room_detect==null)
             System.out.println("there is no such room !");
@@ -130,7 +129,7 @@ public class Command { // BROKER CLASS IN COMMAND PATTERN
         }
     }
 
-    private static void handle_param(Smart_Home sh, String[] in_arr){
+    private static void handle_param(SmartHome sh, String[] in_arr){
 
         Rooms room = sh.getRoomsMap().get(in_arr[3]); // fourth argument is Room name
 
@@ -166,7 +165,7 @@ public class Command { // BROKER CLASS IN COMMAND PATTERN
         }
     }
 
-    private static void handle_config(Smart_Home sh, String[] in_arr){
+    private static void handle_config(SmartHome sh, String[] in_arr){
         switch (in_arr[1]){ // second argument is the room or sensor or actuator option
             case "room": // ajouter une chambre à la maison
                 String name = in_arr[2]; // third argument is name of the room to be added

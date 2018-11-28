@@ -1,10 +1,10 @@
 public class Script {
 
     public static void main(String[] args){
-        Smart_Home smart = Smart_Home.getSmartHome();
+        SmartHome smart = SmartHome.getSmartHome();
 
         smart.smartHomeInit("/config.json5");
-        //Smart_Home smart = new Smart_Home("config.json5");
+        //SmartHome smart = new SmartHome("config.json5");
         System.out.println(smart.toString());
 
 
