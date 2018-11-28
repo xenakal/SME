@@ -6,6 +6,7 @@
 
 public interface GeneralCommand {
 
-    void execute();
+
+    void execute(String[] in_arr);
 
 }

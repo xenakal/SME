@@ -1,13 +1,16 @@
+/**
+ * Client Method in the Client Pattern
+ */
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.util.List;
 
 /* TODO:
-    - Do the Command correctly
+    - Do the Client correctly
     - Add an actual exception and handle all exceptions
     - JavaFx
  */
-public class Command { // BROKER CLASS IN COMMAND PATTERN
+public class Client {
 
     /*
     * How to use: Type a sequence of words with the following pattern
@@ -16,10 +19,73 @@ public class Command { // BROKER CLASS IN COMMAND PATTERN
     *   - first word "param" --> second word should be the type of actuator --> third the type of command (ex. SetTemperature) --> fourth the Room -> fifth the value
     *   - first word "config" --> second word should be the option "room", "sensor" or "actuator" --> third the Room where to add the actuator/sesor if applicable
     */
+
+
     public static void start(){
 
         SmartHome sh = SmartHome.getSmartHome();
 
+        // Concrete Commands
+        GetCommand gc = new GetCommand();
+        DetectCommand dc = new DetectCommand();
+        ParamCommand pc = new ParamCommand();
+
+        // Agent
+        CommandsPlacer commands_handler = new CommandsPlacer();
+
+        try{
+            BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+            boolean end = false;
+            while(!end){
+                System.out.println("Tell us what is happening in the house");
+                String in = br.readLine();
+                String[] in_arr = in.split(" "); // first word should be type of command
+                String command_type = in_arr[0];
+                switch (command_type) {
+                    case "print_house":
+                        System.out.println(sh.toString());
+                        break;
+                    case "get":
+                        commands_handler.placeOrder(gc,in_arr);
+                        break;
+                    case "detect": // second word is Room, third is Type (ex. motion or temperature) fourth is value
+                        commands_handler.placeOrder(dc,in_arr);
+                        break;
+                    case "param":
+                        commands_handler.placeOrder(pc,in_arr);
+                        break;
+                    //case "config":
+                    //    handle_config(sh, in_arr);
+                    //    break;
+                    case "exit":
+                        end = true;
+                        break;
+                    default:
+                        System.out.println("wrong type of command, please try again");
+                        System.out.println();
+                        System.out.println("The command read is:");
+                        System.out.println(in);
+                        break;
+                }
+            }
+        }
+        catch (Exception e){
+            System.out.println("Some unexpected Exception occured :/ ");
+        }
+
+    }
+
+
+
+
+    /*
+    public static void start(){
+
+        SmartHome sh = SmartHome.getSmartHome();
+        GetCommand gc = new GetCommand();
+        DetectCommand dc = new DetectCommand();
+        ParamCommand pc = new ParamCommand();
 
         try{
             BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -194,6 +260,6 @@ public class Command { // BROKER CLASS IN COMMAND PATTERN
                 break;
         }
     }
-
+*/
 
 }
