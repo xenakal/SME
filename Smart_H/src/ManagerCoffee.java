@@ -10,7 +10,7 @@ public class ManagerCoffee implements ManagerFeature {
 
     private List<ActuCoffeeMachine> machines ;
     private  List<Rooms> rooms;
-    private boolean isActive = true;
+    private boolean isActive = false;
 
     public boolean isActive() {
         return isActive;

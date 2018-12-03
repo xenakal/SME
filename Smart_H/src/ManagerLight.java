@@ -14,7 +14,7 @@ public class ManagerLight implements ManagerFeature {
     //mode d'allumage
     private Map<String,List<ActuLight>> modeMap;
     private String currentmode = "all";
-    private boolean isActive = true;
+    private boolean isActive = false;
 
     public boolean isActive() {
         return isActive;

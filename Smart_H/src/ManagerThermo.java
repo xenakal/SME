@@ -10,7 +10,7 @@ public class ManagerThermo implements ManagerFeature {
     private int last_temp = 20;  // last recorded temperature
     private List<ActuRadiator> radiators ;
     private  List<Rooms> rooms;
-    private boolean isActive = true;
+    private boolean isActive = false;
 
 
     public int getTolerance() {

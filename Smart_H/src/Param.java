@@ -39,7 +39,7 @@ public class Param {
         actuator.add((new actuatorFeature("coffee", "or")));
         //add more kind of actuator here
 
-        FeatureCompo functonality = new FeatureCompo(false, "Functonality", null, null);
+        FeatureCompo functonality = new FeatureCompo(false, "Functionality", null, null);
         this.mainFeature.add(functonality);
         functonality.add(new functionalityFeature("lightControl","or"));
         functonality.add(new functionalityFeature("temperatureControl","or"));
@@ -92,11 +92,12 @@ public class Param {
 
             JSONObject functConfig = (JSONObject) config.get("functionalityParam");
             FeatureCompo functParam = (FeatureCompo) mainFeature.getOneChild("Functionality");
-            //todo
-
-
-
-
+            boolean lightManParam = (boolean) functConfig.get("lightControl");
+            if(lightManParam) functParam.getOneChild("lightControl").active();
+            boolean coffeeManParam = (boolean) functConfig.get("smartCoffee");
+            if(coffeeManParam) functParam.getOneChild("smartCoffee").active();
+            boolean thermoManParam = (boolean) functConfig.get("temperatureControl");
+            if(thermoManParam) functParam.getOneChild("temperatureControl").active();
         } catch (Exception e) {
             e.printStackTrace();
         }
