@@ -81,7 +81,7 @@ public class SmartHome {
                 AbsSensor sens = sensorMap.get((String) connect.get("sensorname"));
                 Rooms location = roomsMap.get((String) connect.get("roomactuator"));
                 String type = (String) connect.get("actuatortype");
-                ManagerFeature manager =  location.getManager(Enum.convertToManager(type));
+                ManagerFeature manager =  location.getManagerOfType(Enum.convertToManager(type));
                 sens.attach(manager);  //TODO on pourrais permettre de lier un senor a plusieur manager directement
             }
 

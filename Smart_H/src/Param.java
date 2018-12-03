@@ -1,5 +1,4 @@
 import java.util.List;
-import java.util.*;
 import java.io.FileReader;
 import java.util.Iterator;
 
@@ -38,11 +37,14 @@ public class Param {
         actuator.add((new actuatorFeature("light", "or")));
         actuator.add((new actuatorFeature("radiator", "or")));
         actuator.add((new actuatorFeature("coffee", "or")));
-        //add more kind of actuatoir here
+        //add more kind of actuator here
 
         FeatureCompo functonality = new FeatureCompo(false, "Functonality", null, null);
         this.mainFeature.add(functonality);
-        //TODO
+        functonality.add(new functionalityFeature("lightControl","or"));
+        functonality.add(new functionalityFeature("temperatureControl","or"));
+        functonality.add(new functionalityFeature("smartCoffee","or"));
+        //add more kind of functionality here
     }
 
     /**
@@ -89,7 +91,7 @@ public class Param {
             if(radiatorParam)actuParam.getOneChild("radiator").active();
 
             JSONObject functConfig = (JSONObject) config.get("functionalityParam");
-            FeatureCompo functParam = (FeatureCompo) mainFeature.getOneChild("Functonality");
+            FeatureCompo functParam = (FeatureCompo) mainFeature.getOneChild("Functionality");
             //todo
 
 
@@ -141,13 +143,21 @@ public class Param {
     }
 
     public void activeFunctonality(String Name){
-        //todo
+        Enum.Manager name = Enum.convertToManager(Name);
+        FeatureCompo ParamList = (FeatureCompo) mainFeature.getOneChild("Functionality");
+        functionalityFeature f = (functionalityFeature) ParamList.getOneChild(Name);
+        if(f.isActivable()){
+            ParamList.activeChild(f);
+        }
     }
     public void deactiveFunctonality(String Name){
-        //todo
+        Enum.Manager name = Enum.convertToManager(Name);
+        FeatureCompo ParamList = (FeatureCompo) mainFeature.getOneChild("Functionality");
+        functionalityFeature f = (functionalityFeature) ParamList.getOneChild(Name);
+        if(f.isDeactivable()){
+            ParamList.deactivateChild(f);
+        }
     }
-    // todo add managerfor functionnality
-
     //todo  tester activation desactivation
 
 //###############################################################################################################################################
@@ -223,7 +233,7 @@ public class Param {
         public boolean localCheck() {
             for (Rooms r : SmartHome.getSmartHome().getRoomsMap().values()){
                 Enum.Actuator type = Enum.convertToActu(this.getName());
-                if(r.getActuatorofType(type) != null && !r.getActuatorofType(type).isEmpty()){
+                if(r.getActuatorOfType(type) != null && !r.getActuatorOfType(type).isEmpty()){
                     return true ;
                 }
             }
@@ -235,8 +245,8 @@ public class Param {
             super.active();
             for (Rooms r : SmartHome.getSmartHome().getRoomsMap().values()){
                 Enum.Actuator type = Enum.convertToActu(this.getName());
-                if(r.getActuatorofType(type) != null) {
-                    for(Actuator a :r.getActuatorofType(type)) {
+                if(r.getActuatorOfType(type) != null) {
+                    for(Actuator a :r.getActuatorOfType(type)) {
                         if (!a.isActive()) {
                             a.active();
                         }
@@ -251,8 +261,8 @@ public class Param {
             super.deactivate();
             for (Rooms r : SmartHome.getSmartHome().getRoomsMap().values()){
                 Enum.Actuator type = Enum.convertToActu(this.getName());
-                if(r.getActuatorofType(type) != null) {
-                    for(Actuator a :r.getActuatorofType(type)){
+                if(r.getActuatorOfType(type) != null) {
+                    for(Actuator a :r.getActuatorOfType(type)){
                         if (a.isActive()){
                             a.deactive();
                         }
@@ -268,12 +278,47 @@ public class Param {
             super(isActivate, name, dependences, parentDependence);
         }
 
-        @Override
-        public boolean localCheck() {
-            return true;
-            //todo check manager ?
+        public functionalityFeature(String name, String parentDependence) {
+            super(name, parentDependence);
         }
 
-        //todo activation of manager
+        @Override
+        public boolean localCheck() {
+            for (Rooms r : SmartHome.getSmartHome().getRoomsMap().values()){
+                Enum.Manager type = Enum.convertToManager(this.getName());
+                if(r.getManagerOfType(type) != null){
+                    return true ;
+                }
+            }
+            return false;
+        }
+
+        @Override
+        protected void active() {
+            super.active();
+            for (Rooms r : SmartHome.getSmartHome().getRoomsMap().values()){
+                Enum.Manager type = Enum.convertToManager(this.getName());
+                if(r.getManagerOfType(type) != null) {
+                    if (!r.getManagerOfType(type).isActive()) {
+                        r.getManagerOfType(type).active();
+                    }
+                }
+            }
+        }
+
+
+        @Override
+        protected void deactivate() {
+            super.deactivate();
+            for (Rooms r : SmartHome.getSmartHome().getRoomsMap().values()){
+                Enum.Manager type = Enum.convertToManager(this.getName());
+                if(r.getManagerOfType(type) != null) {
+                    if (r.getManagerOfType(type).isActive()) {
+                        r.getManagerOfType(type).deactive();
+                    }
+                }
+            }
+
+        }
     }
 }

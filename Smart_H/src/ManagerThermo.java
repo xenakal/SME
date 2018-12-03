@@ -93,7 +93,7 @@ public class ManagerThermo implements ManagerFeature {
 
     public void upDateRadiator(List<ActuRadiator> list) {
         for(Rooms r : rooms){
-            for (Actuator rad : r.getActuatorofType(Enum.Actuator.radiator)){
+            for (Actuator rad : r.getActuatorOfType(Enum.Actuator.radiator)){
                 if (!list.contains((ActuRadiator) rad)){
                     list.add((ActuRadiator) rad);
                 }

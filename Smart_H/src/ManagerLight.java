@@ -117,7 +117,7 @@ public class ManagerLight implements ManagerFeature {
 
     public void updateLights(List<ActuLight> list ) {
         for(Rooms r : rooms){
-            for (Actuator l : r.getActuatorofType(Enum.Actuator.light)){
+            for (Actuator l : r.getActuatorOfType(Enum.Actuator.light)){
                 if (!list.contains((ActuLight) l)){
                     list.add((ActuLight) l);
                 }

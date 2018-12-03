@@ -66,7 +66,7 @@ public class ManagerCoffee implements ManagerFeature {
 
     public void upDateCoffeMachines(List<ActuCoffeeMachine> list ) {
         for(Rooms r : rooms){
-            for (Actuator cm : r.getActuatorofType(Enum.Actuator.coffee)){
+            for (Actuator cm : r.getActuatorOfType(Enum.Actuator.coffee)){
                 if (!list.contains((ActuCoffeeMachine) cm)){
                     list.add((ActuCoffeeMachine) cm);
                 }
