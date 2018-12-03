@@ -10,7 +10,7 @@ public class Enum {
             case "coffee": return Actuator.coffee;
             case "radiator": return Actuator.radiator;
             case "alarm": return Actuator.alarm;
-            default: System.out.println("Error : invalid Actuator type");return Actuator.light;
+            default: System.out.println("Error Enum : invalid Actuator type : " +type);return Actuator.light;
         }
     }
     /*public enum Manager{
@@ -24,7 +24,8 @@ public class Enum {
         switch (type) {
             case "motion" : return Sensor.motion;
             case "temperature": return Sensor.temperature;
-            default: System.out.println("Error : invalid Sensor type"); return Sensor.motion;
+            case "thermo": return Sensor.temperature;
+            default: System.out.println("Error Enum: invalid Sensor type : " +type); return Sensor.motion;
         }
     }
 
@@ -35,7 +36,7 @@ public class Enum {
     public static ActivationCondition convertToCondition(String type){
         switch (type) {
             case "presence" : return ActivationCondition.presence;
-            default: System.out.println("Error : invalid ActivationCondition type"); return ActivationCondition.presence;
+            default: System.out.println("Error Enum: invalid ActivationCondition type"); return ActivationCondition.presence;
         }
     }
 }

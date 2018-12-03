@@ -1,5 +1,21 @@
 {
   "name": "Robinson's house",
+  "parametrisation" : {
+    "sensorParam" : {
+      "motion" : true,
+      "thermo" : true
+    },
+    "actuatorParam":{
+      "light": true,
+      "coffee": true,
+      "radiator": true
+    },
+    "functionalityParam":{
+      "lightControl": true,
+      "temperatureControl": true,
+      "smartCoffee": true
+    }
+  },
   "rooms": [
     {
       "name": "kitchen",
@@ -24,6 +40,15 @@
         {"name" : "bedlight2", "type" : "light"},
         {"name" : "bedradiator", "type" : "radiator"}
       ]
+    },
+    {
+      "name": "toilet",
+      "sensor":  [
+        {"name" : "motionWC", "type" : "motion", "activationcondition" : "presence"}
+      ],
+      "actuator" : [
+        {"name" : "WClight", "type" : "light"}
+      ]
     }
   ],
   "makeManagerforeachroom" : true,
@@ -35,7 +60,7 @@
     {"sensorname" :  "motionkitchen2",
       "roomactuator": "kitchen",
       "actuatortype": "light"
-    }
+    },
     {"sensorname" : "thermo_sensor_bedroom",
       "roomactuator" : "bedroom",
       "actuatortype" : "radiator"

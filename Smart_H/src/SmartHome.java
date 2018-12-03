@@ -51,13 +51,7 @@ public class SmartHome {
                 Iterator sensorIterator = sensors.iterator();
                 while (sensorIterator.hasNext()){
                     JSONObject sens = (JSONObject) sensorIterator.next();
-                    AbsSensor s = Factory.getInstance().makeSensor((String) sens.get("type"),(String) sens.get("name")); //TODO replace by AbsSensor s;
-                    /*switch ((String) sens.get("type")){
-                        case "motion" : s = new SensorMotion((String) sens.get("name")); break;
-                        default:
-                            System.out.println("Error in json parse");
-                            s= new SensorMotion((String) sens.get("name"));
-                    }*/
+                    AbsSensor s = Factory.getInstance().makeSensor((String) sens.get("type"),(String) sens.get("name"));
                     r.addSensor(s);
                     sensorMap.put((String) sens.get("name"),s);
                 }
@@ -72,10 +66,6 @@ public class SmartHome {
                     String type = (String) dev.get("type");
                     String name = (String) dev.get("name");
                     r.addDevice( Factory.getInstance().makeActuator(type,name));
-                    //switch (type){
-                    //    case "light" : r.addDevice(new ActuLight((String)dev.get("name") )); break;
-                    //    case "coffee" : r.addDevice(new ActuCoffeeMachine((String) dev.get("name")));break;
-                    //}
                 }
                 if((Boolean) jsonObject.get("makeManagerforeachroom")){
                     //cree un manager pour chaque type d'actuator
