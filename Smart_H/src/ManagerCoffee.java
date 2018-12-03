@@ -99,7 +99,7 @@ public class ManagerCoffee implements ManagerFeature {
     }
 
     public String ToString(){
-        String str =  "CoffeManager : " ;
+        String str = (isActive()?"Active ": "Not active ") + "CoffeManager : " ;
         for (ActuCoffeeMachine c: machines) {
             str = str + c.toString();
         }

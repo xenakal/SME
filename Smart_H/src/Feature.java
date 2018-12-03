@@ -67,7 +67,7 @@ public abstract class Feature{
             System.out.println("Error : Invalid activation for feature "+ name);
         }
     }
-    protected void disactive() {
+    protected void deactivate() {
         isActivate = false;
     }
 

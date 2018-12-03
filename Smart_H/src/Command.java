@@ -67,7 +67,7 @@ public class Command { // BROKER CLASS IN COMMAND PATTERN
         String attribute = in_arr[3]; // fourth argument is the attribute (ex. tolerance, temperature, light_state)
         switch (actuator) {
             case light:
-                ManagerLight light_manager = (ManagerLight) room.getManager(actuator);
+                ManagerLight light_manager = (ManagerLight) room.getManager(Enum.getCorrespondingManager(actuator));
                 switch (attribute){
                     case "light_state":
                         light_manager.getStates();
@@ -78,7 +78,7 @@ public class Command { // BROKER CLASS IN COMMAND PATTERN
                 }
                 break;
             case radiator:
-                ManagerThermo thermo_manager = (ManagerThermo) room.getManager(actuator);
+                ManagerThermo thermo_manager = (ManagerThermo) room.getManager(Enum.getCorrespondingManager(actuator));
                 switch (attribute){
                     case "tolerance":
                         int tol = thermo_manager.getTolerance();
@@ -135,11 +135,11 @@ public class Command { // BROKER CLASS IN COMMAND PATTERN
 
         switch (Enum.Actuator.valueOf(in_arr[1])) { // second argument is manager type (light, radiator)
             case light:
-                ManagerLight light_manager = (ManagerLight) room.getManager(Enum.Actuator.light);
+                ManagerLight light_manager = (ManagerLight) room.getManager(Enum.Manager.lightManager);
                 // TODO: add light manager new method
                 break;
             case radiator:
-                ManagerThermo thermo_manager = (ManagerThermo) room.getManager(Enum.Actuator.radiator);
+                ManagerThermo thermo_manager = (ManagerThermo) room.getManager(Enum.Manager.temperatureManager);
                 int value = Integer.parseInt(in_arr[4]);
 
                 switch (in_arr[2]) { // third argument is specific command (setRequiredTemperature or setTolerance)
@@ -177,7 +177,7 @@ public class Command { // BROKER CLASS IN COMMAND PATTERN
                 String sname = in_arr[4];
                 AbsSensor sens = Factory.getInstance().makeSensor(type,sname);
                 sroom.addSensor(sens);
-                ManagerFeature manager =  sroom.getManager(Enum.convertToActu(type));
+                ManagerFeature manager =  sroom.getManager(Enum.convertToManager(type));
                 // TODO: CORRIGER
                 sens.attach(manager);
                 break;

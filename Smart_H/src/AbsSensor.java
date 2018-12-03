@@ -28,14 +28,14 @@ abstract class AbsSensor extends Object{
     public void active(){
         if(!isActive){
             isActive = true;
-            System.out.println("sensor " + this.getName()+  "is activate ");
+            System.out.println("sensor " + this.getName()+  " is activate ");
             advertise();
         }
     }
     public void deactive(){
         if(isActive){
             isActive = false;
-            System.out.println("sensor " + this.getName()+  "is deactivate ");
+            System.out.println("sensor " + this.getName()+  " is deactivate ");
         }
     }
 
@@ -45,7 +45,9 @@ abstract class AbsSensor extends Object{
 
 
     public String toString(){
-        String str = this.name + " is connected to \n";
+        String str = this.name ;
+        if(this.isActive()) str+= " is active and "; else str+= " is not active and ";
+        str +=  " is connected to \n";
         for (ManagerFeature m: obsList) {
             str = str + m.ToString() + "\n";
         }

@@ -158,7 +158,7 @@ public class ManagerLight implements ManagerFeature {
 
 
     public String ToString(){
-        String str =  "LightManager : " ;
+        String str = (isActive()?"Active ": "Not active ") + "LightManager : " ;
         for (ActuLight l: modeMap.get("all")) {
             str = str + l.toString();
         }

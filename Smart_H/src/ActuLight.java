@@ -9,12 +9,12 @@ public class ActuLight extends Object implements Actuator{
     }
     public void active(){
         isActive = true;
-        System.out.println("# "+name + "activate");
+        System.out.println("# "+name + " activate");
         if(on){lightOn();}
     }
     public void deactive(){
         isActive = false;
-        System.out.println("# "+name + "deactivate");
+        System.out.println("# "+name + " deactivate");
         if(on){lightOff();}
     }
 
@@ -53,6 +53,6 @@ public class ActuLight extends Object implements Actuator{
     }
 
     public String toString(){
-        return "# "+"light : " +name + "  ";
+        return "# "+"light : " +name + (isActive()?" is active ": " is not active ");
     }
 }

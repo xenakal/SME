@@ -9,12 +9,12 @@ public class ActuRadiator implements Actuator{
     }
     public void active(){
         isActive = true;
-        System.out.println("# "+name + "activate");
+        System.out.println("# "+name + " activate");
         if(on){radiatorOn();}
     }
     public void deactive(){
         isActive = false;
-        System.out.println("# "+name + "deactivate");
+        System.out.println("# "+name + " deactivate");
         if(on){radiatorOff();}
     }
 
@@ -54,7 +54,7 @@ public class ActuRadiator implements Actuator{
     }
 
     public String toString(){
-        return "# "+ "radiator : " +name + "  ";
+        return "# "+ "radiator : " +name  + (isActive()?" is active and ": " is not active and  ");
     }
 
 

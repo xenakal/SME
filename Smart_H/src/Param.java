@@ -50,7 +50,7 @@ public class Param {
      * Ajoute les piece necessaire aux parametre et
      * Active les fonctionnalité indiquée dans le fichier de configuration
      */
-    public void adapteToConfig(String configFileName){
+    public void adaptToConfig(String configFileName){
         JSONParser parser = new JSONParser();
         try {
             //FileReader FR = new FileReader("/Users/DimiS/Documents/Maintenace & evolution M1Q1/SME/Smart_H/src/config.txt");
@@ -119,7 +119,7 @@ public class Param {
         FeatureCompo sensorParamList = (FeatureCompo) mainFeature.getOneChild("Sensors");
         sensorFeature s = (sensorFeature) sensorParamList.getOneChild(sensorName);
         if(s.isDeactivable()){
-            sensorParamList.disactivateChild(s);
+            sensorParamList.deactivateChild(s);
         }
     }
 
@@ -136,7 +136,7 @@ public class Param {
         FeatureCompo ParamList = (FeatureCompo) mainFeature.getOneChild("Actuators");
         actuatorFeature a  = (actuatorFeature) ParamList.getOneChild(Name);
         if(a.isDeactivable()){
-            ParamList.disactivateChild(a);
+            ParamList.deactivateChild(a);
         }
     }
 
@@ -188,7 +188,7 @@ public class Param {
                 Enum.Sensor type = Enum.convertToSensor(this.getName());
                 if(r.getSensorOfType(type) != null) {
                     for(AbsSensor s :r.getSensorOfType(type)){
-                        if (s.isActive()){
+                        if (!s.isActive()){
                             s.active();
                         }
                     }
@@ -198,13 +198,13 @@ public class Param {
         }
 
         @Override
-        protected void disactive() {
-            super.disactive();
+        protected void deactivate() {
+            super.deactivate();
             for (Rooms r : SmartHome.getSmartHome().getRoomsMap().values()){
                 Enum.Sensor type = Enum.convertToSensor(this.getName());
                 if(r.getSensorOfType(type) != null) {
                     for (AbsSensor s : r.getSensorOfType(type)) {
-                        if (!s.isActive()) {
+                        if (s.isActive()) {
                             s.deactive();
                         }
                     }
@@ -237,7 +237,7 @@ public class Param {
                 Enum.Actuator type = Enum.convertToActu(this.getName());
                 if(r.getActuatorofType(type) != null) {
                     for(Actuator a :r.getActuatorofType(type)) {
-                        if (a.isActive()) {
+                        if (!a.isActive()) {
                             a.active();
                         }
                     }
@@ -247,13 +247,13 @@ public class Param {
         }
 
         @Override
-        protected void disactive() {
-            super.disactive();
+        protected void deactivate() {
+            super.deactivate();
             for (Rooms r : SmartHome.getSmartHome().getRoomsMap().values()){
                 Enum.Actuator type = Enum.convertToActu(this.getName());
                 if(r.getActuatorofType(type) != null) {
                     for(Actuator a :r.getActuatorofType(type)){
-                        if (!a.isActive()){
+                        if (a.isActive()){
                             a.deactive();
                         }
                     }

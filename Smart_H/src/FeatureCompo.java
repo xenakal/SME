@@ -66,10 +66,10 @@ public class FeatureCompo extends Feature {
     }
 
     @Override
-    public void disactive() {
-        super.disactive();
+    public void deactivate() {
+        super.deactivate();
         for (Feature c : this.getChild()){
-            c.disactive();
+            c.deactivate();
         }
     }
 
@@ -82,7 +82,7 @@ public class FeatureCompo extends Feature {
         //c.active();
     }
 
-    public void disactivateChild(Feature child){
-        child.disactive();
+    public void deactivateChild(Feature child){
+        child.deactivate();
     }
 }

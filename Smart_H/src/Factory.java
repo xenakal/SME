@@ -11,7 +11,7 @@ public class Factory {
             case "light" : return new ActuLight(name);
             case "coffee" : return new ActuCoffeeMachine(name);
             case "radiator" : return new ActuRadiator(name);
-            default: System.out.print("Type error in Actuator Factory, given type : "+type);return null;
+            default: System.out.print("Type error in Actuator Factory, given type : "+type); return null;
             //TODO launch error
         }
     }
@@ -31,15 +31,14 @@ public class Factory {
     }
 
 
-    public ManagerFeature makeManager(Enum.Actuator act){
+    public ManagerFeature makeManager(Enum.Manager m){
         ManagerFeature manager;
-        // light,coffee,radiator,alarm
-        //TODO improve ManagerFeature
-        switch (act){
-            case light: manager= new ManagerLight(); break;
-            case radiator: manager = new ManagerThermo(20,0); break;
-            case coffee: manager =new ManagerCoffee(); break;
-            default:System.out.println("Error in makeManagerForUsedDevices : invalid actuator type");manager = null; //coffee
+        switch (m){
+            case lightManager: manager= new ManagerLight(); break;
+            case temperatureManager: manager = new ManagerThermo(20,0); break;
+            case coffeeManager: manager =new ManagerCoffee(); break;
+            //case securityManager: manager = new ...; break;
+            default:System.out.println("Error in makeManagerForUsedDevices : invalid actuator type"); manager = null;
                 //TODO launch error
         }
         return manager;

@@ -155,7 +155,7 @@ public class ManagerThermo implements ManagerFeature {
 
     @Override
     public String ToString() {
-        String str =  "ThermoManager : " ;
+        String str =  (isActive()?"Active": "Not active ") + "ThermoManager : " ;
         for (ActuRadiator r: radiators) {
             str = str + r.toString();
         }

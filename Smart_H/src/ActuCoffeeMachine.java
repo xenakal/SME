@@ -9,11 +9,11 @@ public class ActuCoffeeMachine implements Actuator{
     }
     public void active(){
         isActive = true;
-        System.out.println("# "+name + "activate");
+        System.out.println("# "+name + " activate");
     }
     public void deactive(){
         isActive = false;
-        System.out.println("# "+name + "deactivate");
+        System.out.println("# "+name + " deactivate");
     }
 
     public ActuCoffeeMachine(String name) {
@@ -34,6 +34,7 @@ public class ActuCoffeeMachine implements Actuator{
             }
     }
     public String toString(){
-            return "coffee machine : " +name + "  ";
+        String acti = isActive()?" is active and ": " is not active and ";
+            return "coffee machine : " +  acti +name + "  ";
         }
 }
