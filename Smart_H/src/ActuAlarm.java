@@ -1,7 +1,21 @@
 public class ActuAlarm implements Actuator{
 
     String name;
-    //public boolean isActivate = false;
+    private boolean isActive = false;
+
+    public boolean isActive() {
+        return isActive;
+    }
+    public void active(){
+        isActive = true;
+        System.out.println("# "+name + "activate");
+        //if(on){lightOn();}
+    }
+    public void deactive(){
+        isActive = false;
+        System.out.println("# "+name + "deactivate");
+        //if(on){lightOff();}
+    }
 
 
     public ActuAlarm(String name) {

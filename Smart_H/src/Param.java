@@ -100,11 +100,55 @@ public class Param {
         }
     }
 
-    //todo ajouter activation aux sensor
-    //todo ajouter activation aux actuator ou
-    // todo add managerfor functionnality
-    //todo  tester activation desactivation
+    public void activeRoom(String roomName){
+        //todo
+    }
+    public void deactiveRoom(String roomName){
+        //todo
+    }
+    public void activeSensor(String sensorName){
+        Enum.Sensor name = Enum.convertToSensor(sensorName);
+        FeatureCompo sensorParamList = (FeatureCompo) mainFeature.getOneChild("Sensors");
+        sensorFeature s = (sensorFeature) sensorParamList.getOneChild(sensorName);
+        if(s.isActivable()){
+            sensorParamList.activeChild(s);
+        }
+    }
+    public void deactiveSensor(String sensorName){
+        Enum.Sensor name = Enum.convertToSensor(sensorName);
+        FeatureCompo sensorParamList = (FeatureCompo) mainFeature.getOneChild("Sensors");
+        sensorFeature s = (sensorFeature) sensorParamList.getOneChild(sensorName);
+        if(s.isDeactivable()){
+            sensorParamList.disactivateChild(s);
+        }
+    }
 
+    public void activeActuator(String Name){
+        Enum.Actuator name = Enum.convertToActu(Name);
+        FeatureCompo ParamList = (FeatureCompo) mainFeature.getOneChild("Actuators");
+        actuatorFeature a = (actuatorFeature) ParamList.getOneChild(Name);
+        if(a.isActivable()){
+            ParamList.activeChild(a);
+        }
+    }
+    public void deactiveActuator(String Name){
+        Enum.Actuator name = Enum.convertToActu(Name);
+        FeatureCompo ParamList = (FeatureCompo) mainFeature.getOneChild("Actuators");
+        actuatorFeature a  = (actuatorFeature) ParamList.getOneChild(Name);
+        if(a.isDeactivable()){
+            ParamList.disactivateChild(a);
+        }
+    }
+
+    public void activeFunctonality(String Name){
+        //todo
+    }
+    public void deactiveFunctonality(String Name){
+        //todo
+    }
+    // todo add managerfor functionnality
+
+    //todo  tester activation desactivation
 
 //###############################################################################################################################################
     public class RoomFeature extends Feature {
@@ -121,7 +165,8 @@ public class Param {
             return SmartHome.getSmartHome().getRoomsMap().containsKey(this.getName());
         }
     }
-
+    //todo activation of room
+//###############################################################################################################################################
     public class sensorFeature extends Feature {
         public sensorFeature(String name, String parentDependence) {
             super(name, parentDependence);
@@ -135,8 +180,40 @@ public class Param {
             }
             return false;
         }
-    }
 
+        @Override
+        protected void active() {
+            super.active();
+            for (Rooms r : SmartHome.getSmartHome().getRoomsMap().values()){
+                Enum.Sensor type = Enum.convertToSensor(this.getName());
+                if(r.getSensorOfType(type) != null) {
+                    for(AbsSensor s :r.getSensorOfType(type)){
+                        if (s.isActive()){
+                            s.active();
+                        }
+                    }
+                }
+            }
+
+        }
+
+        @Override
+        protected void disactive() {
+            super.disactive();
+            for (Rooms r : SmartHome.getSmartHome().getRoomsMap().values()){
+                Enum.Sensor type = Enum.convertToSensor(this.getName());
+                if(r.getSensorOfType(type) != null) {
+                    for (AbsSensor s : r.getSensorOfType(type)) {
+                        if (!s.isActive()) {
+                            s.deactive();
+                        }
+                    }
+                }
+            }
+
+        }
+    }
+//###############################################################################################################################################
     public class actuatorFeature extends Feature {
         public actuatorFeature(String name, String parentDependence) {
             super(name, parentDependence);
@@ -153,21 +230,39 @@ public class Param {
             return false;
         }
 
-        /*@Override
+        @Override
         protected void active() {
             super.active();
             for (Rooms r : SmartHome.getSmartHome().getRoomsMap().values()){
                 Enum.Actuator type = Enum.convertToActu(this.getName());
-                for(Actuator a :r.getActuatorofType(type)){
-                    //if (a.isActive()){
-                    //a.active()
-                    //}
+                if(r.getActuatorofType(type) != null) {
+                    for(Actuator a :r.getActuatorofType(type)) {
+                        if (a.isActive()) {
+                            a.active();
+                        }
+                    }
                 }
             }
 
-        }*/
-    }
+        }
 
+        @Override
+        protected void disactive() {
+            super.disactive();
+            for (Rooms r : SmartHome.getSmartHome().getRoomsMap().values()){
+                Enum.Actuator type = Enum.convertToActu(this.getName());
+                if(r.getActuatorofType(type) != null) {
+                    for(Actuator a :r.getActuatorofType(type)){
+                        if (!a.isActive()){
+                            a.deactive();
+                        }
+                    }
+                }
+            }
+
+        }
+    }
+//###############################################################################################################################################
     public class functionalityFeature extends Feature {
         public functionalityFeature(boolean isActivate, String name, List<Feature> dependences, String parentDependence) {
             super(isActivate, name, dependences, parentDependence);
@@ -178,5 +273,7 @@ public class Param {
             return true;
             //todo check manager ?
         }
+
+        //todo activation of manager
     }
 }

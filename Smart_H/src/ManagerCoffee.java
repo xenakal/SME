@@ -10,6 +10,19 @@ public class ManagerCoffee implements ManagerFeature {
 
     private List<ActuCoffeeMachine> machines ;
     private  List<Rooms> rooms;
+    private boolean isActive = true;
+
+    public boolean isActive() {
+        return isActive;
+    }
+    public void active(){
+        isActive = true;
+        System.out.println("coffee manager activate");
+    }
+    public void deactive(){
+        isActive = false;
+        System.out.println("coffee manager deactivate");
+    }
 
     public ManagerCoffee() {
         machines = new ArrayList<ActuCoffeeMachine>();
@@ -69,16 +82,19 @@ public class ManagerCoffee implements ManagerFeature {
     //TODO ajouter dependance par rapport à l'heure
     @Override
     public void react(Info info) {
-        switch (info.getName()) {
-            case "motion" :
-                if (info.getValue() == 1) {  //true = 1
-                    for (ActuCoffeeMachine cm : machines) {
-                        cm.makeCoffee();
-                    }
+        if(this.isActive()) {
+            switch (info.getName()) {
+                case "motion":
+                    if (info.getValue() == 1) {  //true = 1
+                        for (ActuCoffeeMachine cm : machines) {
+                            cm.makeCoffee();
+                        }
 
-                }
-                break;
-            default: break;
+                    }
+                    break;
+                default:
+                    break;
+            }
         }
     }
 

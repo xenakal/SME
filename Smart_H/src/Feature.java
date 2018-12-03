@@ -40,6 +40,19 @@ public abstract class Feature{
          return (!isActive()) || (isActive() && localCheck() && checkDependeces());
     }
 
+    public boolean isActivable(){
+        isActivate = true;
+        boolean b = check();
+        isActivate = false;
+        return b;
+    }
+    public boolean isDeactivable(){
+        isActivate = false;
+        boolean b =  check();
+        isActivate = true;
+        return b;
+    }
+
     /**
      * indicate if the feature is curretly activate
      */

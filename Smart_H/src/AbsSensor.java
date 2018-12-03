@@ -5,6 +5,7 @@ abstract class AbsSensor extends Object{
 
     protected String name;
     protected List<ManagerFeature> obsList ;
+    protected Boolean isActive = false;
 
 
     protected AbsSensor(String name){
@@ -20,6 +21,22 @@ abstract class AbsSensor extends Object{
 
     public void setName(String name) {
         this.name = name;
+    }
+    public boolean isActive() {
+        return this.isActive;
+    }
+    public void active(){
+        if(!isActive){
+            isActive = true;
+            System.out.println("sensor " + this.getName()+  "is activate ");
+            advertise();
+        }
+    }
+    public void deactive(){
+        if(isActive){
+            isActive = false;
+            System.out.println("sensor " + this.getName()+  "is deactivate ");
+        }
     }
 
     abstract void reset();
@@ -56,10 +73,11 @@ abstract class AbsSensor extends Object{
         obsList.remove(obs);
     }
     public void advertise(){
-        //System.out.println("advertise");
-        for (ManagerFeature o: obsList
-        ) {
-            o.react(this.makeinfo());
+        if(this.isActive()) {
+            //System.out.println("advertise");
+            for (ManagerFeature o : obsList) {
+                o.react(this.makeinfo());
+            }
         }
     }
 }
