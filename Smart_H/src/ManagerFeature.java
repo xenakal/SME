@@ -15,4 +15,7 @@ public interface ManagerFeature {
      * @modify
      */
     public void update();
+    public boolean isActive();
+    public void active();
+    public void deactive();
 }

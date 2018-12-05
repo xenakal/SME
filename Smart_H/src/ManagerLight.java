@@ -14,6 +14,19 @@ public class ManagerLight implements ManagerFeature {
     //mode d'allumage
     private Map<String,List<ActuLight>> modeMap;
     private String currentmode = "all";
+    private boolean isActive = false;
+
+    public boolean isActive() {
+        return isActive;
+    }
+    public void active(){
+        isActive = true;
+        System.out.println("light manager activate");
+    }
+    public void deactive(){
+        isActive = false;
+        System.out.println("light manager deactivate");
+    }
 
 
     public ManagerLight() {
@@ -104,7 +117,7 @@ public class ManagerLight implements ManagerFeature {
 
     public void updateLights(List<ActuLight> list ) {
         for(Rooms r : rooms){
-            for (Actuator l : r.getActuatorofType(Enum.Actuator.light)){
+            for (Actuator l : r.getActuatorOfType(Enum.Actuator.light)){
                 if (!list.contains((ActuLight) l)){
                     list.add((ActuLight) l);
                 }
@@ -120,29 +133,32 @@ public class ManagerLight implements ManagerFeature {
 
     @Override
     public void react(Info info) {
-        lastinfo = info;
-        List<ActuLight> myLight = modeMap.get(currentmode);
-        switch (info.getName()) {
-            case "motion" :
-                if (info.getValue() == 1) {  //true = 1
-                    for (ActuLight li : myLight) {
-                        li.turn_on();
-                    }
+        if(this.isActive()) {
+            lastinfo = info;
+            List<ActuLight> myLight = modeMap.get(currentmode);
+            switch (info.getName()) {
+                case "motion":
+                    if (info.getValue() == 1) {  //true = 1
+                        for (ActuLight li : myLight) {
+                            li.turn_on();
+                        }
 
-                }else{
-                    for (ActuLight li : myLight) {
-                        if(li.getState())
-                            li.turn_off();
+                    } else {
+                        for (ActuLight li : myLight) {
+                            if (li.getState())
+                                li.turn_off();
+                        }
                     }
-                }
-                break;
-            default: break;
+                    break;
+                default:
+                    break;
+            }
         }
     }
 
 
     public String ToString(){
-        String str =  "LightManager : " ;
+        String str = (isActive()?"Active ": "Not active ") + "LightManager : " ;
         for (ActuLight l: modeMap.get("all")) {
             str = str + l.toString();
         }

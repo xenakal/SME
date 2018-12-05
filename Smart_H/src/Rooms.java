@@ -14,20 +14,20 @@ public class Rooms {
 
 
     //Manager
-    private Map<Enum.Actuator, ManagerFeature> managerMap;
+    private Map<Enum.Manager, ManagerFeature> managerMap;
 
 
     public Rooms() {
         this.sensorMap = new HashMap<Enum.Sensor, List<AbsSensor>>();
         this.actuatorMap = new HashMap<Enum.Actuator, List<Actuator>>();
-        this.managerMap = new HashMap<Enum.Actuator, ManagerFeature>();
+        this.managerMap = new HashMap<Enum.Manager, ManagerFeature>();
     }
 
     public Rooms(String name) {
         this.name = name;
         this.sensorMap = new HashMap<Enum.Sensor, List<AbsSensor>>();
         this.actuatorMap = new HashMap<Enum.Actuator, List<Actuator>>();
-        this.managerMap = new HashMap<Enum.Actuator, ManagerFeature>();
+        this.managerMap = new HashMap<Enum.Manager, ManagerFeature>();
     }
 
 
@@ -47,12 +47,12 @@ public class Rooms {
     public void addDevice(Actuator a) {
         if (!actuatorMap.containsKey(a.getType())) {
             actuatorMap.put(a.getType(), new ArrayList<Actuator>());
-            ManagerFeature m = this.getManager(a.getType());
+            ManagerFeature m = this.getManagerOfType(Enum.getCorrespondingManager(a.getType()));
             if (m != null) {
                 m.update();
             }
         }
-        this.getActuatorofType(a.getType()).add(a);
+        this.getActuatorOfType(a.getType()).add(a);
     }
 
     public void addDevice(String type, String name) {
@@ -62,7 +62,7 @@ public class Rooms {
 
 
 
-    public List<Actuator> getActuatorofType(Enum.Actuator type) {
+    public List<Actuator> getActuatorOfType(Enum.Actuator type) {
         return actuatorMap.get(type);
     }
 
@@ -70,16 +70,17 @@ public class Rooms {
         return sensorMap.get(type);
     }
 
-    public ManagerFeature getManager(Enum.Actuator act){
-        return managerMap.get(act);
+    public ManagerFeature getManagerOfType(Enum.Manager man){
+        return managerMap.get(man);
     }
 
     public void makeManagerForUsedDevices(){
-        for (Enum.Actuator act: Enum.Actuator.values()) {
+        for (Enum.Actuator act : Enum.Actuator.values()) {
             if(actuatorMap.containsKey(act)){
-                ManagerFeature manager = Factory.getInstance().makeManager(act);
+                Enum.Manager man = Enum.getCorrespondingManager(act);
+                ManagerFeature manager = Factory.getInstance().makeManager(man);
                 manager.add(this);
-                managerMap.put(act,manager);
+                managerMap.put(man,manager);
             }
         }
     }

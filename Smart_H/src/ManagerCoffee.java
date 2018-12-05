@@ -10,6 +10,19 @@ public class ManagerCoffee implements ManagerFeature {
 
     private List<ActuCoffeeMachine> machines ;
     private  List<Rooms> rooms;
+    private boolean isActive = false;
+
+    public boolean isActive() {
+        return isActive;
+    }
+    public void active(){
+        isActive = true;
+        System.out.println("coffee manager activate");
+    }
+    public void deactive(){
+        isActive = false;
+        System.out.println("coffee manager deactivate");
+    }
 
     public ManagerCoffee() {
         machines = new ArrayList<ActuCoffeeMachine>();
@@ -53,7 +66,7 @@ public class ManagerCoffee implements ManagerFeature {
 
     public void upDateCoffeMachines(List<ActuCoffeeMachine> list ) {
         for(Rooms r : rooms){
-            for (Actuator cm : r.getActuatorofType(Enum.Actuator.coffee)){
+            for (Actuator cm : r.getActuatorOfType(Enum.Actuator.coffee)){
                 if (!list.contains((ActuCoffeeMachine) cm)){
                     list.add((ActuCoffeeMachine) cm);
                 }
@@ -69,21 +82,24 @@ public class ManagerCoffee implements ManagerFeature {
     //TODO ajouter dependance par rapport à l'heure
     @Override
     public void react(Info info) {
-        switch (info.getName()) {
-            case "motion" :
-                if (info.getValue() == 1) {  //true = 1
-                    for (ActuCoffeeMachine cm : machines) {
-                        cm.makeCoffee();
-                    }
+        if(this.isActive()) {
+            switch (info.getName()) {
+                case "motion":
+                    if (info.getValue() == 1) {  //true = 1
+                        for (ActuCoffeeMachine cm : machines) {
+                            cm.makeCoffee();
+                        }
 
-                }
-                break;
-            default: break;
+                    }
+                    break;
+                default:
+                    break;
+            }
         }
     }
 
     public String ToString(){
-        String str =  "CoffeManager : " ;
+        String str = (isActive()?"Active ": "Not active ") + "CoffeManager : " ;
         for (ActuCoffeeMachine c: machines) {
             str = str + c.toString();
         }

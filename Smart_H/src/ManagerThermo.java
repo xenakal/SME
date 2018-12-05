@@ -8,6 +8,10 @@ public class ManagerThermo implements ManagerFeature {
     private int tolerance;  // tolerance on required temperature
     private int required_temperature;
     private int last_temp = 20;  // last recorded temperature
+    private List<ActuRadiator> radiators ;
+    private  List<Rooms> rooms;
+    private boolean isActive = false;
+
 
     public int getTolerance() {
         return tolerance;
@@ -30,8 +34,18 @@ public class ManagerThermo implements ManagerFeature {
         System.out.println("# new required temperature is " + required_temperature);
     }
 
-    private List<ActuRadiator> radiators ;
-    private  List<Rooms> rooms;
+
+    public boolean isActive() {
+        return isActive;
+    }
+    public void active(){
+        isActive = true;
+        System.out.println("temperature manager activate");
+    }
+    public void deactive(){
+        isActive = false;
+        System.out.println("temperature manager deactivate");
+    }
 
     public ManagerThermo(int required_temperature, int tolerance) {
         this.required_temperature = required_temperature;
@@ -79,7 +93,7 @@ public class ManagerThermo implements ManagerFeature {
 
     public void upDateRadiator(List<ActuRadiator> list) {
         for(Rooms r : rooms){
-            for (Actuator rad : r.getActuatorofType(Enum.Actuator.radiator)){
+            for (Actuator rad : r.getActuatorOfType(Enum.Actuator.radiator)){
                 if (!list.contains((ActuRadiator) rad)){
                     list.add((ActuRadiator) rad);
                 }
@@ -96,14 +110,17 @@ public class ManagerThermo implements ManagerFeature {
 
     @Override
     public void react(Info info) {
-        switch (info.getName()) {
-            case "temperature" :
+        if(this.isActive()) {
+            switch (info.getName()) {
+                case "temperature":
                     for (ActuRadiator rad : radiators) {   //remplacer par getLights ou pas car perte de rapidité
-                        applyTemperature(rad,info.getValue());
+                        applyTemperature(rad, info.getValue());
                     }
                     last_temp = info.getValue();
-                break;
-            default: break;
+                    break;
+                default:
+                    break;
+            }
         }
     }
 
@@ -138,7 +155,7 @@ public class ManagerThermo implements ManagerFeature {
 
     @Override
     public String ToString() {
-        String str =  "ThermoManager : " ;
+        String str =  (isActive()?"Active": "Not active ") + "ThermoManager : " ;
         for (ActuRadiator r: radiators) {
             str = str + r.toString();
         }
