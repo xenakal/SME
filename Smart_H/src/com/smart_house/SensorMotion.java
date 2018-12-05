@@ -1,4 +1,4 @@
-import java.util.*;
+package com.smart_house;
 
 public class SensorMotion extends AbsSensor{
 

@@ -1,3 +1,4 @@
+package com.smart_house;
 
 import java.util.*;
 import java.io.FileReader;

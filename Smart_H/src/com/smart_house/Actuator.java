@@ -1,3 +1,5 @@
+package com.smart_house;
+
 public interface Actuator{
 
     public Enum.Actuator getType();

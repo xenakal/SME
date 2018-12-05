@@ -1,3 +1,5 @@
+package com.smart_house;
+
 /**
  *  This class is used to transfer from sensors to Managers
  */

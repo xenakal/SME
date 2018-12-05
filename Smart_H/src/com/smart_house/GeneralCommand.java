@@ -1,3 +1,5 @@
+package com.smart_house;
+
 /**
  * Interface for executing an operation. The Receiver is the
  *

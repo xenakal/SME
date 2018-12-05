@@ -1,3 +1,5 @@
+package com.smart_house;
+
 public class Factory {
 
     private static  Factory factory = new Factory();

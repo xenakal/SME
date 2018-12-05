@@ -1,3 +1,5 @@
+package com.smart_house;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;

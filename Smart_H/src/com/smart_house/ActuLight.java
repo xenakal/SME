@@ -1,3 +1,5 @@
+package com.smart_house;
+
 public class ActuLight extends Object implements Actuator{
 
     String name;

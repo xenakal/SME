@@ -1,5 +1,4 @@
-import java.util.LinkedList;
-import java.util.List;
+package com.smart_house;
 
 public class SensorThermo extends AbsSensor{
 

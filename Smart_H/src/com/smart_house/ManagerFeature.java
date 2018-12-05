@@ -1,3 +1,4 @@
+package com.smart_house;
 
 /**
  * Interface for classes how manage the activation/disactivation of devises

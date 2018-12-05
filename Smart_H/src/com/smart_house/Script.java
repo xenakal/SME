@@ -1,9 +1,11 @@
+package com.smart_house;
+
 public class Script {
 
     public static void main(String[] args){
         SmartHome smart = SmartHome.getSmartHome();
 
-        smart.smartHomeInit("/config.json5");
+        smart.smartHomeInit("/com/smart_house/config.json5");
         //SmartHome smart = new SmartHome("config.json5");
         System.out.println(smart.toString());
 

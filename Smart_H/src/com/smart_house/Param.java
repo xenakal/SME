@@ -1,4 +1,5 @@
-import java.util.List;
+package com.smart_house;
+
 import java.io.FileReader;
 import java.util.Iterator;
 

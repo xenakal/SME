@@ -1,3 +1,5 @@
+package com.smart_house;
+
 public class ActuRadiator implements Actuator{
 
     String name;

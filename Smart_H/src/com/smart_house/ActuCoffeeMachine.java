@@ -1,3 +1,5 @@
+package com.smart_house;
+
 public class ActuCoffeeMachine implements Actuator{
 
     String name;

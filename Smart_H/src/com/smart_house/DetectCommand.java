@@ -1,3 +1,5 @@
+package com.smart_house;
+
 import java.util.List;
 /**
  * Concrete Client class

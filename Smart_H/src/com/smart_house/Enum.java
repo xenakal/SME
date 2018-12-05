@@ -1,3 +1,5 @@
+package com.smart_house;
+
 public class Enum {
     public enum Actuator{
         light,coffee,radiator,alarm

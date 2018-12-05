@@ -1,4 +1,4 @@
-/**
+package com.smart_house; /**
  * Client Method in the Client Pattern
  */
 

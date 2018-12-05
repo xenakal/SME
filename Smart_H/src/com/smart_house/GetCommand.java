@@ -1,3 +1,5 @@
+package com.smart_house;
+
 /**
  * Concrete Client class
  */
