@@ -4,7 +4,7 @@ import java.util.List;
 public class FeatureCompo extends Feature {
     private List<Feature> child;
 
-    public FeatureCompo(boolean isActivate, String name, List<Feature> dependences, String parentDependence) {
+    public FeatureCompo(boolean isActivate, String name, Feature[] dependences, String parentDependence) {
         super(isActivate, name, dependences, parentDependence);
         this.child = new ArrayList<Feature>();
     }

@@ -173,7 +173,7 @@ public class Param {
 
 //###############################################################################################################################################
     public class RoomFeature extends Feature {
-        public RoomFeature(boolean isActivate, String name, List<Feature> dependences, String parentDependence) {
+        public RoomFeature(boolean isActivate, String name, Feature[] dependences, String parentDependence) {
             super(isActivate, name, dependences, parentDependence);
         }
 
@@ -285,7 +285,7 @@ public class Param {
     }
 //###############################################################################################################################################
     public class functionalityFeature extends Feature {
-        public functionalityFeature(boolean isActivate, String name, List<Feature> dependences, String parentDependence) {
+        public functionalityFeature(boolean isActivate, String name, Feature[] dependences, String parentDependence) {
             super(isActivate, name, dependences, parentDependence);
         }
 

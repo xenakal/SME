@@ -17,11 +17,11 @@ public class ParamCommand implements GeneralCommand{
 
         switch (Enum.Actuator.valueOf(in_arr[1])) { // second argument is manager type (light, radiator)
             case light:
-                ManagerLight light_manager = (ManagerLight) room.getManager(Enum.Actuator.light);
+                ManagerLight light_manager = (ManagerLight) room.getManagerOfType(Enum.Manager.lightManager);
                 // TODO: add light manager new method
                 break;
             case radiator:
-                ManagerThermo thermo_manager = (ManagerThermo) room.getManager(Enum.Actuator.radiator);
+                ManagerThermo thermo_manager = (ManagerThermo) room.getManagerOfType(Enum.Manager.temperatureManager);
                 int value = Integer.parseInt(in_arr[4]);
 
                 switch (in_arr[2]) { // third argument is specific command (setRequiredTemperature or setTolerance)
