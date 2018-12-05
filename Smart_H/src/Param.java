@@ -28,23 +28,33 @@ public class Param {
 
         FeatureCompo sensor = new FeatureCompo(false, "Sensors", null, null);
         this.mainFeature.add(sensor);
-        sensor.add(new sensorFeature("motion","or"));
-        sensor.add(new sensorFeature("thermo","or"));
-        //add more kind of sensor here
+        String[][] sensorNameList = {{"motion","or"},{"thermo","or"}};
+        for(String[] sens : sensorNameList){
+            sensor.add(new sensorFeature(sens[0],sens[1]));
+        }
 
         FeatureCompo actuator = new FeatureCompo(false, "Actuators", null, null);
         this.mainFeature.add(actuator);
-        actuator.add((new actuatorFeature("light", "or")));
-        actuator.add((new actuatorFeature("radiator", "or")));
-        actuator.add((new actuatorFeature("coffee", "or")));
-        //add more kind of actuator here
+        String[][] actuNameList = {{"light","or"},{"radiator","or"},{"coffee","or"}};
+        for(String[] actu : actuNameList){
+            actuator.add(new actuatorFeature(actu[0],actu[1]));
+        }
 
         FeatureCompo functonality = new FeatureCompo(false, "Functionality", null, null);
         this.mainFeature.add(functonality);
-        functonality.add(new functionalityFeature("lightControl","or"));
-        functonality.add(new functionalityFeature("temperatureControl","or"));
-        functonality.add(new functionalityFeature("smartCoffee","or"));
-        //add more kind of functionality here
+        String[][] functNameList = {{"lightControl","or"},{"temperatureControl","or"},{"smartCoffee","or"}};
+        for(String[] funct : functNameList){
+
+            functonality.add(new functionalityFeature(funct[0],funct[1]));
+        }
+
+        //other constraints
+        //temperaureControl => thermo & (radiator| climatisor)
+        //todo
+        //lightControl => motion & light
+        //todo
+        //smartCoffee => coffee
+
     }
 
     /**

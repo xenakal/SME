@@ -3,11 +3,11 @@ import java.util.List;
 public abstract class Feature{
     private boolean isActivate;
     private String name;
-    private List<Feature> dependences;
+    private Feature[] dependences;
     private String parentDependence; //free , mandatory, or, alt
 
 
-    public Feature(boolean isActivate, String name, List<Feature> dependences, String parentDependence) {
+    public Feature(boolean isActivate, String name, Feature[] dependences, String parentDependence) {
         this.isActivate = isActivate;
         this.name = name;
         this.dependences = dependences;
@@ -75,12 +75,12 @@ public abstract class Feature{
         return name;
     }
 
-    public List<Feature> getDependences() {
+    public Feature[] getDependences() {
         return dependences;
     }
 
-    public void addDependences(Feature f) {
-        dependences.add(f);
+    public void setDependences(Feature[] f) {
+        dependences = f;
     }
 
     public String getParentDependence() {
