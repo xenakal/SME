@@ -18,7 +18,7 @@ public class GetCommand implements GeneralCommand{
         String attribute = in_arr[3]; // fourth argument is the attribute (ex. tolerance, temperature, light_state)
         switch (actuator) {
             case light:
-                ManagerLight light_manager = (ManagerLight) room.getManager(actuator);
+                ManagerLight light_manager = (ManagerLight) room.getManagerOfType(Enum.getCorrespondingManager(actuator));
                 switch (attribute) {
                     case "light_state":
                         light_manager.getStates();
@@ -29,7 +29,7 @@ public class GetCommand implements GeneralCommand{
                 }
                 break;
             case radiator:
-                ManagerThermo thermo_manager = (ManagerThermo) room.getManager(actuator);
+                ManagerThermo thermo_manager = (ManagerThermo) room.getManagerOfType(Enum.getCorrespondingManager(actuator));
                 switch (attribute) {
                     case "tolerance":
                         int tol = thermo_manager.getTolerance();
