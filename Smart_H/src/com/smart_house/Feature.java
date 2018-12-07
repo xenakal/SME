@@ -23,7 +23,8 @@ public abstract class Feature{
 
     public abstract boolean localCheck();
 
-    public boolean checkDependeces(){
+    public boolean checkDependences(){
+        if (dependences == null) return true;
         for (Feature[] depAnd: dependences) {
             boolean ok = false;
             for(Feature depOr : depAnd){
@@ -41,15 +42,14 @@ public abstract class Feature{
      * check if the feature model is respected for the given feature
      */
     public boolean check(){
-
-         return (!isActive()) || (isActive() && localCheck() && checkDependeces());
+         return ((!isActive()) || (isActive() && localCheck() && checkDependences()));
     }
 
     public boolean isActivable(){
         isActivate = true;
-        boolean b = check();
+        boolean bo = check();
         isActivate = false;
-        return b;
+        return bo;
     }
     public boolean isDeactivable(){
         isActivate = false;
@@ -66,7 +66,7 @@ public abstract class Feature{
     }
 
     protected void active(){
-        if(localCheck()){  //isActivable ?
+        if(isActivable()){  //isActivable ?
             isActivate = true;
         }else{
             System.out.println("Error : Invalid activation for feature "+ name);

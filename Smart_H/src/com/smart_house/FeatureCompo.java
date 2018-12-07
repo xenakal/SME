@@ -42,21 +42,23 @@ public class FeatureCompo extends Feature {
 
     @Override
     public boolean check() {
-        if (super.check()){
+        if (super.check() && child != null && !child.isEmpty()){
             //check that the child are correctly active
+            boolean orActive = false;
+            boolean altActive = false;
             int or = 0;
             int alt = 0;
             for(Feature c: this.getChild()){
                 switch (c.getParentDependence()){
                     case "mandatory" : if(!c.isActive()){return false;} break;
                     case "free": break;
-                    case "or": if(c.isActive()){ or ++; }break;
-                    case "alt" : if(c.isActive()){alt ++; }break;
+                    case "or": if(c.isActive()){ orActive = true ; or ++; }break;
+                    case "alt" : if(c.isActive()){altActive = true; alt ++; }break;
                     default: System.out.println("Error in Feature : Invalid kind of dependence");
                 }
             }
-            if (alt != 1){return false;}  //TODO == 1? pour les alternative est ce qu'il faut necessairement l'une des option?
-            return or != 0;
+            if (alt != 1){return !altActive;}  //TODO == 1? pour les alternative est ce qu'il faut necessairement l'une des option?
+            return !orActive || or != 0;
         }
         return false;
     }
@@ -81,7 +83,7 @@ public class FeatureCompo extends Feature {
             System.out.println("Error in activeChild : no child "+ c.getName() +" in the featureCompo");
         }
         if(! isActive()){this.active();}
-        //c.active();
+        c.active();
     }
 
     public void deactivateChild(Feature child){
