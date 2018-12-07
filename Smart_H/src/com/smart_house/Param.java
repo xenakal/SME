@@ -50,12 +50,15 @@ public class Param {
         }
 
         //other constraints
-        //temperaureControl => thermo & (radiator| climatisor)
-        //todo
+        //temperaureControl => thermo & (radiator) //todo thermo & (radiator| climatisor)
+        Feature[][] conditions1 = {{sensor.getOneChild("thermo")},{actuator.getOneChild("radiator")}};
+        functonality.getOneChild("temperatureControl").setDependences(conditions1);
         //lightControl => motion & light
-        //todo
+        Feature[][] conditions2 = {{sensor.getOneChild("motion")},{actuator.getOneChild("light")}};
+        functonality.getOneChild("lightControl").setDependences(conditions2);
         //smartCoffee => coffee
-
+        Feature[][] conditions3 = {{actuator.getOneChild("coffee")}};
+        functonality.getOneChild("smartCoffee").setDependences(conditions3);
     }
 
     /**
@@ -174,7 +177,7 @@ public class Param {
 
 //###############################################################################################################################################
     public class RoomFeature extends Feature {
-        public RoomFeature(boolean isActivate, String name, Feature[] dependences, String parentDependence) {
+        public RoomFeature(boolean isActivate, String name, Feature[][] dependences, String parentDependence) {
             super(isActivate, name, dependences, parentDependence);
         }
 
@@ -286,7 +289,7 @@ public class Param {
     }
 //###############################################################################################################################################
     public class functionalityFeature extends Feature {
-        public functionalityFeature(boolean isActivate, String name, Feature[] dependences, String parentDependence) {
+        public functionalityFeature(boolean isActivate, String name, Feature[][] dependences, String parentDependence) {
             super(isActivate, name, dependences, parentDependence);
         }
 
