@@ -58,6 +58,10 @@ public class ActuClimatisor implements Actuator{
     public String toString(){
         return "# "+ "climatisor : " +name  + (isActive()?" is active ": " is not active ");
     }
+	@Override
+	public String getName() {
+		return this.name;
+	}
 
 
 }
