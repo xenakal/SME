@@ -43,6 +43,7 @@ public class ActuAlarm implements Actuator{
         return "alarm : " +name + "  ";
     }
 
+    public String getName() { return this.name; }
     //TODO more complete
     //TODO Code, ...
 
