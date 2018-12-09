@@ -2,7 +2,7 @@ package com.smart_house;
 
 public class Enum {
     public enum Actuator{
-        light,coffee,radiator,alarm
+        light,coffee,radiator,alarm,climatisor
     }
 
     //transforme un string en un element de l'enumeration
@@ -12,6 +12,7 @@ public class Enum {
             case "coffee": return Actuator.coffee;
             case "radiator": return Actuator.radiator;
             case "alarm": return Actuator.alarm;
+            case "climatisor": return Actuator.climatisor;
             default: System.out.println("Error Enum : invalid Actuator type : " +type);return null;
         }
     }
@@ -27,7 +28,7 @@ public class Enum {
             case "light" : return Manager.lightManager;
             case "coffee": return Manager.coffeeManager;
             case "radiator": return Manager.temperatureManager;
-            //case"cooling" : return Manager.temperatureManager;
+            case "climatisor" : return Manager.temperatureManager;
             case "alarm": return Manager.securityManager;
             default: System.out.println("Error Enum : invalid Actuator type : " +type); return null;
         }
@@ -38,7 +39,7 @@ public class Enum {
             case light: return Manager.lightManager;
             case coffee: return Manager.coffeeManager;
             case radiator: return Manager.temperatureManager;
-            //case cooling : return Manager.temperatureManager;
+            case climatisor: return Manager.temperatureManager;
             case alarm: return Manager.securityManager;
             default: System.out.println("Error Enum : invalid Actuator type : " +type); return null;
         }

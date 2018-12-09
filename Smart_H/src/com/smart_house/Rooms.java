@@ -65,11 +65,15 @@ public class Rooms {
 
 
     public List<Actuator> getActuatorOfType(Enum.Actuator type) {
-        return actuatorMap.get(type);
+        List<Actuator> ret = actuatorMap.get(type);
+        if(ret == null) ret =  new ArrayList<Actuator>();
+        return ret;
     }
 
     public List<AbsSensor> getSensorOfType(Enum.Sensor type) {
-        return sensorMap.get(type);
+        List<AbsSensor> ret = sensorMap.get(type);
+        if(ret == null) ret =  new ArrayList<AbsSensor>();
+        return ret;
     }
 
     public ManagerFeature getManagerOfType(Enum.Manager man){
@@ -80,9 +84,11 @@ public class Rooms {
         for (Enum.Actuator act : Enum.Actuator.values()) {
             if(actuatorMap.containsKey(act)){
                 Enum.Manager man = Enum.getCorrespondingManager(act);
-                ManagerFeature manager = Factory.getInstance().makeManager(man);
-                manager.add(this);
-                managerMap.put(man,manager);
+                if(!managerMap.containsKey(man)) {
+                    ManagerFeature manager = Factory.getInstance().makeManager(man);
+                    manager.add(this);
+                    managerMap.put(man, manager);
+                }
             }
         }
     }

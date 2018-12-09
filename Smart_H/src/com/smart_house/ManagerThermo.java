@@ -11,6 +11,7 @@ public class ManagerThermo implements ManagerFeature {
     private int required_temperature;
     private int last_temp = 20;  // last recorded temperature
     private List<ActuRadiator> radiators ;
+    private List<ActuClimatisor> climatisors ;
     private  List<Rooms> rooms;
     private boolean isActive = false;
 
@@ -53,6 +54,7 @@ public class ManagerThermo implements ManagerFeature {
         this.required_temperature = required_temperature;
         this.tolerance = tolerance;
         radiators = new ArrayList<ActuRadiator>();
+        climatisors = new ArrayList<ActuClimatisor>();
         rooms = new ArrayList<Rooms>();
     }
 
@@ -60,6 +62,13 @@ public class ManagerThermo implements ManagerFeature {
     public void add(ActuRadiator l){
         if (!radiators.contains(l)){
             radiators.add(l);
+            update();
+        }
+    }
+
+    public void add(ActuClimatisor l){
+        if (!climatisors.contains(l)){
+            climatisors.add(l);
             update();
         }
     }
@@ -82,15 +91,24 @@ public class ManagerThermo implements ManagerFeature {
         update();
     }
 
-    @Override
-    public void update() {
-        upDateRadiator(radiators);
-    }
+
 
     public List<ActuRadiator> getRadiator() {
         List<ActuRadiator> list = new ArrayList<ActuRadiator>();
         upDateRadiator(list);
         return list;
+    }
+
+    public List<ActuClimatisor> getClimatisors() {
+        List<ActuClimatisor> list = new ArrayList<ActuClimatisor>();
+        upDateClimatisor(list);
+        return list;
+    }
+
+    @Override
+    public void update() {
+        upDateRadiator(radiators);
+        upDateClimatisor(climatisors);
     }
 
     public void upDateRadiator(List<ActuRadiator> list) {
@@ -108,6 +126,21 @@ public class ManagerThermo implements ManagerFeature {
         }
     }
 
+    public void upDateClimatisor(List<ActuClimatisor> list) {
+        for(Rooms r : rooms){
+            for (Actuator cl : r.getActuatorOfType(Enum.Actuator.climatisor)){
+                if (!list.contains(cl)){
+                    list.add((ActuClimatisor) cl);
+                }
+            }
+        }
+        for (ActuClimatisor cl :climatisors){
+            if (!list.contains(cl)){
+                list.add(cl);
+            }
+        }
+    }
+
 
 
     @Override
@@ -115,8 +148,11 @@ public class ManagerThermo implements ManagerFeature {
         if(this.isActive()) {
             switch (info.getName()) {
                 case "temperature":
-                    for (ActuRadiator rad : radiators) {   //remplacer par getLights ou pas car perte de rapidité
+                    for (ActuRadiator rad : radiators) {
                         applyTemperature(rad, info.getValue());
+                    }
+                    for (ActuClimatisor clim : climatisors) {   //remplacer par getLights ou pas car perte de rapidité
+                        applyTemperature(clim, info.getValue());
                     }
                     last_temp = info.getValue();
                     break;
@@ -140,6 +176,27 @@ public class ManagerThermo implements ManagerFeature {
                 rad.turn_off();
             else{
                 System.out.println("Radiator already off !");
+            }
+        }
+        else{
+            System.out.println("already at good temperature");
+        }
+    }
+
+    private void applyTemperature(ActuClimatisor clim, int value){
+
+        if(value > required_temperature - tolerance){
+            if(!clim.getState())
+                clim.turn_on();
+            else{
+                System.out.println("Climatisor already on !");
+            }
+        }
+        else if(value < required_temperature + tolerance){
+            if(clim.getState())
+                clim.turn_off();
+            else{
+                System.out.println("Climatisor already off !");
             }
         }
         else{

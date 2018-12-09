@@ -13,6 +13,7 @@ public class Factory {
             case "light" : return new ActuLight(name);
             case "coffee" : return new ActuCoffeeMachine(name);
             case "radiator" : return new ActuRadiator(name);
+            case "climatisor" : return new ActuClimatisor(name);
             default: System.out.print("Type error in Actuator Factory, given type : "+type); return null;
             //TODO launch error
         }

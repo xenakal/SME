@@ -3,11 +3,11 @@ package com.smart_house;
 public abstract class Feature{
     private boolean isActivate;
     private String name;
-    private Feature[] dependences;
+    private Feature[][] dependences; //condition FNC
     private String parentDependence; //free , mandatory, or, alt
 
 
-    public Feature(boolean isActivate, String name, Feature[] dependences, String parentDependence) {
+    public Feature(boolean isActivate, String name, Feature[][] dependences, String parentDependence) {
         this.isActivate = isActivate;
         this.name = name;
         this.dependences = dependences;
@@ -23,11 +23,17 @@ public abstract class Feature{
 
     public abstract boolean localCheck();
 
-    public boolean checkDependeces(){
-        for (Feature dep: dependences) {
-            if(!dep.isActive()){
-                return false;
+    public boolean checkDependences(){
+        if (dependences == null) return true;
+        for (Feature[] depAnd: dependences) {
+            boolean ok = false;
+            for(Feature depOr : depAnd){
+                if(depOr.isActive()){
+                    ok = true;
+                    break;
+                }
             }
+            if(!ok)return false;
         }
         return true;
     }
@@ -36,15 +42,14 @@ public abstract class Feature{
      * check if the feature model is respected for the given feature
      */
     public boolean check(){
-
-         return (!isActive()) || (isActive() && localCheck() && checkDependeces());
+         return ((!isActive()) || (isActive() && localCheck() && checkDependences()));
     }
 
     public boolean isActivable(){
         isActivate = true;
-        boolean b = check();
+        boolean bo = check();
         isActivate = false;
-        return b;
+        return bo;
     }
     public boolean isDeactivable(){
         isActivate = false;
@@ -61,7 +66,7 @@ public abstract class Feature{
     }
 
     protected void active(){
-        if(localCheck()){
+        if(isActivable()){  //isActivable ?
             isActivate = true;
         }else{
             System.out.println("Error : Invalid activation for feature "+ name);
@@ -75,11 +80,11 @@ public abstract class Feature{
         return name;
     }
 
-    public Feature[] getDependences() {
+    public Feature[][] getDependences() {
         return dependences;
     }
 
-    public void setDependences(Feature[] f) {
+    public void setDependences(Feature[][] f) {
         dependences = f;
     }
 

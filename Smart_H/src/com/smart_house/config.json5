@@ -8,7 +8,8 @@
     "actuatorParam":{
       "light": true,
       "coffee": true,
-      "radiator": true
+      "radiator": true,
+      "climatisor":true
     },
     "functionalityParam":{
       "lightControl": true,
