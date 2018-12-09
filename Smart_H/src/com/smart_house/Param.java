@@ -33,7 +33,7 @@ public class Param {
 
         FeatureCompo actuator = new FeatureCompo(false, "Actuators", null, null);
         this.mainFeature.add(actuator);
-        String[][] actuNameList = {{"light","or"},{"radiator","or"},{"coffee","or"}};
+        String[][] actuNameList = {{"light","or"},{"radiator","or"},{"climatisor","or"},{"coffee","or"}};
         for(String[] actu : actuNameList){
             actuator.add(new actuatorFeature(actu[0],actu[1]));
         }
@@ -97,7 +97,7 @@ public class Param {
 
             JSONObject actuConfig = (JSONObject) config.get("actuatorParam");
             FeatureCompo actuParam = (FeatureCompo) mainFeature.getOneChild("Actuators");
-            String[] actuNameList = {"light","coffee","radiator"};
+            String[] actuNameList = {"light","coffee","radiator","climatisor"};
             for(String actu : actuNameList){
                 boolean param = (boolean) actuConfig.get(actu);
                 if(param)activeActuator(actu);//actuParam.getOneChild(actu).active();
