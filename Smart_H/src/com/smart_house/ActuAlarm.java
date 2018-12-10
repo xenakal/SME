@@ -11,12 +11,10 @@ public class ActuAlarm implements Actuator{
     public void active(){
         isActive = true;
         System.out.println("# "+name + " activate");
-        //if(on){lightOn();}
     }
     public void deactive(){
         isActive = false;
         System.out.println("# "+name + " deactivate");
-        //if(on){lightOff();}
     }
 
 
@@ -36,7 +34,7 @@ public class ActuAlarm implements Actuator{
 
 
     public void callThePolice(){
-
+        System.out.println("Call the police");
     }
 
     public String toString(){

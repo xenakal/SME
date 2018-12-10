@@ -6,6 +6,6 @@ public interface Actuator{
     public boolean isActive();
     public void active();
     public void deactive();
-    public String getName(); 
+    public String getName();
 
 }
