@@ -17,12 +17,12 @@ public class ParamCommand implements GeneralCommand{
 
         Rooms room = sh.getRoomsMap().get(in_arr[3]); // fourth argument is Room name
 
-        switch (Enum.Actuator.valueOf(in_arr[1])) { // second argument is manager type (light, radiator)
-            case light:
+        switch (Enum.Manager.valueOf(in_arr[1])) { // second argument is manager type (light, radiator)
+            case lightManager:
                 ManagerLight light_manager = (ManagerLight) room.getManagerOfType(Enum.Manager.lightManager);
                 // TODO: add light manager new method
                 break;
-            case radiator:
+            case temperatureManager:
                 ManagerThermo thermo_manager = (ManagerThermo) room.getManagerOfType(Enum.Manager.temperatureManager);
                 int value = Integer.parseInt(in_arr[4]);
 
@@ -41,6 +41,21 @@ public class ParamCommand implements GeneralCommand{
                 }
 
                 break;
+            case securityManager:
+                if(in_arr.length != 5){
+                    System.out.print("Usage : param setCode room oldCode newCode");
+                    break;
+                }
+                int oldCode = Integer.parseInt(in_arr[4]);
+                int newCode = Integer.parseInt(in_arr[5]);
+                switch (in_arr[2]) {
+                    case "setCode":
+                        SensorAlarmBox alarm = (SensorAlarmBox) room.getSensorOfType(Enum.Sensor.alarmBox).get(0);
+                        if(! alarm.setNewCode(oldCode, newCode)){
+                           System.out.println("Invalid code, the code is still unchanged ");
+                        }
+                        break;
+                }
 
             default:
                 System.out.println("not a valid manager type");

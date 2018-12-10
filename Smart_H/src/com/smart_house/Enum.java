@@ -46,7 +46,7 @@ public class Enum {
     }
 
     public enum Sensor{
-        motion,temperature
+        motion,temperature, alarmBox
     }
 
     public static Sensor convertToSensor(String type){
@@ -54,6 +54,7 @@ public class Enum {
             case "motion" : return Sensor.motion;
             case "temperature": return Sensor.temperature;
             case "thermo": return Sensor.temperature;
+            case "alarmBox": return Sensor.alarmBox;
             default: System.out.println("Error Enum: invalid Sensor type : " +type); return null;
         }
     }

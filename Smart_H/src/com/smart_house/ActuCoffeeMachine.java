@@ -6,6 +6,11 @@ public class ActuCoffeeMachine implements Actuator{
     private boolean isMakingCoffee = false;
     private boolean isActive = false;
 
+    @Override
+    public String getName() {
+        return name;
+    }
+
     public boolean isActive() {
         return isActive;
     }

@@ -24,14 +24,14 @@ public class Param {
             room.add(new RoomFeature(r[0],r[1]));
         }
 
-        FeatureCompo sensor = new FeatureCompo(false, "Sensors", null, null);
+        FeatureCompo sensor = new FeatureCompo(false, "Sensor", null, null);
         this.mainFeature.add(sensor);
         String[][] sensorNameList = {{"motion","or"},{"thermo","or"}};
         for(String[] sens : sensorNameList){
             sensor.add(new sensorFeature(sens[0],sens[1]));
         }
 
-        FeatureCompo actuator = new FeatureCompo(false, "Actuators", null, null);
+        FeatureCompo actuator = new FeatureCompo(false, "Actuator", null, null);
         this.mainFeature.add(actuator);
         String[][] actuNameList = {{"light","or"},{"radiator","or"},{"climatisor","or"},{"coffee","or"}};
         for(String[] actu : actuNameList){
@@ -86,7 +86,7 @@ public class Param {
             roomParam.active();
 
             JSONObject sensorConfig= (JSONObject) config.get("sensorParam");
-            FeatureCompo sensorParam = (FeatureCompo) mainFeature.getOneChild("Sensors");
+            FeatureCompo sensorParam = (FeatureCompo) mainFeature.getOneChild("Sensor");
             String[] sensorNameList = {"motion","thermo"};
             for(String sens : sensorNameList){
                 boolean param = (boolean) sensorConfig.get(sens);
@@ -96,7 +96,7 @@ public class Param {
 
 
             JSONObject actuConfig = (JSONObject) config.get("actuatorParam");
-            FeatureCompo actuParam = (FeatureCompo) mainFeature.getOneChild("Actuators");
+            FeatureCompo actuParam = (FeatureCompo) mainFeature.getOneChild("Actuator");
             String[] actuNameList = {"light","coffee","radiator","climatisor"};
             for(String actu : actuNameList){
                 boolean param = (boolean) actuConfig.get(actu);
@@ -116,15 +116,26 @@ public class Param {
         }
     }
 
+
+    public boolean isActiveSubFeature(String subFeature, String name){
+        FeatureCompo subFeat = (FeatureCompo) mainFeature.getOneChild(subFeature);
+        if(subFeat == null)return false; //error
+        Feature feat = subFeat.getOneChild(name);
+        if(feat == null)return false; //error
+        return feat.isActive();
+        //todo exception
+        //todo more modulable
+    }
+
     public void activeRoom(String roomName){
         //todo
     }
     public void deactiveRoom(String roomName){
         //todo
     }
+
     public void activeSensor(String sensorName){
-        Enum.Sensor name = Enum.convertToSensor(sensorName);
-        FeatureCompo sensorParamList = (FeatureCompo) mainFeature.getOneChild("Sensors");
+        FeatureCompo sensorParamList = (FeatureCompo) mainFeature.getOneChild("Sensor");
         sensorFeature s = (sensorFeature) sensorParamList.getOneChild(sensorName);
         if(s.isActivable()){
             sensorParamList.activeChild(s);
@@ -133,8 +144,7 @@ public class Param {
         }
     }
     public void deactiveSensor(String sensorName){
-        Enum.Sensor name = Enum.convertToSensor(sensorName);
-        FeatureCompo sensorParamList = (FeatureCompo) mainFeature.getOneChild("Sensors");
+        FeatureCompo sensorParamList = (FeatureCompo) mainFeature.getOneChild("Sensor");
         sensorFeature s = (sensorFeature) sensorParamList.getOneChild(sensorName);
         if(s.isDeactivable()){
             sensorParamList.deactivateChild(s);
@@ -144,7 +154,7 @@ public class Param {
     }
 
     public void activeActuator(String Name){
-        FeatureCompo ParamList = (FeatureCompo) mainFeature.getOneChild("Actuators");
+        FeatureCompo ParamList = (FeatureCompo) mainFeature.getOneChild("Actuator");
         actuatorFeature a = (actuatorFeature) ParamList.getOneChild(Name);
         if(a.isActivable()){
             ParamList.activeChild(a);
@@ -154,7 +164,7 @@ public class Param {
     }
     public void deactiveActuator(String Name){
         Enum.Actuator name = Enum.convertToActu(Name);
-        FeatureCompo ParamList = (FeatureCompo) mainFeature.getOneChild("Actuators");
+        FeatureCompo ParamList = (FeatureCompo) mainFeature.getOneChild("Actuator");
         actuatorFeature a  = (actuatorFeature) ParamList.getOneChild(Name);
         if(a.isDeactivable()){
             ParamList.deactivateChild(a);
