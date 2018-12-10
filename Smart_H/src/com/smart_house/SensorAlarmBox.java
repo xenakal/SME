@@ -26,7 +26,7 @@ public class SensorAlarmBox extends AbsSensor {
     }
 
     @Override
-    Enum.Sensor getType() {
+    public Enum.Sensor getType() {
         return Enum.Sensor.alarmBox;
     }
 

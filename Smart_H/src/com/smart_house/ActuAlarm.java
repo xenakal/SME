@@ -5,11 +5,6 @@ public class ActuAlarm implements Actuator{
     String name;
     private boolean isActive = false;
 
-    @Override
-    public String getName() {
-        return name;
-    }
-
     public boolean isActive() {
         return isActive;
     }

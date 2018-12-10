@@ -6,11 +6,6 @@ public class ActuRadiator implements Actuator{
     private boolean on = false;
     private boolean isActive = false;
 
-    @Override
-    public String getName() {
-        return name;
-    }
-
     public boolean isActive() {
         return isActive;
     }
