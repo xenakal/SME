@@ -35,7 +35,7 @@ public class SensorAgent extends StackPane{
         this.getChildren().addAll(r, text, button);
      }   
 	
-	public void setBackColor(String color) {
+	public void setState(String color) {
 		switch (color){
 			case "yellow":
 				r.setFill(Color.YELLOW);

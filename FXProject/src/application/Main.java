@@ -3,6 +3,7 @@ package application;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import com.smart_house.*;
 import com.smart_house.Enum;
@@ -53,7 +54,7 @@ public class Main extends Application {
 			window.setScene(scene);
 			window.setTitle("Lele's first try");
 			window.show();
-		
+
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -85,12 +86,11 @@ public class Main extends Application {
 		Iterator<Map.Entry<String,Rooms>> it = roomsMap.entrySet().iterator(); 
 	    while (it.hasNext()) { 
 	        Map.Entry<String,Rooms> pair = (Map.Entry<String,Rooms>)it.next(); // use: pair.getKey() & pair.getValue() 
-	        
 	        // new cell for the room 
 	        FlowPane roomCell = createSingleCellForRoom(pair.getValue(),pair.getKey()); // every room is a child of the main grid  and is a grid itself 
 	        
 			layout.getChildren().addAll(roomCell); 
-	        it.remove(); // avoids a ConcurrentModificationException
+	        //it.remove(); // avoids a ConcurrentModificationException
 	    }
 		
 	}
@@ -132,7 +132,7 @@ public class Main extends Application {
 	        	addActuatorToCell(cell, act); 
 	        }
 	        
-	        it.remove(); // avoids a ConcurrentModificationException
+	        //it.remove(); // avoids a ConcurrentModificationException
 	    }
 	}
 	
@@ -148,7 +148,7 @@ public class Main extends Application {
 	        for(AbsSensor sensor : (List<AbsSensor>) pair.getValue()) {
 	        	addSensorToCell(cell, sensor); 
 	        }
-	        it.remove(); // avoids a ConcurrentModificationException
+	        //it.remove(); // avoids a ConcurrentModificationException
 	    }
 	} 
 	
@@ -158,9 +158,9 @@ public class Main extends Application {
 	public void addActuatorToCell(FlowPane cell, Actuator act) {
 		// light,coffee,radiator,alarm
 		ActuatorAgent actAgent = AgentFactory.getInstance().makeActuatorAgent(act); 
-		System.out.println("okokok");
 		if(actAgent != null)
 			cell.getChildren().add(actAgent); 
+		
 		/*switch (act.getType()) {
 			case light:
 				ActuatorAgent light = new ActuatorAgent(act);

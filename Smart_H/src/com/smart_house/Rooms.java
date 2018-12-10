@@ -100,6 +100,10 @@ public class Rooms {
     public Map<Enum.Actuator, List<Actuator>> getActuatorMap(){
         return actuatorMap;
     }
+    
+    public String getName() {
+    	return this.name; 
+    }
     public String toString(){
         String str =  "Room :"+ name ;
         str = str + " \n sensors : \n";
