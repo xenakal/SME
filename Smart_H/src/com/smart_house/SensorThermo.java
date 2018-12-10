@@ -5,7 +5,7 @@ public class SensorThermo extends AbsSensor{
     private int recorded_temp = 25;
 
     @Override
-    Enum.Sensor getType() {
+    public Enum.Sensor getType() {
         return Enum.Sensor.temperature;
     }
 
