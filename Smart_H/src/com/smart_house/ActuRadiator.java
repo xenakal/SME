@@ -64,5 +64,6 @@ public class ActuRadiator implements Actuator{
         return "# "+ "radiator : " +name  + (isActive()?" is active": " is not active ");
     }
 
+    public String getName() { return this.name; }
 
 }

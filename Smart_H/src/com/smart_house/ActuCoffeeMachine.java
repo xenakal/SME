@@ -2,7 +2,7 @@ package com.smart_house;
 
 public class ActuCoffeeMachine implements Actuator{
 
-    String name;
+    private String name;
     private boolean isMakingCoffee = false;
     private boolean isActive = false;
 
@@ -43,5 +43,8 @@ public class ActuCoffeeMachine implements Actuator{
     public String toString(){
         String acti = isActive()?" is active and ": " is not active and ";
             return "coffee machine : " +  acti +name + "  ";
-        }
+    }
+    
+    public String getName() { return this.name; }
+    
 }

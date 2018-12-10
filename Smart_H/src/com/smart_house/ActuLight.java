@@ -62,4 +62,6 @@ public class ActuLight extends Object implements Actuator{
     public String toString(){
         return "# "+"light : " +name + (isActive()?" is active ": " is not active ");
     }
+    
+    public String getName() { return this.name; }
 }

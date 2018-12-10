@@ -3,7 +3,7 @@ package com.smart_house;
 import java.util.LinkedList;
 import java.util.List;
 
-abstract class AbsSensor extends Object{
+public abstract class AbsSensor extends Object{
 
     protected String name;
     protected List<ManagerFeature> obsList ;
@@ -19,7 +19,7 @@ abstract class AbsSensor extends Object{
     public String getName() {
         return name;
     }
-    abstract Enum.Sensor getType();
+    public abstract Enum.Sensor getType();
 
     public void setName(String name) {
         this.name = name;

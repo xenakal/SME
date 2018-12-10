@@ -75,6 +75,10 @@ public class Rooms {
         if(ret == null) ret =  new ArrayList<AbsSensor>();
         return ret;
     }
+    
+    public Map<Enum.Sensor, List<AbsSensor>> getSensorMap(){
+    	return this.sensorMap; 
+    }
 
     public ManagerFeature getManagerOfType(Enum.Manager man){
         return managerMap.get(man);
