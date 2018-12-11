@@ -11,4 +11,9 @@ public interface GeneralCommand {
 
     void execute(String[] in_arr);
 
+    /**
+     * Tell how use the command
+     */
+    void usage();
+
 }

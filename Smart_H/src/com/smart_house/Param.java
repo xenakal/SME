@@ -17,28 +17,28 @@ public class Param {
 
     private Param(){
         this.mainFeature = new FeatureCompo(true, "main", null, null);
-        FeatureCompo room = new FeatureCompo(false, "Room", null, null);
+        FeatureCompo room = new FeatureCompo(false, "room", null, null);
         this.mainFeature.add(room);
         String[][] roomNameList = {{"kitchen","mandatory"},{"bedroom","mandatory"}};//{"living","mandatory"},{"bathroom",,"mandatory"},{"balcony","free"}
         for(String[] r : roomNameList){
             room.add(new RoomFeature(r[0],r[1]));
         }
 
-        FeatureCompo sensor = new FeatureCompo(false, "Sensor", null, null);
+        FeatureCompo sensor = new FeatureCompo(false, "sensor", null, null);
         this.mainFeature.add(sensor);
         String[][] sensorNameList = {{"motion","or"},{"thermo","or"}};
         for(String[] sens : sensorNameList){
             sensor.add(new sensorFeature(sens[0],sens[1]));
         }
 
-        FeatureCompo actuator = new FeatureCompo(false, "Actuator", null, null);
+        FeatureCompo actuator = new FeatureCompo(false, "actuator", null, null);
         this.mainFeature.add(actuator);
         String[][] actuNameList = {{"light","or"},{"radiator","or"},{"climatisor","or"},{"coffee","or"}};
         for(String[] actu : actuNameList){
             actuator.add(new actuatorFeature(actu[0],actu[1]));
         }
 
-        FeatureCompo functonality = new FeatureCompo(false, "Functionality", null, null);
+        FeatureCompo functonality = new FeatureCompo(false, "functionality", null, null);
         this.mainFeature.add(functonality);
         String[][] functNameList = {{"lightControl","or"},{"temperatureControl","or"},{"smartCoffee","or"}};
         for(String[] funct : functNameList){
@@ -72,7 +72,7 @@ public class Param {
 
             JSONObject config = (JSONObject) jsonObject.get("parametrisation");
 
-            FeatureCompo roomParam = (FeatureCompo) mainFeature.getOneChild("Room");
+            FeatureCompo roomParam = (FeatureCompo) mainFeature.getOneChild("room");
             JSONArray roomList = (JSONArray) jsonObject.get("rooms");
             Iterator roomIterator = roomList.iterator();
             while (roomIterator.hasNext()) {
@@ -86,7 +86,7 @@ public class Param {
             roomParam.active();
 
             JSONObject sensorConfig= (JSONObject) config.get("sensorParam");
-            FeatureCompo sensorParam = (FeatureCompo) mainFeature.getOneChild("Sensor");
+            FeatureCompo sensorParam = (FeatureCompo) mainFeature.getOneChild("sensor");
             String[] sensorNameList = {"motion","thermo"};
             for(String sens : sensorNameList){
                 boolean param = (boolean) sensorConfig.get(sens);
@@ -96,7 +96,7 @@ public class Param {
 
 
             JSONObject actuConfig = (JSONObject) config.get("actuatorParam");
-            FeatureCompo actuParam = (FeatureCompo) mainFeature.getOneChild("Actuator");
+            FeatureCompo actuParam = (FeatureCompo) mainFeature.getOneChild("actuator");
             String[] actuNameList = {"light","coffee","radiator","climatisor"};
             for(String actu : actuNameList){
                 boolean param = (boolean) actuConfig.get(actu);
@@ -104,7 +104,7 @@ public class Param {
             }
 
             JSONObject functConfig = (JSONObject) config.get("functionalityParam");
-            FeatureCompo functParam = (FeatureCompo) mainFeature.getOneChild("Functionality");
+            FeatureCompo functParam = (FeatureCompo) mainFeature.getOneChild("functionality");
             String[] funNameList = {"lightControl","smartCoffee","temperatureControl"};
             for(String f : funNameList){
 
@@ -116,13 +116,22 @@ public class Param {
         }
     }
 
-
     public boolean isActiveSubFeature(String subFeature, String name){
         FeatureCompo subFeat = (FeatureCompo) mainFeature.getOneChild(subFeature);
         if(subFeat == null)return false; //error
         Feature feat = subFeat.getOneChild(name);
         if(feat == null)return false; //error
         return feat.isActive();
+        //todo exception
+        //todo more modulable
+    }
+
+    public boolean isActivailbleSubFeature(String subFeature, String name){
+        FeatureCompo subFeat = (FeatureCompo) mainFeature.getOneChild(subFeature);
+        if(subFeat == null)return false; //error
+        Feature feat = subFeat.getOneChild(name);
+        if(feat == null)return false; //error
+        return feat.isActivable();
         //todo exception
         //todo more modulable
     }
@@ -135,18 +144,18 @@ public class Param {
     }
 
     public void activeSensor(String sensorName){
-        FeatureCompo sensorParamList = (FeatureCompo) mainFeature.getOneChild("Sensor");
+        FeatureCompo sensorParamList = (FeatureCompo) mainFeature.getOneChild("sensor");
         sensorFeature s = (sensorFeature) sensorParamList.getOneChild(sensorName);
-        if(s.isActivable()){
+        if(s.isActive() || s.isActivable()){
             sensorParamList.activeChild(s);
         }else {
             System.out.println("Sensor" + sensorName+ " non-activable");
         }
     }
     public void deactiveSensor(String sensorName){
-        FeatureCompo sensorParamList = (FeatureCompo) mainFeature.getOneChild("Sensor");
+        FeatureCompo sensorParamList = (FeatureCompo) mainFeature.getOneChild("sensor");
         sensorFeature s = (sensorFeature) sensorParamList.getOneChild(sensorName);
-        if(s.isDeactivable()){
+        if(!s.isActive() || s.isDeactivable()){
             sensorParamList.deactivateChild(s);
         }else {
             System.out.println("Sensor" + sensorName+ " is not disactivable");
@@ -154,9 +163,9 @@ public class Param {
     }
 
     public void activeActuator(String Name){
-        FeatureCompo ParamList = (FeatureCompo) mainFeature.getOneChild("Actuator");
+        FeatureCompo ParamList = (FeatureCompo) mainFeature.getOneChild("actuator");
         actuatorFeature a = (actuatorFeature) ParamList.getOneChild(Name);
-        if(a.isActivable()){
+        if(a.isActive() || a.isActivable()){
             ParamList.activeChild(a);
         }else {
             System.out.println("Actuator "+ Name+ "non-activable");
@@ -164,9 +173,9 @@ public class Param {
     }
     public void deactiveActuator(String Name){
         Enum.Actuator name = Enum.convertToActu(Name);
-        FeatureCompo ParamList = (FeatureCompo) mainFeature.getOneChild("Actuator");
+        FeatureCompo ParamList = (FeatureCompo) mainFeature.getOneChild("actuator");
         actuatorFeature a  = (actuatorFeature) ParamList.getOneChild(Name);
-        if(a.isDeactivable()){
+        if(!a.isActive() || a.isDeactivable()){
             ParamList.deactivateChild(a);
         }else {
             System.out.println("Actuator "+ Name + " is not disactivable");
@@ -175,9 +184,9 @@ public class Param {
 
     public void activeFunctonality(String Name){
         Enum.Manager name = Enum.convertToManager(Name);
-        FeatureCompo ParamList = (FeatureCompo) mainFeature.getOneChild("Functionality");
+        FeatureCompo ParamList = (FeatureCompo) mainFeature.getOneChild("functionality");
         functionalityFeature f = (functionalityFeature) ParamList.getOneChild(Name);
-        if(f.isActivable()){
+        if(f.isActive() || f.isActivable()){
             ParamList.activeChild(f);
         }else {
             System.out.println("Functionnality "+ Name + " is not activable");
@@ -185,15 +194,16 @@ public class Param {
     }
     public void deactiveFunctonality(String Name){
         Enum.Manager name = Enum.convertToManager(Name);
-        FeatureCompo ParamList = (FeatureCompo) mainFeature.getOneChild("Functionality");
+        FeatureCompo ParamList = (FeatureCompo) mainFeature.getOneChild("functionality");
         functionalityFeature f = (functionalityFeature) ParamList.getOneChild(Name);
-        if(f.isDeactivable()){
+        if(!f.isActive() || f.isDeactivable()){
             ParamList.deactivateChild(f);
         }else {
             System.out.println("Functionnality "+ Name + " is not disactivable");
         }
     }
     //todo  tester activation desactivation
+
 
 //###############################################################################################################################################
     public class RoomFeature extends Feature {
@@ -215,7 +225,6 @@ public class Param {
         }
         //todo activation of room
     }
-
 
 
 //###############################################################################################################################################

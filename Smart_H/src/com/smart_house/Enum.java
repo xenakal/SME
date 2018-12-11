@@ -34,6 +34,17 @@ public class Enum {
         }
     }
 
+    public static String convertToFunctionnality(String actuType){
+        switch (actuType) {
+            case "light" : return "lightControl";
+            case "coffee": return "smartCoffee";
+            case "radiator": return "temperatureControl";
+            case "climatisor" : return "temperatureControl";
+            //case "alarm": return Manager.securityManager; //todo
+            default: System.out.println("Error Enum : invalid Actuator type : " + actuType); return null;
+        }
+    }
+
     public static Manager getCorrespondingManager(Actuator type){
         switch (type) {
             case light: return Manager.lightManager;

@@ -64,4 +64,11 @@ public class ParamCommand implements GeneralCommand{
         }
 
     }
+
+    public void usage(){
+        System.out.println("Usage : param manager command_type room value");
+        System.out.println("The command_type are :   lightManager : ");
+        System.out.println("                   temperatureManager : setRequiredTemperature, setTolerance");
+        System.out.println("                      securityManager : setCode");
+    }
 }

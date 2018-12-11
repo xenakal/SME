@@ -40,26 +40,65 @@ public class Rooms {
         this.getSensorOfType(s.getType()).add(s);
     }
 
+    public void removeSensor(AbsSensor s) {
+        if (sensorMap.containsKey(s.getType())) {
+            this.getSensorOfType(s.getType()).remove(s);
+            if(sensorMap.get(s.getType()).isEmpty()){
+                sensorMap.remove(s.getType());
+            }
+        }
+
+    }
+
     public void addSensor(String type, String name) {
         AbsSensor s = Factory.getInstance().makeSensor(type, name);
         this.addSensor(s);
+    }
+
+    public void removeSensor(String type, String name) {
+        AbsSensor s = Factory.getInstance().makeSensor(type, name);
+        this.removeSensor(s);
     }
 
 
     public void addDevice(Actuator a) {
         if (!actuatorMap.containsKey(a.getType())) {
             actuatorMap.put(a.getType(), new ArrayList<Actuator>());
-            ManagerFeature m = this.getManagerOfType(Enum.getCorrespondingManager(a.getType()));
-            if (m != null) {
+            Enum.Manager managerType = Enum.getCorrespondingManager(a.getType());
+            ManagerFeature m = this.getManagerOfType(managerType);
+            if (m == null) {
+                m = Factory.getInstance().makeManager(managerType);
+                m.add(this);
+                managerMap.put(managerType, m);
+            }else{
                 m.update();
             }
         }
         this.getActuatorOfType(a.getType()).add(a);
     }
 
+    public void removeDevice(Actuator a) {
+        if (actuatorMap.containsKey(a.getType())) {
+            this.getActuatorOfType(a.getType()).remove(a);
+            if(actuatorMap.get(a.getType()).isEmpty()){
+                actuatorMap.remove(a.getType());
+                Enum.Manager managerType = Enum.getCorrespondingManager(a.getType());
+                ManagerFeature m = this.getManagerOfType(managerType);
+                if(m != null){
+                    managerMap.remove(managerType);
+                }
+            }
+        }
+    }
+
     public void addDevice(String type, String name) {
         Actuator a = Factory.getInstance().makeActuator(type, name);
         this.addDevice(a);
+    }
+
+    public void removeDevice(String type, String name) {
+        Actuator a = Factory.getInstance().makeActuator(type, name);
+        this.removeDevice(a);
     }
 
 

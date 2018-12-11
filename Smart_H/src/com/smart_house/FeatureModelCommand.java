@@ -5,6 +5,10 @@ package com.smart_house;
  * feature_model isActivate/activate/disactivate room/sensor/actuator/functionality  name
  */
 public class FeatureModelCommand implements GeneralCommand{
+
+    public FeatureModelCommand() {
+    }
+
     @Override
     public void execute(String[] in_arr) {
         if (in_arr.length != 4){
@@ -44,7 +48,7 @@ public class FeatureModelCommand implements GeneralCommand{
         }
     }
 
-    private void usage(){
+    public void usage(){
         System.out.println("Usage : feature_model isActivate/activate/disactivate   Room/Sensor/Actuator/Functionality  name");
     }
 }

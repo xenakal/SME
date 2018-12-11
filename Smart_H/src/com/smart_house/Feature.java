@@ -66,7 +66,7 @@ public abstract class Feature{
     }
 
     protected void active(){
-        if(isActivable()){  //isActivable ?
+        if(isActivate || isActivable()){  //isActivable ?
             isActivate = true;
         }else{
             System.out.println("Error : Invalid activation for feature "+ name);

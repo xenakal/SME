@@ -40,4 +40,8 @@ public class DetectCommand implements GeneralCommand{
             }
         }
     }
+
+    public void usage(){
+        System.out.println("Usage : detect room sensor_type value");
+    }
 }

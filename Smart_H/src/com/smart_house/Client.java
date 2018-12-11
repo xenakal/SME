@@ -12,11 +12,11 @@ import java.io.InputStreamReader;
  */
 public class Client {
 
-    /*
+    /**
     * How to use: Type a sequence of words with the following pattern
     *   - first word "get" --> second word should be the Room --> third the actuator type --> fourth the attribute (tolerance, temperature, light_state)
     *   - first word "detect" --> second word should be the Room --> third the type of command (ex. motion) --> fourth the value
-    *   - first word "param" --> second word should be the type of actuator --> third the type of command (ex. SetTemperature) --> fourth the Room -> fifth the value
+    *   - first word "param" --> second word should be the type of manager --> third the type of command (ex. SetTemperature) --> fourth the Room -> fifth the value
     *   - first word "config" --> second word should be the option "room", "sensor" or "actuator" --> third the Room where to add the actuator/sesor if applicable
     */
 
@@ -29,6 +29,8 @@ public class Client {
         GetCommand gc = new GetCommand();
         DetectCommand dc = new DetectCommand();
         ParamCommand pc = new ParamCommand();
+        ConfigCommand cc = new ConfigCommand();
+        FeatureModelCommand fmc = new FeatureModelCommand();
 
         // Agent
         CommandsPlacer commands_handler = new CommandsPlacer();
@@ -43,6 +45,14 @@ public class Client {
                 String[] in_arr = in.split(" "); // first word should be type of command
                 String command_type = in_arr[0];
                 switch (command_type) {
+                    case "usage":
+                        System.out.println("Usage PRINT: print_house");
+                        gc.usage();
+                        dc.usage();
+                        pc.usage();
+                        cc.usage();
+                        fmc.usage();
+                        break;
                     case "print_house":
                         System.out.println(sh.toString());
                         break;
@@ -55,9 +65,12 @@ public class Client {
                     case "param":
                         commands_handler.placeOrder(pc,in_arr);
                         break;
-                    //case "config":
-                    //    handle_config(sh, in_arr);
-                    //    break;
+                    case "config":
+                        commands_handler.placeOrder(cc, in_arr);
+                        break;
+                    case "feature_model":
+                        commands_handler.placeOrder(fmc, in_arr);
+                        break;
                     case "exit":
                         end = true;
                         break;
@@ -75,7 +88,6 @@ public class Client {
         }
 
     }
-
 
 
 

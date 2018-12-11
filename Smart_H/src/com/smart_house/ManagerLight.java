@@ -18,6 +18,17 @@ public class ManagerLight implements ManagerFeature {
     private String currentmode = "all";
     private boolean isActive = false;
 
+
+    public ManagerLight() {
+        lights = new ArrayList<ActuLight>();
+        rooms = new ArrayList<Rooms>();
+        modeMap = new HashMap<String,List<ActuLight>>();
+        //Default mode : all
+        modeMap.put("all", lights);
+        this.update();
+    }
+
+
     public boolean isActive() {
         return isActive;
     }
@@ -30,14 +41,6 @@ public class ManagerLight implements ManagerFeature {
         System.out.println("light manager deactivate");
     }
 
-
-    public ManagerLight() {
-        lights = new ArrayList<ActuLight>();
-        rooms = new ArrayList<Rooms>();
-        modeMap = new HashMap<String,List<ActuLight>>();
-        //Default mode : all
-        modeMap.put("all", lights);
-    }
 
     public void getStates(){
         for(ActuLight li : lights){
@@ -77,7 +80,7 @@ public class ManagerLight implements ManagerFeature {
 
     public void update(){
         //update "all"
-        updateLights(lights);
+        updateLights(this.lights);
         //for all other mode suppress the removed lights
         for (List<ActuLight> lightList: modeMap.values()) {
             for (ActuLight li: lightList) {
@@ -119,6 +122,7 @@ public class ManagerLight implements ManagerFeature {
 
     public void updateLights(List<ActuLight> list ) {
         for(Rooms r : rooms){
+            System.out.println(r.getActuatorOfType(Enum.Actuator.light).toString());
             for (Actuator l : r.getActuatorOfType(Enum.Actuator.light)){
                 if (!list.contains((ActuLight) l)){
                     list.add((ActuLight) l);
