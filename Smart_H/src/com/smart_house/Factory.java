@@ -14,6 +14,7 @@ public class Factory {
             case "coffee" : return new ActuCoffeeMachine(name);
             case "radiator" : return new ActuRadiator(name);
             case "climatisor" : return new ActuClimatisor(name);
+            case "alarm" : return new ActuAlarm(name);
             default: System.out.print("Type error in Actuator Factory, given type : "+type); return null;
             //TODO launch error
         }
@@ -25,6 +26,8 @@ public class Factory {
             case "motion" : return new SensorMotion(name);
 
             case "thermo" : return new SensorThermo(name);
+
+            case "alarmBox": return new SensorAlarmBox(name);
 
             default:
                 System.out.println("Error in json parse");
@@ -40,7 +43,7 @@ public class Factory {
             case lightManager: manager= new ManagerLight(); break;
             case temperatureManager: manager = new ManagerThermo(20,0); break;
             case coffeeManager: manager =new ManagerCoffee(); break;
-            //case securityManager: manager = new ...; break;
+            case securityManager: manager = new ManagerSecurity(); break;
             default:System.out.println("Error in makeManagerForUsedDevices : invalid actuator type"); manager = null;
                 //TODO launch error
         }

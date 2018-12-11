@@ -3,18 +3,21 @@
   "parametrisation" : {
     "sensorParam" : {
       "motion" : true,
-      "thermo" : true
+      "thermo" : true,
+      "alarmBox": false
     },
     "actuatorParam":{
       "light": true,
       "coffee": true,
       "radiator": true,
-      "climatisor":true
+      "climatisor":true,
+      "alarm": false
     },
     "functionalityParam":{
       "lightControl": true,
       "temperatureControl": true,
-      "smartCoffee": true
+      "smartCoffee": true,
+      "securityControl":false
     }
   },
   "rooms": [

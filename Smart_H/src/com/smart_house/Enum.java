@@ -24,7 +24,7 @@ public class Enum {
             case "lightControl" : return Manager.lightManager;
             case "smartCoffee": return Manager.coffeeManager;
             case "temperatureControl": return Manager.temperatureManager;
-            //case "securityControl": return Manager.securityManager;
+            case "securityControl": return Manager.securityManager;
             case "light" : return Manager.lightManager;
             case "coffee": return Manager.coffeeManager;
             case "radiator": return Manager.temperatureManager;
@@ -40,7 +40,7 @@ public class Enum {
             case "coffee": return "smartCoffee";
             case "radiator": return "temperatureControl";
             case "climatisor" : return "temperatureControl";
-            //case "alarm": return Manager.securityManager; //todo
+            case "alarm": return "securityControl";
             default: System.out.println("Error Enum : invalid Actuator type : " + actuType); return null;
         }
     }

@@ -5,7 +5,7 @@ import java.util.List;
 /**
  * This class manage the command for the feature model
  * The command have this form :
- * config add/remove room/sensor/actuator roomName [type] [name]
+ * config add/remove room/sensor/actuator/connexion roomName [type] [name]
  * no type  for room
  * no name for manager
  */
@@ -87,7 +87,20 @@ public class ConfigCommand implements GeneralCommand{
                             }
                             break;
                         case "connexion":
-                            //todo
+                            if(in_arr.length != 6){
+                                System.out.println("Usage connexion : config add/remove connexion managerRoomName actuatorType SensorName");
+                                return;
+                            }
+                            Enum.Manager type = Enum.convertToManager(in_arr[4]);
+                            String sensorName = in_arr[5];
+                            AbsSensor sensor = sh.getSensorMap().get(sensorName);
+                            if(type == null || sensor == null){
+                                System.out.println("Usage connexion : config add/remove connexion managerRoomName actuatorType SensorName");
+                                return;
+                            }
+                            ManagerFeature man = sh.getRoomsMap().get(room).getManagerOfType(type);
+                             sensor.attach(man);
+
                         default:usage();break;
                     }
                     break;
@@ -97,6 +110,6 @@ public class ConfigCommand implements GeneralCommand{
     }
 
     public void usage(){
-        System.out.println("Usage : config add/remove room/sensor/actuator roomName [type] [name]");
+        System.out.println("Usage CONFIG : config add/remove room/sensor/actuator/connexion roomName [type] [name]");
     }
 }
