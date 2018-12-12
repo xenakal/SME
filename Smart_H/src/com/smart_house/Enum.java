@@ -1,4 +1,5 @@
 package com.smart_house;
+import java.lang.*;
 
 public class Enum {
     public enum Actuator{
@@ -6,20 +7,23 @@ public class Enum {
     }
 
     //transforme un string en un element de l'enumeration
-    public static Actuator convertToActu(String type){
+    public static Actuator convertToActu(String type) throws TypeNotPresentException{
         switch (type) {
             case "light" : return Actuator.light;
             case "coffee": return Actuator.coffee;
             case "radiator": return Actuator.radiator;
             case "alarm": return Actuator.alarm;
             case "climatisor": return Actuator.climatisor;
-            default: System.out.println("Error Enum : invalid Actuator type : " +type);return null;
+            default:
+                System.out.println("Error Enum : invalid Actuator type : " +type);
+                throw new TypeNotPresentException("Type should be light | coffee | radiator |alarm  | climatisor", null);
+                // return null;
         }
     }
     public enum Manager{
         lightManager,coffeeManager, temperatureManager, securityManager
     }
-    public static Manager convertToManager(String type){
+    public static Manager convertToManager(String type) throws TypeNotPresentException{
         switch (type) {
             case "lightControl" : return Manager.lightManager;
             case "smartCoffee": return Manager.coffeeManager;
@@ -30,18 +34,24 @@ public class Enum {
             case "radiator": return Manager.temperatureManager;
             case "climatisor" : return Manager.temperatureManager;
             case "alarm": return Manager.securityManager;
-            default: System.out.println("Error Enum : invalid Actuator type : " +type); return null;
+            default:
+                System.out.println("Error Enum : invalid Actuator type : " +type);
+                throw new TypeNotPresentException("Type should be lightControl | smartCoffee | temperatureControl | securityControl | ACTUATORNAME", null);
+                // return null;
         }
     }
 
-    public static String convertToFunctionnality(String actuType){
+    public static String convertToFunctionnality(String actuType) throws  TypeNotPresentException{
         switch (actuType) {
             case "light" : return "lightControl";
             case "coffee": return "smartCoffee";
             case "radiator": return "temperatureControl";
             case "climatisor" : return "temperatureControl";
             case "alarm": return "securityControl";
-            default: System.out.println("Error Enum : invalid Actuator type : " + actuType); return null;
+            default:
+                System.out.println("Error Enum : invalid Actuator type : " + actuType);
+                throw new TypeNotPresentException("Type should be light | coffee | radiator |alarm  | climatisor", null);
+            //return null;
         }
     }
 
@@ -60,17 +70,20 @@ public class Enum {
         motion,temperature, alarmBox
     }
 
-    public static Sensor convertToSensor(String type){
+    public static Sensor convertToSensor(String type) throws  TypeNotPresentException{
         switch (type) {
             case "motion" : return Sensor.motion;
             case "temperature": return Sensor.temperature;
             case "thermo": return Sensor.temperature;
             case "alarmBox": return Sensor.alarmBox;
-            default: System.out.println("Error Enum: invalid Sensor type : " +type); return null;
+            default:
+                System.out.println("Error Enum: invalid Sensor type : " +type);
+                throw new TypeNotPresentException("Type should be motion | temperature | thermo | alarmBox", null);
+                //return null;
         }
     }
 
-    public enum ActivationCondition{
+    /*public enum ActivationCondition{
         presence
     }
 
@@ -79,5 +92,6 @@ public class Enum {
             case "presence" : return ActivationCondition.presence;
             default: System.out.println("Error Enum: invalid ActivationCondition type"); return ActivationCondition.presence;
         }
-    }
+    }*/
 }
+

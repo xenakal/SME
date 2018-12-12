@@ -79,7 +79,14 @@ public class Client {
                         System.out.println();
                         System.out.println("The command read is:");
                         System.out.println(in);
+                        System.out.println("Usage PRINT: print_house");
+                        gc.usage();
+                        dc.usage();
+                        pc.usage();
+                        cc.usage();
+                        fmc.usage();
                         break;
+
                 }
             }
         }

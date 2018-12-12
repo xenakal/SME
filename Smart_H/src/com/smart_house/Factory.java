@@ -1,6 +1,7 @@
 package com.smart_house;
+import java.lang.*;
 
-public class Factory {
+public class Factory{
 
     private static  Factory factory = new Factory();
 
@@ -8,19 +9,20 @@ public class Factory {
         return factory;
     }
 
-    public Actuator makeActuator(String type, String name){
+    public Actuator makeActuator(String type, String name)throws ClassNotFoundException{
         switch (type){
             case "light" : return new ActuLight(name);
             case "coffee" : return new ActuCoffeeMachine(name);
             case "radiator" : return new ActuRadiator(name);
             case "climatisor" : return new ActuClimatisor(name);
             case "alarm" : return new ActuAlarm(name);
-            default: System.out.print("Type error in Actuator Factory, given type : "+type); return null;
-            //TODO launch error
+            default:
+                throw new ClassNotFoundException("wrong sensor type" + type);
+                //System.out.print("Type error in Actuator Factory, given type : "+type); return null;
         }
     }
 
-    public AbsSensor makeSensor(String type, String name){
+    public AbsSensor makeSensor(String type, String name)throws ClassNotFoundException{
         // TODO: utiliser les types de ENUM
         switch (type){
             case "motion" : return new SensorMotion(name);
@@ -30,9 +32,9 @@ public class Factory {
             case "alarmBox": return new SensorAlarmBox(name);
 
             default:
-                System.out.println("Error in json parse");
-                return null;
-                //TODO launch error
+                throw new ClassNotFoundException("wrong sensor type" + type);
+                //System.out.println("Error in json parse");
+                //return null;
         }
     }
 
