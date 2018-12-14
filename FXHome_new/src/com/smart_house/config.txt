@@ -1,0 +1,28 @@
+{
+  "name" : "sophie",
+  "rooms" : [{"name" : "kitchen",
+            "sensors" : [
+              //sensor :[{"name" : ..., "type" : motion/temperature/...., "activationcondition" : presence/...}]
+              {"name" : "motionbedroom", "type" : "motion", "activationcondition" : "presence"},
+              {"name" : "motionkitchen", "type" : "motion", "activationcondition" : "presence"}
+            ],
+            //actuators :[{name: ..., type: light/coffee}]
+            "actuators" : [
+              {"name" : "kitlight1", "type" : "light"},
+              {"name" : "kitlight2", "type" : "light"},
+              {"name": "what else...", "type" : "coffee"}
+            ]
+  }
+  ],
+
+  //link betwwen a sensor and a room
+  connectionroom : [
+    { sensor : {name : "motionbedroom",localisation : "bedroom"},
+      roomactuator: {roomname :"bedroom", actuatortype: "light"}},
+    { sensor : {name : "motionkitchen" , localisation : "kitchen"},
+      roomactuator: {roomname :"kitchen", actuatortype: "light"}},
+    { sensor : {name : "motionkitchen" , localisation : "kitchen"},
+      roomactuator: {roomname :"leaving", actuatortype: "light"}}
+  ]
+}
+
