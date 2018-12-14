@@ -64,17 +64,17 @@ public class Rooms {
     public void addDevice(Actuator a) {
         if (!actuatorMap.containsKey(a.getType())) {
             actuatorMap.put(a.getType(), new ArrayList<Actuator>());
-            Enum.Manager managerType = Enum.getCorrespondingManager(a.getType());
-            ManagerFeature m = this.getManagerOfType(managerType);
-            if (m == null) {
-                m = Factory.getInstance().makeManager(managerType);
-                m.add(this);
-                managerMap.put(managerType, m);
-            }else{
-                m.update();
-            }
         }
         this.getActuatorOfType(a.getType()).add(a);
+        Enum.Manager managerType = Enum.getCorrespondingManager(a.getType());
+        ManagerFeature m = this.getManagerOfType(managerType);
+        if (m == null) {
+            m = Factory.getInstance().makeManager(managerType);
+            m.add(this);
+            managerMap.put(managerType, m);
+        }else{
+            m.update();
+        }
     }
 
     public void removeDevice(Actuator a) {
@@ -105,7 +105,9 @@ public class Rooms {
 
     public List<Actuator> getActuatorOfType(Enum.Actuator type) {
         List<Actuator> ret = actuatorMap.get(type);
-        if(ret == null) ret =  new ArrayList<Actuator>();
+        if(ret == null){
+            ret =  new ArrayList<Actuator>();
+        }
         return ret;
     }
 
@@ -130,7 +132,9 @@ public class Rooms {
                 if(!managerMap.containsKey(man)) {
                     ManagerFeature manager = Factory.getInstance().makeManager(man);
                     manager.add(this);
+                    manager.update();
                     managerMap.put(man, manager);
+
                 }
             }
         }
