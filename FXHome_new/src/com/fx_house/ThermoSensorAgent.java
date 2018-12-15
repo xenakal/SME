@@ -17,6 +17,8 @@ public class ThermoSensorAgent extends SensorAgent{
     private TextField textIns;
     private VBox vbox;
     SensorThermo sensor;
+    private int sens_required_temp;
+
 
     public ThermoSensorAgent(AbsSensor sensor) {
 
@@ -26,6 +28,7 @@ public class ThermoSensorAgent extends SensorAgent{
         this.name = sensor.getName();
         this.sensor = (SensorThermo) sensor;
         this.sensor.active();
+        this.sens_required_temp = this.sensor.getManagerRequiredTemp();
 
         this.textIns = new TextField();
         textIns.setPromptText("Insert temperature !"); //to set the hint text
@@ -34,14 +37,14 @@ public class ThermoSensorAgent extends SensorAgent{
         vbox.setSpacing(10.0);
 
         this.button = new Button();
-        button.setText("Thermometer");
+        button.setText("Thermometer: goal = " + this.sens_required_temp + " °C");
         button.setOnAction(new HandleThermo(this.sensor, this.textIns)); // add the text inside the text field
 
 
         vbox.getChildren().addAll(textIns,button);
 
         this.r = new Rectangle();
-        r.setWidth(170);
+        r.setWidth(210);
         r.setHeight(60);
         r.setArcWidth(20);
         r.setArcHeight(20);

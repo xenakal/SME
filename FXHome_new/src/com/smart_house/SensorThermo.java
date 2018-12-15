@@ -39,4 +39,12 @@ public class SensorThermo extends AbsSensor {
     public Info makeinfo(){
         return new Info("temperature",  recorded_temp);
     }
+
+    public Integer getManagerRequiredTemp(){
+        ManagerThermo man = (ManagerThermo) obsList.get(0);
+        if(man != null)
+            return man.getRequired_temperature();
+        else
+            return null;
+    }
 }

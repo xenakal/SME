@@ -6,13 +6,14 @@ import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.*;
 import javafx.scene.text.Font;
-import javafx.scene.layout.VBox;
+import javafx.scene.control.TextField;
+import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.scene.control.Button;
 
-import java.awt.*;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -39,11 +40,16 @@ public class Main extends Application {
             System.out.println(sh.toString());
 			
 	        /* prepare the scene graph with the required nodes */
+            VBox appComponents = new VBox();
+
+            GridPane command_layout = createCommand(window.getMaxWidth());
+
             FlowPane house_layout = createHome(sh);
 
+	        appComponents.getChildren().addAll(house_layout,command_layout);
 			/* prepare the scene with the required dimensions and add the scene graph to it */
 
-            Scene scene = new Scene(house_layout,1000,1000);
+            Scene scene = new Scene(appComponents,1000,1000);
             scene.getStylesheets().add(getClass().getResource("./application.css").toExternalForm());
 			
 			/* prepare the stage and add the scene to the stage and display the contents of the stage */
@@ -165,6 +171,26 @@ public class Main extends Application {
         SensorAgent sensAgent = AgentFactory.getInstance().makeSensorAgent(sensor);
         if(sensAgent != null)
             cell.getChildren().add(sensAgent);
+    }
+
+    private GridPane createCommand(double width){
+        GridPane commandCell = new GridPane();
+        ColumnConstraints column1 = new ColumnConstraints();
+        column1.setPercentWidth(90);
+        commandCell.getColumnConstraints().add(column1);
+
+        TextField command_text = new TextField();
+        command_text.setPromptText("Insert your command here :)");  //to set the hint text
+        command_text.setFont(Font.font("Verdana", FontWeight.BOLD, 30));
+
+        Button validate_button = new Button("OK !");
+        Font font = new Font(28.5); //Button font's size should increase to 40
+        validate_button.setFont(font);
+        validate_button.setOnAction(new HandleCommand(command_text));
+
+        commandCell.add(command_text,0,0);
+        commandCell.add(validate_button,1,0);
+        return commandCell;
     }
 
 }

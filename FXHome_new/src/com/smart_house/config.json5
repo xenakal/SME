@@ -24,13 +24,12 @@
     {
       "name": "kitchen",
       "sensor":  [
-        {"name" : "motionkitchen2", "type" : "motion", "activationcondition" : "presence"},
-        {"name" : "thermometerkitchen", "type" : "thermo", "activationcondition" : "NAN"}
+        {"name" : "motionkitchen1", "type" : "motion", "activationcondition" : "presence"},
+        {"name" : "motionkitchen2", "type" : "motion", "activationcondition" : "presence"}
       ],
       "actuator" : [
         {"name" : "kitlight1", "type" : "light"},
         {"name" : "kitlight2", "type" : "light"},
-        {"name" : "kitradiator", "type" : "climatisor"}
         {"name": "what else...", "type" : "coffee"}
       ]
     },
@@ -39,11 +38,13 @@
       "sensor":  [
         {"name" : "motionbedroom", "type" : "motion", "activationcondition" : "presence"},
         {"name" : "thermo_sensor_bedroom", "type" : "thermo", "activationcondition" : "NAN"}
+        {"name" : "thermo_sensor_bedroom2", "type" : "thermo", "activationcondition" : "NAN"}
       ],
       "actuator" : [
         {"name" : "bedlight1", "type" : "light"},
         {"name" : "bedlight2", "type" : "light"},
         {"name" : "bedradiator", "type" : "radiator"}
+        {"name" : "bedcilm", "type" : "climatisor"}
       ]
     },
     {
@@ -69,14 +70,10 @@
     {"sensorname" : "thermo_sensor_bedroom",
       "roomactuator" : "bedroom",
       "actuatortype" : "radiator"
-    },
-    {"sensorname" : "thermometerkitchen",
-    "roomactuator" : "kitchen",
+    }
+    {"sensorname" : "thermo_sensor_bedroom2",
+    "roomactuator" : "bedroom",
     "actuatortype" : "climatisor"
-    },
-    {"sensorname" : "motionWC",
-    "roomactuator" : "toilet",
-    "actuatortype" : "light"
     }
   ]
 }
