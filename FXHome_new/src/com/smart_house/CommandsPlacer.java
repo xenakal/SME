@@ -13,7 +13,7 @@ public class CommandsPlacer {
     public CommandsPlacer() {
     }
 
-    void placeOrder(GeneralCommand command, String[] in_arr) {
+    public void placeOrder(GeneralCommand command, String[] in_arr) {
         //commandsQueue.add(command);
         command.execute(in_arr);
     }

@@ -15,6 +15,6 @@ public class HandleCommand implements EventHandler<ActionEvent> {
 
     @Override
     public void handle(ActionEvent event) {
-        
+        ClientAgent.start();
     }
 }

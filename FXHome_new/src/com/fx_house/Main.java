@@ -38,6 +38,10 @@ public class Main extends Application {
             // /home/xenakis/Documents/Cours/Master/Q7/SME/repo/FXHome_new/src/com/smart_house
             sh.smartHomeInit("./src/com/smart_house/config.json5");
             System.out.println(sh.toString());
+
+            Param param = Param.getInstance();
+            param.adaptToConfig("./src/com/smart_house/config.json5");
+
 			
 	        /* prepare the scene graph with the required nodes */
             VBox appComponents = new VBox();
