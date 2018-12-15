@@ -1,3 +1,5 @@
+package com.fx_house;
+
 import com.smart_house.ActuRadiator;
 import com.smart_house.Actuator;
 import javafx.scene.layout.StackPane;
@@ -13,7 +15,9 @@ public class RadiatorAgent extends ActuatorAgent{
 	
 	public RadiatorAgent(Actuator act) {
 		this.name = act.getName();  
-		this.act = (ActuRadiator) act; 
+		this.act = (ActuRadiator) act;
+		act.makeFX(this);
+
 		r = new Rectangle(); 
 		r.setWidth(100);
 		r.setHeight(100);
@@ -23,8 +27,7 @@ public class RadiatorAgent extends ActuatorAgent{
         r.setStroke(Color.GRAY);
         
 		Text text = new Text(act.getType().name());
-        StackPane stack = new StackPane();
-		
+
         this.getChildren().addAll(r, text);
 	}
 

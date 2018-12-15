@@ -1,3 +1,5 @@
+package com.fx_house;
+
 import javafx.geometry.Insets;
 import javafx.scene.layout.FlowPane;
 

@@ -1,3 +1,5 @@
+package com.fx_house;
+
 import com.smart_house.AbsSensor;
 import com.smart_house.Actuator;
 

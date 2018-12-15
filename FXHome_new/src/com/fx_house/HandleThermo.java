@@ -1,3 +1,5 @@
+package com.fx_house;
+
 import com.smart_house.SensorMotion;
 import com.smart_house.SensorThermo;
 import javafx.event.ActionEvent;
@@ -14,7 +16,7 @@ public class HandleThermo implements EventHandler<ActionEvent>{
 
     public void handle(ActionEvent event) {
         System.out.println("THERMO !!!");
-        //sensor.detect_switch();
+        sensor.detect_temperature(23);
     }
 
 

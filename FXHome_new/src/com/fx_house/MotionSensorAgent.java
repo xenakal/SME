@@ -1,7 +1,8 @@
+package com.fx_house;
+
 import com.smart_house.AbsSensor;
 import com.smart_house.SensorMotion;
 import javafx.scene.control.Button;
-import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
@@ -16,6 +17,8 @@ public class MotionSensorAgent extends SensorAgent{
 
 		this.name = sensor.getName();
 		this.sensor = (SensorMotion) sensor;
+		this.sensor.active();
+
 		r = new Rectangle(); 
 		r.setWidth(100);
 		r.setHeight(100);

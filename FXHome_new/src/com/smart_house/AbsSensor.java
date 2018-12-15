@@ -77,7 +77,6 @@ public abstract class AbsSensor extends Object{
     }
     public void advertise(){
         if(this.isActive()) {
-            //System.out.println("advertise");
             for (ManagerFeature o : obsList) {
                 o.react(this.makeinfo());
             }

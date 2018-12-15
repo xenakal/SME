@@ -28,7 +28,13 @@ public class SensorThermo extends AbsSensor {
         this.advertise();
     }
 
-
+    public void detect_temperature(int temp){
+        recorded_temp = temp;
+        for (ManagerFeature o : obsList) {
+            o.active();
+        }
+        this.advertise();
+    }
 
     public Info makeinfo(){
         return new Info("temperature",  recorded_temp);

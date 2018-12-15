@@ -36,9 +36,17 @@ public class SensorMotion extends AbsSensor {
         }
     }
 
+    public void detect_switch(){
+        movement = 1 - movement;
+        for (ManagerFeature o : obsList) {
+            o.active();
+            System.out.println(o.ToString());
+        }
+        this.advertise();
+    }
 
     public Info makeinfo(){
-        return new Info("motion",  movement);
+        System.out.println("makeinfo");return new Info("motion",  movement);
     }
 
     @Override

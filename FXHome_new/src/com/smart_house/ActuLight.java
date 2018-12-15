@@ -1,15 +1,26 @@
 package com.smart_house;
 
+import com.fx_house.ActuatorAgent;
+import com.fx_house.LightAgent;
 
 public class ActuLight extends Object implements Actuator {
 
     String name;
     private boolean on = false;
     private boolean isActive = false;
-        
+    private boolean fx = false;
+    private LightAgent fxlight;
+
+
+    public void makeFX(ActuatorAgent fxlight){
+        this.fx = true;
+        this.fxlight = (LightAgent) fxlight;
+    }
+
     public boolean isActive() {
         return isActive;
     }
+
     public void active(){
         isActive = true;
         System.out.println("# "+name + " activate");
@@ -50,10 +61,14 @@ public class ActuLight extends Object implements Actuator {
     }
 
     private void lightOn(){
+
         System.out.println("# "+name + "ActuLight on !");
+        this.fxlight.setBackColor();
     }
+
     private void lightOff(){
         System.out.println("# "+name + "ActuLight off !");
+        this.fxlight.setBackColor();
     }
 
     public String toString(){
@@ -61,6 +76,5 @@ public class ActuLight extends Object implements Actuator {
     }
     
     public String getName() { return this.name; }
-
 	
 }

@@ -1,3 +1,5 @@
+package com.fx_house;
+
 import com.smart_house.*;
 import com.smart_house.Enum;
 import javafx.application.Application;
@@ -36,7 +38,7 @@ public class Main extends Application {
 			/* prepare the scene with the required dimensions and add the scene graph to it */
 
             Scene scene = new Scene(layout,1000,1000);
-            scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+            scene.getStylesheets().add(getClass().getResource("./application.css").toExternalForm());
 			
 			/* prepare the stage and add the scene to the stage and display the contents of the stage */
 

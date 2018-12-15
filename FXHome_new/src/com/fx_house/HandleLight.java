@@ -1,3 +1,5 @@
+package com.fx_house;
+
 import com.smart_house.SensorMotion;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -13,7 +15,7 @@ public class HandleLight implements EventHandler<ActionEvent>{
 	
 	public void handle(ActionEvent event) {
 		System.out.println("LIGHT !!!");
-		//sensor.detect_switch();
+		sensor.detect_switch();
 	}
 
 

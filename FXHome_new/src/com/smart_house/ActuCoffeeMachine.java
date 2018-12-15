@@ -1,10 +1,21 @@
 package com.smart_house;
 
+import com.fx_house.ActuatorAgent;
+import com.fx_house.LightAgent;
+
 public class ActuCoffeeMachine implements Actuator {
 
     private String name;
     private boolean isMakingCoffee = false;
     private boolean isActive = false;
+    private boolean fx = false;
+    private LightAgent fxlight;
+
+
+    public void makeFX(ActuatorAgent fxlight){
+        this.fx = true;
+        this.fxlight = (LightAgent) fxlight;
+    }
 
     public boolean isActive() {
         return isActive;
