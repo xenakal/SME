@@ -1,23 +1,10 @@
-package com.smart_house;
+package application.javaApp;
 
-import com.fx_house.ActuatorAgent;
-import com.fx_house.LightAgent;
-import com.fx_house.RadiatorAgent;
-
-public class ActuRadiator implements Actuator {
+public class ActuRadiator implements Actuator{
 
     String name;
     private boolean on = false;
     private boolean isActive = false;
-    private boolean fx = false;
-    private RadiatorAgent fxrad;
-
-
-    public void makeFX(ActuatorAgent fxlight){
-        this.fx = true;
-        this.fxrad = (RadiatorAgent) fxlight;
-    }
-
 
     public boolean isActive() {
         return isActive;
@@ -57,14 +44,10 @@ public class ActuRadiator implements Actuator {
     private void radiatorOn(){
         System.out.println("# " + name + ": ActuRadiator on !");
         System.out.println("# radiator "+name+" increases heat");
-        if(fx)
-            this.fxrad.setBackColor();
     }
 
     private void radiatorOff(){
         System.out.println("# " + name + ": ActuRadiator off !");
-        if(fx)
-            this.fxrad.setBackColor();
     }
 
 

@@ -4,10 +4,15 @@ import com.smart_house.*;
 import com.smart_house.Enum;
 import javafx.application.Application;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.text.Font;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+import java.awt.*;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -27,17 +32,18 @@ public class Main extends Application {
 
             window = primaryStage;
             sh = SmartHome.getSmartHome();
-            sh.smartHomeInit("/home/xenakis/Documents/Cours/Master/Q7/SME/repo/Smart_H/src/com/smart_house/config.json5");
+            //System.out.println("Working Directory = " +
+            //        System.getProperty("user.dir"));
+            // /home/xenakis/Documents/Cours/Master/Q7/SME/repo/FXHome_new/src/com/smart_house
+            sh.smartHomeInit("./src/com/smart_house/config.json5");
             System.out.println(sh.toString());
 			
 	        /* prepare the scene graph with the required nodes */
+            FlowPane house_layout = createHome(sh);
 
-            FlowPane layout = createHome(sh);
-	        
-			
 			/* prepare the scene with the required dimensions and add the scene graph to it */
 
-            Scene scene = new Scene(layout,1000,1000);
+            Scene scene = new Scene(house_layout,1000,1000);
             scene.getStylesheets().add(getClass().getResource("./application.css").toExternalForm());
 			
 			/* prepare the stage and add the scene to the stage and display the contents of the stage */
@@ -78,22 +84,24 @@ public class Main extends Application {
         while (it.hasNext()) {
             Map.Entry<String,Rooms> pair = it.next();
             // new cell for the room
-            FlowPane roomCell = createSingleCellForRoom(pair.getValue(),pair.getKey()); // every room is a child of the main grid  and is a grid itself
+            VBox roomCell = createSingleCellForRoom(pair.getValue(),pair.getKey()); // every room is a child of the main grid  and is a grid itself
 
             layout.getChildren().add(roomCell);
             //it.remove(); // avoids a ConcurrentModificationException
         }
-
     }
 
-    // for a given room, create the corresponding cell
-    // TODO: set correct size to make it square
-    // TODO: put the different actuators and other to match requirements
     /* Creates a cell for a given room */
-    private FlowPane createSingleCellForRoom(Rooms room, String name) {
-        // cell initialization
+    private VBox createSingleCellForRoom(Rooms room, String name) {
 
-        //RoomAgent roomCell = new RoomAgent(); // TODO: make this work
+        // cell initialization
+        VBox roomTitled = new VBox();
+        Text title = new Text(name);
+        title.setFont(Font.font("Verdana", 25));
+
+        roomTitled.setAlignment(Pos.CENTER_LEFT);
+
+        // actual room
         FlowPane roomCell = new FlowPane();
         roomCell.setPadding(new Insets(10,10,10,10)); // add padding around the cells
         roomCell.setMinSize(10,10);
@@ -105,7 +113,9 @@ public class Main extends Application {
         configureActuatorsForRoom(room, roomCell);
         configureSensorsForRoom(room, roomCell);
 
-        return roomCell;
+        roomTitled.getChildren().addAll(title,roomCell);
+
+        return roomTitled;
     }
 
     /*

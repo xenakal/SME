@@ -1,6 +1,6 @@
-package com.smart_house;
+package application.javaApp;
 
-public class SensorMotion extends AbsSensor {
+public class SensorMotion extends AbsSensor{
 
     private int movement; // if movement is detected (0==false)
 
@@ -36,16 +36,12 @@ public class SensorMotion extends AbsSensor {
         }
     }
 
-    public void detect_switch(){
-        movement = 1 - movement;
-        for (ManagerFeature o : obsList) {
-            o.active(); // ici ca devrait pas poser problème, car si un bouton est appuyé, c'est qu'il est dans la configuartion (car sinon il n'apparait pas dans le projet fx, du coup comme c'est un projet séparé c'est bon)
-        }
-        this.advertise();
+    public void detect_switch() {
+    	movement = 1 - movement; // if 1 -> 0, if 0 -> 1  
+    	this.advertise(); 
     }
-
     public Info makeinfo(){
-        System.out.println("makeinfo");return new Info("motion",  movement);
+        return new Info("motion",  movement);
     }
 
     @Override

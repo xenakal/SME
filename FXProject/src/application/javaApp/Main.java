@@ -1,4 +1,4 @@
-package com.smart_house;
+package application.javaApp;
 
 public class Main {
 

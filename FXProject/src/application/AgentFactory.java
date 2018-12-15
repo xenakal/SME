@@ -23,13 +23,14 @@ public class AgentFactory {
     } 
 	
 	public ActuatorAgent makeActuatorAgent(Actuator act){
+		System.out.println("in FACTORY");
         switch (act.getType()){
             case light : return new LightAgent(act);
             //case coffee : return new LightAgent(act);
             case radiator : return new RadiatorAgent(act);
             //case climatisor : return new LightAgent(act);
             //case alarm : 
-            default: System.out.print("Type error in Actuator Factory"); return null;
+            default: System.out.println("Type error in Actuator Factory");	return null;
         }
     }
 	

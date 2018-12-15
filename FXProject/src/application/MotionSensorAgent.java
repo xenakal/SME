@@ -1,6 +1,7 @@
 package application;
 
 import com.smart_house.AbsSensor;
+import com.smart_house.SensorMotion;
 
 import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
@@ -8,16 +9,16 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 
-public class SensorAgent extends StackPane{
-	
+public class MotionSensorAgent extends StackPane{
+
 	private String name; 
 	Rectangle r; 
-	AbsSensor sensor; 
+	SensorMotion sensor; 
 	
-	public SensorAgent(AbsSensor sensor) {
+	public MotionSensorAgent(AbsSensor sensor) {
 		
 		this.name = sensor.getName();  
-		this.sensor = sensor;
+		this.sensor = (SensorMotion) sensor;
 		r = new Rectangle(); 
 		r.setWidth(100);
 		r.setHeight(100);
@@ -27,8 +28,8 @@ public class SensorAgent extends StackPane{
         r.setStroke(Color.GRAY);
         
         Button button = new Button(); 
-        button.setText("SensorGeneral");
-        //button.setOnAction(new HandleLight());
+        button.setText("Sensor");
+        button.setOnAction(new HandleLight(this.sensor));
         
 		Text text = new Text(sensor.getType().name());
         StackPane stack = new StackPane();
@@ -36,17 +37,5 @@ public class SensorAgent extends StackPane{
         this.getChildren().addAll(r, text, button);
      }   
 	
-	public void setState(String color) {
-		switch (color){
-			case "yellow":
-				r.setFill(Color.YELLOW);
-				break; 
-			case "black": 
-				r.setFill(Color.GRAY);
-				break; 
-			default: 
-				System.out.println("Color can be only yellow or black :/ ");
-		}
-	}
 
 }

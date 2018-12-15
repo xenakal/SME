@@ -24,12 +24,13 @@
     {
       "name": "kitchen",
       "sensor":  [
-        {"name" : "motionkitchen1", "type" : "motion", "activationcondition" : "presence"},
-        {"name" : "motionkitchen2", "type" : "motion", "activationcondition" : "presence"}
+        {"name" : "motionkitchen2", "type" : "motion", "activationcondition" : "presence"},
+        {"name" : "thermometerkitchen", "type" : "thermo", "activationcondition" : "NAN"}
       ],
       "actuator" : [
         {"name" : "kitlight1", "type" : "light"},
         {"name" : "kitlight2", "type" : "light"},
+        {"name" : "kitradiator", "type" : "climatisor"}
         {"name": "what else...", "type" : "coffee"}
       ]
     },
@@ -68,6 +69,14 @@
     {"sensorname" : "thermo_sensor_bedroom",
       "roomactuator" : "bedroom",
       "actuatortype" : "radiator"
+    },
+    {"sensorname" : "thermometerkitchen",
+    "roomactuator" : "kitchen",
+    "actuatortype" : "climatisor"
+    },
+    {"sensorname" : "motionWC",
+    "roomactuator" : "toilet",
+    "actuatortype" : "light"
     }
   ]
 }

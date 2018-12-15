@@ -20,9 +20,12 @@ public class AgentFactory {
             case light : return new LightAgent(act);
             //case coffee : return new LightAgent(act);
             case radiator : return new RadiatorAgent(act);
-            //case climatisor : return new LightAgent(act);
+            case climatisor : return new ClimatisorAgent(act);
             //case alarm : 
-            default: System.out.println("Type error in Actuator Factory");	return null;
+            default:
+                System.out.println(act.getType());
+                System.out.println("Type error in Actuator Factory");
+                return null;
         }
     }
 

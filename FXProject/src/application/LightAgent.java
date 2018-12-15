@@ -15,8 +15,11 @@ public class LightAgent extends ActuatorAgent {
 	private ActuLight act; 
 	
 	public LightAgent(Actuator act) {
+		System.out.println("LightAgent created"); 
 		this.name = act.getName();  
 		this.act = (ActuLight) act; 
+		act.informFX(this); 
+		
 		r = new Rectangle(); 
 		r.setWidth(100);
 		r.setHeight(100);

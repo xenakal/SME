@@ -26,7 +26,7 @@ public class Main extends Application {
 	SmartHome sh; 
 
 	public static void main(String[] args) {
-		System.out.println("okok");
+		System.out.println("okok2");
 		launch(args);
 	}
 	
@@ -52,7 +52,7 @@ public class Main extends Application {
 			/* prepare the stage and add the scene to the stage and display the contents of the stage */ 
 			
 			window.setScene(scene);
-			window.setTitle("Lele's first try");
+			window.setTitle("Lele's second try");
 			window.show();
 
 		} catch(Exception e) {
@@ -190,11 +190,11 @@ public class Main extends Application {
 	public void addSensorToCell(FlowPane cell, AbsSensor sensor) {
 		switch (sensor.getType()) {
 		case temperature:
-			SensorAgent tempSensor = new SensorAgent(sensor);
+			MotionSensorAgent tempSensor = new MotionSensorAgent(sensor);
 			cell.getChildren().add(tempSensor); 
 			break; 
 		case motion: 
-			SensorAgent motionSensor = new SensorAgent(sensor);
+			MotionSensorAgent motionSensor = new MotionSensorAgent(sensor);
 			cell.getChildren().add(motionSensor); 
 			break; 
 		default:
