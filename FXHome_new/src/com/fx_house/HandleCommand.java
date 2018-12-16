@@ -8,13 +8,17 @@ import javafx.scene.control.TextField;
 
 public class HandleCommand implements EventHandler<ActionEvent> {
 
-    public HandleCommand(TextField text){
+    ClientAgent command_placer;
+    TextField command;
 
+    public HandleCommand(TextField text){
+        this.command = text;
+        this.command_placer = new ClientAgent();
     }
 
 
     @Override
     public void handle(ActionEvent event) {
-        ClientAgent.start();
+        this.command_placer.execute(this.command);
     }
 }
