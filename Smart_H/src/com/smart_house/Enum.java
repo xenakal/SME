@@ -25,6 +25,10 @@ public class Enum {
             case "smartCoffee": return Manager.coffeeManager;
             case "temperatureControl": return Manager.temperatureManager;
             case "securityControl": return Manager.securityManager;
+            case "lightManager" : return Manager.lightManager;
+            case "coffeeManager": return Manager.coffeeManager;
+            case "temperatureManager": return Manager.temperatureManager;
+            case "securityManager": return Manager.securityManager;
             case "light" : return Manager.lightManager;
             case "coffee": return Manager.coffeeManager;
             case "radiator": return Manager.temperatureManager;

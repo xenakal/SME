@@ -17,7 +17,7 @@ public class ParamCommand implements GeneralCommand{
         try {
             Rooms room = sh.getRoomsMap().get(in_arr[3]); // fourth argument is Room name
 
-            switch (Enum.Manager.valueOf(in_arr[1])) { // second argument is manager type (light, radiator)
+            switch (Enum.convertToManager(in_arr[1])) { // second argument is manager type (light, radiator)
                 case lightManager:
                     ManagerLight light_manager = (ManagerLight) room.getManagerOfType(Enum.Manager.lightManager);
                     // TODO: add light manager new method
@@ -39,11 +39,10 @@ public class ParamCommand implements GeneralCommand{
                             System.out.println("not a valid command for this type of manager");
                             break;
                     }
-
                     break;
                 case securityManager:
-                    if(in_arr.length != 5){
-                        System.out.print("Usage : param setCode room oldCode newCode");
+                    if(in_arr.length != 6){
+                        System.out.println("Usage : param securityManager setCode room oldCode newCode");
                         break;
                     }
                     int oldCode = Integer.parseInt(in_arr[4]);
@@ -56,6 +55,7 @@ public class ParamCommand implements GeneralCommand{
                             }
                             break;
                     }
+                    break;
 
                 default:
                     System.out.println("not a valid manager type");
@@ -72,9 +72,9 @@ public class ParamCommand implements GeneralCommand{
     }
 
     public void usage(){
-        System.out.println("Usage : param manager command_type room value");
-        System.out.println("The command_type are :   lightManager : ");
-        System.out.println("                   temperatureManager : setRequiredTemperature, setTolerance");
-        System.out.println("                      securityManager : setCode");
+        System.out.println("Usage : param functionnality command_type room value");
+        System.out.println("The command_type are :   lightControl : ");
+        System.out.println("                   temperatureControl : setRequiredTemperature, setTolerance");
+        System.out.println("                      securityControl : setCode");
     }
 }

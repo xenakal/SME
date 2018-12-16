@@ -7,6 +7,7 @@ public class ManagerSecurity  implements ManagerFeature{
     private List<ActuAlarm> alarms;
     private  List<Rooms> rooms;
     private boolean isActive = false;
+    private boolean alarmOn = false;
 
     public ManagerSecurity() {
         alarms = new ArrayList<ActuAlarm>();
@@ -81,12 +82,24 @@ public class ManagerSecurity  implements ManagerFeature{
         if(this.isActive()) {
             switch (info.getName()) {
                 case "motion":
-                    if (info.getValue() == 1) {  //true = 1
+                    if (alarmOn && (info.getValue() == 1)) {  //true = 1
                         for (ActuAlarm a : alarms) {
                             a.Bip();
-                            a.callThePolice();
+                            //a.callThePolice();
                         }
 
+                    }
+                    break;
+                case "alarm":
+                    if (info.getValue() == 1) {  //true = 1
+                        alarmOn = !alarmOn;
+                    }else{
+                        if( alarmOn){
+                            for (ActuAlarm a : alarms) {
+                                a.Bip();
+                                a.callThePolice();
+                            }
+                        }
                     }
                     break;
                 default:
