@@ -1,8 +1,7 @@
-package application;
+package com.fx_house;
 
 import com.smart_house.ActuLight;
 import com.smart_house.Actuator;
-
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -15,10 +14,10 @@ public class LightAgent extends ActuatorAgent {
 	private ActuLight act; 
 	
 	public LightAgent(Actuator act) {
-		System.out.println("LightAgent created"); 
+		//System.out.println("LightAgent created");
 		this.name = act.getName();  
 		this.act = (ActuLight) act; 
-		act.informFX(this); 
+		act.makeFX(this);
 		
 		r = new Rectangle(); 
 		r.setWidth(100);
@@ -29,8 +28,7 @@ public class LightAgent extends ActuatorAgent {
         r.setStroke(Color.GRAY);
         
 		Text text = new Text(act.getType().name());
-        StackPane stack = new StackPane();
-		
+
         this.getChildren().addAll(r, text);
 	}
 
@@ -44,8 +42,7 @@ public class LightAgent extends ActuatorAgent {
 
 	@Override
 	public String getName() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.name;
 	}
 	
 	

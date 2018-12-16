@@ -1,0 +1,74 @@
+{
+  "name": "Robinson's house",
+  "parametrisation" : {
+    "sensorParam" : {
+      "motion" : true,
+      "thermo" : true,
+      "alarmBox": false
+    },
+    "actuatorParam":{
+      "light": true,
+      "coffee": true,
+      "radiator": true,
+      "climatisor":true,
+      "alarm": false
+    },
+    "functionalityParam":{
+      "lightControl": true,
+      "temperatureControl": true,
+      "smartCoffee": true,
+      "securityControl":false
+    }
+  },
+  "rooms": [
+    {
+      "name": "kitchen",
+      "sensor":  [
+        {"name" : "motionkitchen1", "type" : "motion", "activationcondition" : "presence"},
+        {"name" : "motionkitchen2", "type" : "motion", "activationcondition" : "presence"}
+      ],
+      "actuator" : [
+        {"name" : "kitlight1", "type" : "light"},
+        {"name" : "kitlight2", "type" : "light"},
+        {"name": "what else...", "type" : "coffee"}
+      ]
+    },
+    {
+      "name": "bedroom",
+      "sensor":  [
+        {"name" : "motionbedroom", "type" : "motion", "activationcondition" : "presence"},
+        {"name" : "thermo_sensor_bedroom", "type" : "thermo", "activationcondition" : "NAN"}
+      ],
+      "actuator" : [
+        {"name" : "bedlight1", "type" : "light"},
+        {"name" : "bedlight2", "type" : "light"},
+        {"name" : "bedradiator", "type" : "radiator"}
+      ]
+    },
+    {
+      "name": "toilet",
+      "sensor":  [
+        {"name" : "motionWC", "type" : "motion", "activationcondition" : "presence"}
+      ],
+      "actuator" : [
+        {"name" : "WClight", "type" : "light"}
+      ]
+    }
+  ],
+  "makeManagerforeachroom" : true,
+  "connection" : [
+    {"sensorname" :  "motionbedroom",
+      "roomactuator": "bedroom",
+      "actuatortype": "light"
+    },
+    {"sensorname" :  "motionkitchen2",
+      "roomactuator": "kitchen",
+      "actuatortype": "light"
+    },
+    {"sensorname" : "thermo_sensor_bedroom",
+      "roomactuator" : "bedroom",
+      "actuatortype" : "radiator"
+    }
+  ]
+}
+
