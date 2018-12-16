@@ -35,6 +35,7 @@ public class ManagerThermo implements ManagerFeature {
 
         this.required_temperature = required_temperature;
         System.out.println("# new required temperature is " + required_temperature);
+        react(new Info("temperature", last_temp));
     }
 
 

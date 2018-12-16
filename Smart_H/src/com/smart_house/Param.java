@@ -26,7 +26,7 @@ public class Param {
 
         FeatureCompo sensor = new FeatureCompo(false, "sensor", null, null);
         this.mainFeature.add(sensor);
-        String[][] sensorNameList = {{"motion","or"},{"thermo","or"},{"alarmBox","or"}};
+        String[][] sensorNameList = {{"motion","or"},{"thermo","or"},{"alarmBox","or"},{"button","or"}};
         for(String[] sens : sensorNameList){
             sensor.add(new sensorFeature(sens[0],sens[1]));
         }
@@ -48,13 +48,13 @@ public class Param {
 
         //other constraints
         //temperaureControl => thermo & (radiator)
-        Feature[][] conditions1 = {{sensor.getOneChild("thermo")},{actuator.getOneChild("radiator"),actuator.getOneChild("cimatisor")}};
+        Feature[][] conditions1 = {{sensor.getOneChild("thermo")},{actuator.getOneChild("radiator"),actuator.getOneChild("climatisor")}};
         functonality.getOneChild("temperatureControl").setDependences(conditions1);
         //lightControl => motion & light
         Feature[][] conditions2 = {{sensor.getOneChild("motion")},{actuator.getOneChild("light")}};
         functonality.getOneChild("lightControl").setDependences(conditions2);
         //smartCoffee => coffee
-        Feature[][] conditions3 = {{actuator.getOneChild("coffee")}};
+        Feature[][] conditions3 = {{sensor.getOneChild("button")},{actuator.getOneChild("coffee")}};
         functonality.getOneChild("smartCoffee").setDependences(conditions3);
         //
         Feature[][] conditions4 = {{sensor.getOneChild("motion"),sensor.getOneChild("alarmBox")},{actuator.getOneChild("alarm")}};
@@ -90,7 +90,7 @@ public class Param {
 
             JSONObject sensorConfig= (JSONObject) config.get("sensorParam");
             FeatureCompo sensorParam = (FeatureCompo) mainFeature.getOneChild("sensor");
-            String[] sensorNameList = {"motion","thermo", "alarmBox"};
+            String[] sensorNameList = {"motion","thermo", "alarmBox","button"};
             for(String sens : sensorNameList){
                 boolean param = (boolean) sensorConfig.get(sens);
                 if(param)activeSensor(sens);//sensorParam.getOneChild(sens).active();
