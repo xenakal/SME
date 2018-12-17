@@ -23,7 +23,7 @@ public class SmartHome {
     public static SmartHome getSmartHome() {
         return sh;
     }
-
+    
     public void smartHomeInit(String filename){
     //public SmartHome(String filename){
         roomsMap = new HashMap<String, Rooms>();

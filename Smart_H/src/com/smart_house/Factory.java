@@ -43,7 +43,7 @@ public class Factory {
             case lightManager: manager= new ManagerLight(); break;
             case temperatureManager: manager = new ManagerThermo(20,0); break;
             case coffeeManager: manager =new ManagerCoffee(); break;
-            case securityManager: manager = new ManagerSecurity(); break;
+            //case securityManager: manager = new ManagerSecurity(); break;
             default:System.out.println("Error in makeManagerForUsedDevices : invalid actuator type"); manager = null;
                 //TODO launch error
         }
