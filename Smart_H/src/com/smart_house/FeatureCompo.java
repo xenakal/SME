@@ -65,7 +65,7 @@ public class FeatureCompo extends Feature {
                         default: System.out.println("Error in Feature : Invalid kind of dependence");
                     }
             }
-            if (alt != 1){return !altActive;}  //TODO == 1? pour les alternative est ce qu'il faut necessairement l'une des option?
+            if (alt != 1){return !altActive;}
             return !orActive || or != 0;
         }
         return false;
