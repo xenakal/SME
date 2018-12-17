@@ -1,13 +1,12 @@
 package com.smart_house;
 
+import java.util.*;
+import java.io.FileReader;
+import java.util.Iterator;
+
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
-
-import java.io.FileReader;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
 
 public class SmartHome {
 
@@ -24,7 +23,7 @@ public class SmartHome {
     public static SmartHome getSmartHome() {
         return sh;
     }
-    
+
     public void smartHomeInit(String filename){
     //public SmartHome(String filename){
         roomsMap = new HashMap<String, Rooms>();
@@ -84,7 +83,8 @@ public class SmartHome {
                 Rooms location = roomsMap.get((String) connect.get("roomactuator"));
                 String type = (String) connect.get("actuatortype");
                 ManagerFeature manager =  location.getManagerOfType(Enum.convertToManager(type));
-                sens.attach(manager);  //TODO on pourrais permettre de lier un senor a plusieur manager directement
+                if(manager != null )
+                    sens.attach(manager);
             }
 
         } catch (Exception e) {

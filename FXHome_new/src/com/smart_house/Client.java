@@ -29,6 +29,7 @@ public class Client {
         GetCommand gc = new GetCommand();
         DetectCommand dc = new DetectCommand();
         ParamCommand pc = new ParamCommand();
+        CommandSensor sc = new CommandSensor();
         ConfigCommand cc = new ConfigCommand();
         FeatureModelCommand fmc = new FeatureModelCommand();
 
@@ -50,6 +51,7 @@ public class Client {
                         gc.usage();
                         dc.usage();
                         pc.usage();
+                        //sc.usage();
                         cc.usage();
                         fmc.usage();
                         break;
@@ -64,6 +66,9 @@ public class Client {
                         break;
                     case "param":
                         commands_handler.placeOrder(pc,in_arr);
+                        break;
+                    case "param_sensor":
+                        commands_handler.placeOrder(sc,in_arr);
                         break;
                     case "config":
                         commands_handler.placeOrder(cc, in_arr);

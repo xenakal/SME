@@ -13,6 +13,7 @@ public abstract class AbsSensor extends Object{
     protected AbsSensor(String name){
         this.name = name;
         obsList = new LinkedList<ManagerFeature>();
+
     }
 
     public String getName() {
@@ -77,6 +78,7 @@ public abstract class AbsSensor extends Object{
     }
     public void advertise(){
         if(this.isActive()) {
+            //System.out.println("advertise");
             for (ManagerFeature o : obsList) {
                 o.react(this.makeinfo());
             }

@@ -3,9 +3,7 @@ package com.smart_house;
 public class Main {
 
     public static void main (String[] args) {
-    	System.out.println("Working Directory = " +
-                System.getProperty("user.dir"));
-        String fileName = "./src/com/smart_house/config.json5";
+        String fileName = "./Smart_H/src/com/smart_house/config.json5";
         SmartHome smart = SmartHome.getSmartHome();
         smart.smartHomeInit(fileName);
         //System.out.println(smart.toString());

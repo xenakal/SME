@@ -2,7 +2,7 @@ package com.smart_house;
 
 public class Factory {
 
-    private static Factory factory = new Factory();
+    private static  Factory factory = new Factory();
 
     public static Factory getInstance(){
         return factory;
@@ -24,11 +24,9 @@ public class Factory {
         // TODO: utiliser les types de ENUM
         switch (type){
             case "motion" : return new SensorMotion(name);
-
             case "thermo" : return new SensorThermo(name);
-
             case "alarmBox": return new SensorAlarmBox(name);
-
+            case "button": return new SensorButton(name);
             default:
                 System.out.println("Error in json parse");
                 return null;
@@ -43,7 +41,7 @@ public class Factory {
             case lightManager: manager= new ManagerLight(); break;
             case temperatureManager: manager = new ManagerThermo(20,0); break;
             case coffeeManager: manager =new ManagerCoffee(); break;
-            //case securityManager: manager = new ManagerSecurity(); break;
+            case securityManager: manager = new ManagerSecurity(); break;
             default:System.out.println("Error in makeManagerForUsedDevices : invalid actuator type"); manager = null;
                 //TODO launch error
         }

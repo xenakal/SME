@@ -1,23 +1,22 @@
 package com.smart_house;
 
 import com.fx_house.ActuatorAgent;
-import com.fx_house.LightAgent;
+import com.fx_house.CoffeeAgent;
 import com.fx_house.RadiatorAgent;
 
-public class ActuRadiator implements Actuator {
+public class ActuRadiator implements Actuator{
 
     String name;
     private boolean on = false;
     private boolean isActive = false;
     private boolean fx = false;
-    private RadiatorAgent fxrad;
+    private RadiatorAgent fxagent;
 
 
     public void makeFX(ActuatorAgent fxlight){
         this.fx = true;
-        this.fxrad = (RadiatorAgent) fxlight;
+        this.fxagent = (RadiatorAgent) fxlight;
     }
-
 
     public boolean isActive() {
         return isActive;
@@ -58,13 +57,13 @@ public class ActuRadiator implements Actuator {
         System.out.println("# " + name + ": ActuRadiator on !");
         System.out.println("# radiator "+name+" increases heat");
         if(fx)
-            this.fxrad.setBackColor();
+            this.fxagent.setBackColor();
     }
 
     private void radiatorOff(){
         System.out.println("# " + name + ": ActuRadiator off !");
         if(fx)
-            this.fxrad.setBackColor();
+            this.fxagent.setBackColor();
     }
 
 
