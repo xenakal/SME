@@ -83,7 +83,8 @@ public class SmartHome {
                 Rooms location = roomsMap.get((String) connect.get("roomactuator"));
                 String type = (String) connect.get("actuatortype");
                 ManagerFeature manager =  location.getManagerOfType(Enum.convertToManager(type));
-                sens.attach(manager);  //TODO on pourrais permettre de lier un senor a plusieur manager directement
+                if(manager != null )
+                    sens.attach(manager);
             }
 
         } catch (Exception e) {

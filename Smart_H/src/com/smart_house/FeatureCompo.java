@@ -49,13 +49,21 @@ public class FeatureCompo extends Feature {
             int or = 0;
             int alt = 0;
             for(Feature c: this.getChild()){
-                switch (c.getParentDependence()){
-                    case "mandatory" : if(!c.isActive()){return false;} break;
-                    case "free": break;
-                    case "or": if(c.isActive()){ orActive = true ; or ++; }break;
-                    case "alt" : if(c.isActive()){altActive = true; alt ++; }break;
-                    default: System.out.println("Error in Feature : Invalid kind of dependence");
-                }
+                    switch (c.getParentDependence()){
+                        case "mandatory" : if(!c.isActive() || !c.check()){return false;} break;
+                        case "free":if(c.isActive() && !c.check()) return false; break;
+                        case "or":
+                            orActive = true ;
+                            if(c.isActive()){  or ++; }
+                            if(c.isActive() && !c.check()) return false;
+                            break;
+                        case "alt" :
+                            altActive = true;
+                            if(c.isActive()){ alt ++; }
+                            if(c.isActive() && !c.check()) return false;
+                            break;
+                        default: System.out.println("Error in Feature : Invalid kind of dependence");
+                    }
             }
             if (alt != 1){return !altActive;}  //TODO == 1? pour les alternative est ce qu'il faut necessairement l'une des option?
             return !orActive || or != 0;
@@ -71,10 +79,10 @@ public class FeatureCompo extends Feature {
 
     @Override
     public void deactivate() {
-        super.deactivate();
         for (Feature c : this.getChild()){
             c.deactivate();
         }
+        super.deactivate();
     }
 
     //active un enfant et le parent si necessaire
@@ -88,5 +96,8 @@ public class FeatureCompo extends Feature {
 
     public void deactivateChild(Feature child){
         child.deactivate();
+        if(isActive() && !check()){
+            super.deactivate();
+        }
     }
 }

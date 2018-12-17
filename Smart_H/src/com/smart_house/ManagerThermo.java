@@ -180,6 +180,8 @@ public class ManagerThermo implements ManagerFeature {
             }
         }
         else{
+            if(rad.getState())
+                rad.turn_off();
             System.out.println("already at good temperature");
         }
     }
@@ -197,6 +199,8 @@ public class ManagerThermo implements ManagerFeature {
             if(clim.getState())
                 clim.turn_off();
             else{
+                if(clim.getState())
+                    clim.turn_off();
                 System.out.println("Climatisor already off !");
             }
         }
