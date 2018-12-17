@@ -36,7 +36,7 @@ public class SensorAlarmBox extends AbsSensor {
     }
 
     @Override
-    void detect(int value) {
+    public void detect(int value) {
         String val = Integer.toString(value);
         if(val.hashCode() == code){
             isGoodCode = 1 ;

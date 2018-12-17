@@ -22,15 +22,22 @@ public class SensorThermo extends AbsSensor{
 
     void reset() {}
 
-    void detect(int value) {
+    public void detect(int value) {
         //System.out.println("# Température détectée: "+value);
         recorded_temp = value;
         this.advertise();
     }
 
-
-
     public Info makeinfo(){
         return new Info("temperature",  recorded_temp);
+    }
+
+    public Integer getManagerRequiredTemp(){
+        try{
+            ManagerThermo man = (ManagerThermo) obsList.get(0);
+            return man.getRequired_temperature();
+        }catch (Exception e){
+            return  null ;
+        }
     }
 }

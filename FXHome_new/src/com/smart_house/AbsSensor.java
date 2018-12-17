@@ -42,7 +42,7 @@ public abstract class AbsSensor extends Object{
     }
 
     abstract void reset();
-    abstract void detect(int value);
+    public abstract void detect(int value);
     abstract Info makeinfo();
 
 
