@@ -6,7 +6,7 @@ import javafx.scene.control.Button;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
-public class CoffeeAgent extends SensorAgent{
+public class CoffeeAgent extends ActuatorAgent{
 
     private String name;
     private Rectangle r;

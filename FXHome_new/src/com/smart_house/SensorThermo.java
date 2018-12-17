@@ -1,6 +1,6 @@
 package com.smart_house;
 
-public class SensorThermo extends AbsSensor {
+public class SensorThermo extends AbsSensor{
 
     private int recorded_temp = 25;
 
@@ -22,17 +22,9 @@ public class SensorThermo extends AbsSensor {
 
     void reset() {}
 
-    void detect(int value) {
+    public void detect(int value) {
         //System.out.println("# Température détectée: "+value);
         recorded_temp = value;
-        this.advertise();
-    }
-
-    public void detect_temperature(int temp){
-        recorded_temp = temp;
-        for (ManagerFeature o : obsList) {
-            o.active();
-        }
         this.advertise();
     }
 
@@ -41,10 +33,11 @@ public class SensorThermo extends AbsSensor {
     }
 
     public Integer getManagerRequiredTemp(){
-        ManagerThermo man = (ManagerThermo) obsList.get(0);
-        if(man != null)
+        try{
+            ManagerThermo man = (ManagerThermo) obsList.get(0);
             return man.getRequired_temperature();
-        else
-            return null;
+        }catch (Exception e){
+            return  null ;
+        }
     }
 }

@@ -18,7 +18,7 @@ public class HandleThermo implements EventHandler<ActionEvent>{
     public void handle(ActionEvent event) {
         try {
             int value = Integer.parseInt(this.textField.getText());
-            sensor.detect_temperature(value);
+            sensor.detect(value);
         }
         catch (Exception e){
             System.out.println("Temperature detected must be an integer !");

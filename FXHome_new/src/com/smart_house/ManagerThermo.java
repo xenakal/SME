@@ -35,6 +35,7 @@ public class ManagerThermo implements ManagerFeature {
 
         this.required_temperature = required_temperature;
         System.out.println("# new required temperature is " + required_temperature);
+        react(new Info("temperature", last_temp));
     }
 
 
@@ -179,6 +180,8 @@ public class ManagerThermo implements ManagerFeature {
             }
         }
         else{
+            if(rad.getState())
+                rad.turn_off();
             System.out.println("already at good temperature");
         }
     }
@@ -196,6 +199,8 @@ public class ManagerThermo implements ManagerFeature {
             if(clim.getState())
                 clim.turn_off();
             else{
+                if(clim.getState())
+                    clim.turn_off();
                 System.out.println("Climatisor already off !");
             }
         }

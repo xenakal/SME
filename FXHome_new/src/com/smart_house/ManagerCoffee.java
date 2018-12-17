@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+
 /**
  * Manage the coffe fabrication  according to presence of people
  */
@@ -85,7 +86,7 @@ public class ManagerCoffee implements ManagerFeature {
     public void react(Info info) {
         if(this.isActive()) {
             switch (info.getName()) {
-                case "motion":
+                case "button":
                     if (info.getValue() == 1) {  //true = 1
                         for (ActuCoffeeMachine cm : machines) {
                             cm.makeCoffee();

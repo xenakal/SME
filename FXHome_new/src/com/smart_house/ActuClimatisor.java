@@ -2,20 +2,20 @@ package com.smart_house;
 
 import com.fx_house.ActuatorAgent;
 import com.fx_house.ClimatisorAgent;
-import com.fx_house.RadiatorAgent;
+import com.fx_house.LightAgent;
 
-public class ActuClimatisor implements Actuator {
+public class ActuClimatisor implements Actuator{
 
     String name;
     private boolean on = false;
     private boolean isActive = false;
     private boolean fx = false;
-    private ClimatisorAgent fxrad;
+    private ClimatisorAgent fxagent;
 
 
     public void makeFX(ActuatorAgent fxlight){
         this.fx = true;
-        this.fxrad = (ClimatisorAgent) fxlight;
+        this.fxagent = (ClimatisorAgent) fxlight;
     }
 
     public boolean isActive() {
@@ -57,14 +57,13 @@ public class ActuClimatisor implements Actuator {
         System.out.println("# " + name + ": ActuClimatisor on !");
         System.out.println("# climatisor "+name+" decreases heat");
         if(fx)
-            this.fxrad.setBackColor();
+            this.fxagent.setBackColor();
     }
 
     private void climatisorOff(){
-
         System.out.println("# " + name + ": ActuClimatisor off !");
         if(fx)
-            this.fxrad.setBackColor();
+            this.fxagent.setBackColor();
     }
 
 

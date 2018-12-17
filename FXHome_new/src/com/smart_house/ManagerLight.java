@@ -32,12 +32,10 @@ public class ManagerLight implements ManagerFeature {
     public boolean isActive() {
         return isActive;
     }
-
     public void active(){
         isActive = true;
         System.out.println("light manager activate");
     }
-
     public void deactive(){
         isActive = false;
         System.out.println("light manager deactivate");
@@ -161,9 +159,6 @@ public class ManagerLight implements ManagerFeature {
                 default:
                     break;
             }
-        }
-        else{
-            System.out.println("nop");
         }
     }
 

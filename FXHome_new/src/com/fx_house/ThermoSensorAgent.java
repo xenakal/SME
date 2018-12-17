@@ -17,7 +17,7 @@ public class ThermoSensorAgent extends SensorAgent{
     private TextField textIns;
     private VBox vbox;
     SensorThermo sensor;
-    private int sens_required_temp;
+    private Integer sens_required_temp;
 
 
     public ThermoSensorAgent(AbsSensor sensor) {

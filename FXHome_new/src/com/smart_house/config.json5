@@ -4,20 +4,21 @@
     "sensorParam" : {
       "motion" : true,
       "thermo" : true,
-      "alarmBox": false
+      "alarmBox": true,
+      "button": true
     },
     "actuatorParam":{
       "light": true,
       "coffee": true,
       "radiator": true,
       "climatisor":true,
-      "alarm": false
+      "alarm": true
     },
     "functionalityParam":{
       "lightControl": true,
       "temperatureControl": true,
       "smartCoffee": true,
-      "securityControl":false
+      "securityControl":true
     }
   },
   "rooms": [
@@ -25,12 +26,15 @@
       "name": "kitchen",
       "sensor":  [
         {"name" : "motionkitchen1", "type" : "motion", "activationcondition" : "presence"},
-        {"name" : "motionkitchen2", "type" : "motion", "activationcondition" : "presence"}
+        {"name" : "motionkitchen2", "type" : "motion", "activationcondition" : "presence"},
+        {"name" : "thermo1", "type" : "thermo", "activationcondition" : "presence"}
       ],
       "actuator" : [
         {"name" : "kitlight1", "type" : "light"},
         {"name" : "kitlight2", "type" : "light"},
-        {"name": "what else...", "type" : "coffee"}
+        {"name": "radiator1", "type" : "radiator"},
+        {"name": "radiator2", "type" : "radiator"},
+        {"name": "climatisor1", "type" : "climatisor"}
       ]
     },
     {
@@ -38,13 +42,11 @@
       "sensor":  [
         {"name" : "motionbedroom", "type" : "motion", "activationcondition" : "presence"},
         {"name" : "thermo_sensor_bedroom", "type" : "thermo", "activationcondition" : "NAN"}
-        {"name" : "thermo_sensor_bedroom2", "type" : "thermo", "activationcondition" : "NAN"}
       ],
       "actuator" : [
         {"name" : "bedlight1", "type" : "light"},
         {"name" : "bedlight2", "type" : "light"},
         {"name" : "bedradiator", "type" : "radiator"}
-        {"name" : "bedcilm", "type" : "climatisor"}
       ]
     },
     {
@@ -63,6 +65,14 @@
       "roomactuator": "bedroom",
       "actuatortype": "light"
     },
+    {"sensorname" :  "motionkitchen1",
+      "roomactuator": "kitchen",
+      "actuatortype": "light"
+    },
+    {"sensorname" :  "motionkitchen2",
+      "roomactuator": "kitchen",
+      "actuatortype": "light"
+    },
     {"sensorname" :  "motionkitchen2",
       "roomactuator": "kitchen",
       "actuatortype": "light"
@@ -71,10 +81,8 @@
       "roomactuator" : "bedroom",
       "actuatortype" : "radiator"
     }
-    {"sensorname" : "thermo_sensor_bedroom2",
-    "roomactuator" : "bedroom",
-    "actuatortype" : "climatisor"
-    }
   ]
 }
+
+
 
