@@ -24,11 +24,9 @@ public class Factory {
         // TODO: utiliser les types de ENUM
         switch (type){
             case "motion" : return new SensorMotion(name);
-
             case "thermo" : return new SensorThermo(name);
-
             case "alarmBox": return new SensorAlarmBox(name);
-
+            case "button": return new SensorButton(name);
             default:
                 System.out.println("Error in json parse");
                 return null;

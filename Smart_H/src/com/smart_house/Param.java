@@ -11,34 +11,38 @@ public class Param {
     private static Param instance = new Param(); //singelton
     private FeatureCompo mainFeature;
 
+    public FeatureCompo getMainFeature() {
+        return mainFeature;
+    }
+
     public static Param getInstance(){
         return instance;
     }
 
     private Param(){
-        this.mainFeature = new FeatureCompo(true, "main", null, null);
-        FeatureCompo room = new FeatureCompo(false, "room", null, null);
+        this.mainFeature = new FeatureCompo(true, "main", null, "mandatory");
+        FeatureCompo room = new FeatureCompo(false, "room", null, "mandatory");
         this.mainFeature.add(room);
         String[][] roomNameList = {{"kitchen","mandatory"},{"bedroom","mandatory"}};//{"living","mandatory"},{"bathroom",,"mandatory"},{"balcony","free"}
         for(String[] r : roomNameList){
             room.add(new RoomFeature(r[0],r[1]));
         }
 
-        FeatureCompo sensor = new FeatureCompo(false, "sensor", null, null);
+        FeatureCompo sensor = new FeatureCompo(false, "sensor", null, "free");
         this.mainFeature.add(sensor);
-        String[][] sensorNameList = {{"motion","or"},{"thermo","or"},{"alarmBox","or"}};
+        String[][] sensorNameList = {{"motion","or"},{"thermo","or"},{"alarmBox","or"},{"button","or"}};
         for(String[] sens : sensorNameList){
             sensor.add(new sensorFeature(sens[0],sens[1]));
         }
 
-        FeatureCompo actuator = new FeatureCompo(false, "actuator", null, null);
+        FeatureCompo actuator = new FeatureCompo(false, "actuator", null, "free");
         this.mainFeature.add(actuator);
         String[][] actuNameList = {{"light","or"},{"radiator","or"},{"climatisor","or"},{"coffee","or"},{"alarm","or"}};
         for(String[] actu : actuNameList){
             actuator.add(new actuatorFeature(actu[0],actu[1]));
         }
 
-        FeatureCompo functonality = new FeatureCompo(false, "functionality", null, null);
+        FeatureCompo functonality = new FeatureCompo(false, "functionality", null, "free");
         this.mainFeature.add(functonality);
         String[][] functNameList = {{"lightControl","or"},{"temperatureControl","or"},{"smartCoffee","or"},{"securityControl","or"}};
         for(String[] funct : functNameList){
@@ -48,13 +52,13 @@ public class Param {
 
         //other constraints
         //temperaureControl => thermo & (radiator)
-        Feature[][] conditions1 = {{sensor.getOneChild("thermo")},{actuator.getOneChild("radiator"),actuator.getOneChild("cimatisor")}};
+        Feature[][] conditions1 = {{sensor.getOneChild("thermo")},{actuator.getOneChild("radiator"),actuator.getOneChild("climatisor")}};
         functonality.getOneChild("temperatureControl").setDependences(conditions1);
         //lightControl => motion & light
         Feature[][] conditions2 = {{sensor.getOneChild("motion")},{actuator.getOneChild("light")}};
         functonality.getOneChild("lightControl").setDependences(conditions2);
         //smartCoffee => coffee
-        Feature[][] conditions3 = {{actuator.getOneChild("coffee")}};
+        Feature[][] conditions3 = {{sensor.getOneChild("button")},{actuator.getOneChild("coffee")}};
         functonality.getOneChild("smartCoffee").setDependences(conditions3);
         //
         Feature[][] conditions4 = {{sensor.getOneChild("motion"),sensor.getOneChild("alarmBox")},{actuator.getOneChild("alarm")}};
@@ -90,7 +94,7 @@ public class Param {
 
             JSONObject sensorConfig= (JSONObject) config.get("sensorParam");
             FeatureCompo sensorParam = (FeatureCompo) mainFeature.getOneChild("sensor");
-            String[] sensorNameList = {"motion","thermo", "alarmBox"};
+            String[] sensorNameList = {"motion","thermo", "alarmBox","button"};
             for(String sens : sensorNameList){
                 boolean param = (boolean) sensorConfig.get(sens);
                 if(param)activeSensor(sens);//sensorParam.getOneChild(sens).active();

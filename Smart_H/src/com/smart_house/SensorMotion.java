@@ -16,7 +16,10 @@ public class SensorMotion extends AbsSensor{
     }
 
     public void reset() {
-        //TODO
+        if(movement == 1) {
+            movement = 0;
+            makeinfo();
+        }
     }
 
     public void sensor_on(){
