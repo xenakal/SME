@@ -18,7 +18,7 @@ public class AgentFactory {
 		//System.out.println("in FACTORY");
         switch (act.getType()){
             case light : return new LightAgent(act);
-            //case coffee : return new LightAgent(act);
+            //case coffee : return new CoffeeAgent(act);
             case radiator : return new RadiatorAgent(act);
             case climatisor : return new ClimatisorAgent(act);
             //case alarm : 

@@ -18,7 +18,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-public class Main extends Application {
+public class SmartHomeFX extends Application {
 
     Stage window;
     SmartHome sh;
@@ -42,30 +42,36 @@ public class Main extends Application {
             Param param = Param.getInstance();
             param.adaptToConfig("./src/com/smart_house/config.json5");
 
-			
-	        /* prepare the scene graph with the required nodes */
-            VBox appComponents = new VBox();
-
-            GridPane command_layout = createCommand(window.getMaxWidth());
-
-            FlowPane house_layout = createHome(sh);
-
-	        appComponents.getChildren().addAll(house_layout,command_layout);
-			/* prepare the scene with the required dimensions and add the scene graph to it */
-
-            Scene scene = new Scene(appComponents,1000,1000);
-            scene.getStylesheets().add(getClass().getResource("./application.css").toExternalForm());
-			
-			/* prepare the stage and add the scene to the stage and display the contents of the stage */
-
-            window.setScene(scene);
-            window.setTitle("Lele's second try");
-            window.show();
+            draw_house();
 
         } catch(Exception e) {
             e.printStackTrace();
         }
     }
+
+
+    public void draw_house(){
+
+        VBox appComponents = new VBox();
+
+        GridPane command_layout = createCommand(window.getMaxWidth());
+
+        FlowPane house_layout = createHome(sh);
+
+        appComponents.getChildren().addAll(house_layout,command_layout);
+			/* prepare the scene with the required dimensions and add the scene graph to it */
+
+        Scene scene = new Scene(appComponents,1000,1000);
+        scene.getStylesheets().add(getClass().getResource("./application.css").toExternalForm());
+
+			/* prepare the stage and add the scene to the stage and display the contents of the stage */
+
+        window.setScene(scene);
+        window.setTitle("Lele's second try");
+        window.show();
+
+    }
+
 
     /*
      * creates the basic Pane that will contain all the Rooms
@@ -190,7 +196,7 @@ public class Main extends Application {
         Button validate_button = new Button("OK !");
         Font font = new Font(28.5); //Button font's size should increase to 40
         validate_button.setFont(font);
-        validate_button.setOnAction(new HandleCommand(command_text));
+        validate_button.setOnAction(new HandleCommand(command_text, this));
 
         commandCell.add(command_text,0,0);
         commandCell.add(validate_button,1,0);

@@ -10,7 +10,6 @@ import org.json.simple.parser.JSONParser;
 
 public class SmartHome {
 
-
     private static SmartHome sh = new SmartHome();
 
     private String name;

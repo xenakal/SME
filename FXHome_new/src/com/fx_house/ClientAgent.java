@@ -3,10 +3,6 @@ import com.smart_house.*;
 import javafx.application.Platform;
 import javafx.scene.control.TextField;
 
-import javax.xml.soap.Text;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-
 
 public class ClientAgent {
 
@@ -81,6 +77,7 @@ public class ClientAgent {
                         break;
                     case "config":
                         commands_handler.placeOrder(cc, in_arr);
+                        //SmartHomeFX.getMain().draw_house();
                         break;
                     case "feature_model":
                         commands_handler.placeOrder(fmc, in_arr);
@@ -98,6 +95,7 @@ public class ClientAgent {
         }
         catch (Exception e){
             System.out.println("Some unexpected Exception occured :/ ");
+            System.out.println(e.getMessage());
         }
 
     }

@@ -41,6 +41,7 @@ public class SensorMotion extends AbsSensor{
 
     public void detect_switch(){
         movement = 1 - movement;
+        System.out.println(movement);
         //for (ManagerFeature o : obsList) {
         //    o.active(); // ici ca devrait pas poser problème, car si un bouton est appuyé, c'est qu'il est dans la configuartion (car sinon il n'apparait pas dans le projet fx, du coup comme c'est un projet séparé c'est bon)
         //}

@@ -10,15 +10,18 @@ public class HandleCommand implements EventHandler<ActionEvent> {
 
     ClientAgent command_placer;
     TextField command;
+    SmartHomeFX shfx;
 
-    public HandleCommand(TextField text){
+    public HandleCommand(TextField text, SmartHomeFX shfx){
         this.command = text;
         this.command_placer = new ClientAgent();
+        this.shfx = shfx;
     }
 
 
     @Override
     public void handle(ActionEvent event) {
         this.command_placer.execute(this.command);
+        shfx.draw_house();
     }
 }

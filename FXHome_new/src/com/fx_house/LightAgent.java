@@ -30,6 +30,7 @@ public class LightAgent extends ActuatorAgent {
 		Text text = new Text(act.getType().name());
 
         this.getChildren().addAll(r, text);
+        setBackColor();
 	}
 
 	public void setBackColor() {
