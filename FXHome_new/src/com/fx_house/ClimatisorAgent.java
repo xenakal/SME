@@ -34,7 +34,7 @@ public class ClimatisorAgent extends ActuatorAgent{
         if(act.getState())
             r.setFill(Color.CADETBLUE);
         else
-            r.setFill(Color.GRAY);
+            r.setFill(Color.DARKGRAY);
     }
 
     @Override

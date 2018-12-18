@@ -36,7 +36,7 @@ public class RadiatorAgent extends ActuatorAgent{
 		if(act.getState())
 			r.setFill(Color.DARKRED);
 		else
-			r.setFill(Color.GRAY);
+			r.setFill(Color.DARKGRAY);
 			
 	}
 

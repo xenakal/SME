@@ -18,10 +18,10 @@ public class AgentFactory {
 		//System.out.println("in FACTORY");
         switch (act.getType()){
             case light : return new LightAgent(act);
-            //case coffee : return new CoffeeAgent(act);
+            case coffee : return new CoffeeAgent(act);
             case radiator : return new RadiatorAgent(act);
             case climatisor : return new ClimatisorAgent(act);
-            //case alarm : 
+            case alarm : return new AlarmAgent(act);
             default:
                 System.out.println(act.getType());
                 System.out.println("Type error in Actuator Factory");
@@ -36,6 +36,10 @@ public class AgentFactory {
                 return new ThermoSensorAgent(sensor);
             case motion:
                 return new MotionSensorAgent(sensor);
+            case button:
+                return new ButtonSensorAgent(sensor);
+            case alarmBox:
+                return new AlarmBoxSensorAgent(sensor);
             default:
                 System.out.println("wrong type of sensor :/");
                 return null;

@@ -4,11 +4,11 @@ import com.smart_house.SensorMotion;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 
-public class HandleLight implements EventHandler<ActionEvent>{
+public class HandleMotion implements EventHandler<ActionEvent>{
 
 	private SensorMotion sensor; 
 	
-	public HandleLight(SensorMotion sensor) {
+	public HandleMotion(SensorMotion sensor) {
 		this.sensor = sensor; 
 	}
 	

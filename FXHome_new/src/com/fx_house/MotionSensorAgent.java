@@ -29,7 +29,7 @@ public class MotionSensorAgent extends SensorAgent{
         
         Button button = new Button(); 
         button.setText("Motion Sensor");
-        button.setOnAction(new HandleLight(this.sensor));
+        button.setOnAction(new HandleMotion(this.sensor));
         
 
         this.getChildren().addAll(r, button);

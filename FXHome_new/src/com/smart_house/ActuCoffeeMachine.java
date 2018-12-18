@@ -44,6 +44,8 @@ public class ActuCoffeeMachine implements Actuator{
             if(!isMakingCoffee){
                 isMakingCoffee = true;
                 System.out.println("Coffee machine :" +name + "have made a coffee");
+                if(fx)
+                    fxagent.setBackColor(true);
                 isMakingCoffee = false;
             }
     }
