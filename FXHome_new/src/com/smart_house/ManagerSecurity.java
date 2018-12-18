@@ -93,7 +93,13 @@ public class ManagerSecurity  implements ManagerFeature{
                 case "alarm":
                     if (info.getValue() == 1) {  //true = 1
                         alarmOn = !alarmOn;
-                    }else{
+                        for (ActuAlarm a : alarms) {
+                            if(alarmOn)
+                                a.alarmSet();
+                            else
+                                a.alarmNotSet();
+                        }
+                    }else{ //wrong code
                         if( alarmOn){
                             for (ActuAlarm a : alarms) {
                                 a.Bip();

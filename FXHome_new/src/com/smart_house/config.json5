@@ -25,16 +25,19 @@
     {
       "name": "kitchen",
       "sensor":  [
-        {"name" : "motionkitchen1", "type" : "motion", "activationcondition" : "presence"},
-        {"name" : "motionkitchen2", "type" : "motion", "activationcondition" : "presence"},
-        {"name" : "thermo1", "type" : "thermo", "activationcondition" : "presence"}
+        {"name" : "motionkitchen", "type" : "motion", "activationcondition" : "presence"},
+        {"name" : "thermo1", "type" : "thermo", "activationcondition" : "presence"},
+        {"name" : "don't touch", "type" : "button", "activationcondition" : "presence"},
+        {"name" : "alarmBox", "type" : "alarmBox", "activationcondition" : "presence"}
       ],
       "actuator" : [
         {"name" : "kitlight1", "type" : "light"},
         {"name" : "kitlight2", "type" : "light"},
+        {"name": "what else...", "type" : "coffee"},
         {"name": "radiator1", "type" : "radiator"},
         {"name": "radiator2", "type" : "radiator"},
-        {"name": "climatisor1", "type" : "climatisor"}
+        {"name": "climatisor1", "type" : "climatisor"},
+        {"name": "alarm1", "type" : "alarm"}
       ]
     },
     {
@@ -46,7 +49,8 @@
       "actuator" : [
         {"name" : "bedlight1", "type" : "light"},
         {"name" : "bedlight2", "type" : "light"},
-        {"name" : "bedradiator", "type" : "radiator"}
+        {"name" : "bedradiator", "type" : "radiator"},
+        {"name": "alarm2", "type" : "alarm"}
       ]
     },
     {
@@ -57,6 +61,16 @@
       "actuator" : [
         {"name" : "WClight", "type" : "light"}
       ]
+    },
+    {
+      "name": "living",
+      "sensor":  [
+        {"name" : "motionliving", "type" : "motion", "activationcondition" : "presence"}
+      ],
+      "actuator" : [
+        {"name" : "lightliving", "type" : "light"},
+        {"name": "alarm3", "type" : "alarm"}
+      ]
     }
   ],
   "makeManagerforeachroom" : true,
@@ -65,21 +79,89 @@
       "roomactuator": "bedroom",
       "actuatortype": "light"
     },
-    {"sensorname" :  "motionkitchen1",
+    {"sensorname" :  "motionkitchen",
       "roomactuator": "kitchen",
       "actuatortype": "light"
     },
-    {"sensorname" :  "motionkitchen2",
-      "roomactuator": "kitchen",
+    {"sensorname" :  "motionWC",
+      "roomactuator": "toilet",
       "actuatortype": "light"
     },
-    {"sensorname" :  "motionkitchen2",
-      "roomactuator": "kitchen",
+    {"sensorname" :  "motionliving",
+      "roomactuator": "living",
       "actuatortype": "light"
+    },
+    {"sensorname" :  "don't touch",
+      "roomactuator": "kitchen",
+      "actuatortype": "coffee"
     },
     {"sensorname" : "thermo_sensor_bedroom",
       "roomactuator" : "bedroom",
       "actuatortype" : "radiator"
+    },
+    {"sensorname" : "thermo1",
+      "roomactuator" : "kitchen",
+      "actuatortype" : "radiator"
+    },
+    {"sensorname" : "alarmBox",
+      "roomactuator" : "kitchen",
+      "actuatortype" : "alarm"
+    },
+    {"sensorname" : "alarmBox",
+      "roomactuator" : "bedroom",
+      "actuatortype" : "alarm"
+    },
+    {"sensorname" : "alarmBox",
+      "roomactuator" : "living",
+      "actuatortype" : "alarm"
+    },
+    {"sensorname" : "motionbedroom",
+      "roomactuator" : "bedroom",
+      "actuatortype" : "alarm"
+    },
+    {"sensorname" : "motionbedroom",
+      "roomactuator" : "living",
+      "actuatortype" : "alarm"
+    },
+    {"sensorname" : "motionbedroom",
+      "roomactuator" : "kitchen",
+      "actuatortype" : "alarm"
+    },
+    {"sensorname" : "motionkitchen",
+      "roomactuator" : "bedroom",
+      "actuatortype" : "alarm"
+    },
+    {"sensorname" : "motionkitchen",
+      "roomactuator" : "living",
+      "actuatortype" : "alarm"
+    },
+    {"sensorname" : "motionkitchen",
+      "roomactuator" : "kitchen",
+      "actuatortype" : "alarm"
+    },
+    {"sensorname" : "motionWC",
+      "roomactuator" : "bedroom",
+      "actuatortype" : "alarm"
+    },
+    {"sensorname" : "motionWC",
+      "roomactuator" : "living",
+      "actuatortype" : "alarm"
+    },
+    {"sensorname" : "motionWC",
+      "roomactuator" : "kitchen",
+      "actuatortype" : "alarm"
+    },
+    {"sensorname" : "motionliving",
+      "roomactuator" : "bedroom",
+      "actuatortype" : "alarm"
+    },
+    {"sensorname" : "motionliving",
+      "roomactuator" : "living",
+      "actuatortype" : "alarm"
+    },
+    {"sensorname" : "motionliving",
+      "roomactuator" : "kitchen",
+      "actuatortype" : "alarm"
     }
   ]
 }

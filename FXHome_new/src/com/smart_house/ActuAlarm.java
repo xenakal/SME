@@ -1,6 +1,7 @@
 package com.smart_house;
 
 import com.fx_house.ActuatorAgent;
+import com.fx_house.AlarmAgent;
 import com.fx_house.LightAgent;
 
 public class ActuAlarm implements Actuator{
@@ -8,12 +9,12 @@ public class ActuAlarm implements Actuator{
     String name;
     private boolean isActive = false;
     private boolean fx = false;
-    private LightAgent fxagent;
+    private AlarmAgent fxagent;
 
 
     public void makeFX(ActuatorAgent fxlight){
         this.fx = true;
-        this.fxagent = (LightAgent) fxlight;
+        this.fxagent = (AlarmAgent) fxlight;
     }
 
     public boolean isActive() {
@@ -42,19 +43,20 @@ public class ActuAlarm implements Actuator{
     public void Bip(){
         System.out.println("Beeeeeep");
         if(fx)
-            this.fxagent.setBackColor();
+            this.fxagent.setBackColor("bip");
     }
-
-    public void Stop(){
-        if(fx)
-            this.fxagent.setBackColor();
+    public  void alarmSet(){
+        this.fxagent.setBackColor("on");
+    }
+    public  void alarmNotSet(){
+        this.fxagent.setBackColor("off");
     }
 
 
     public void callThePolice(){
         System.out.println("Call the police");
         if(fx)
-            this.fxagent.setBackColor();
+            this.fxagent.setBackColor("bip");
     }
 
     public String toString(){

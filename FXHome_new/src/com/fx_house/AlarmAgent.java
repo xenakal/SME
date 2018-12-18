@@ -1,22 +1,21 @@
 package com.fx_house;
 
-import com.fx_house.ActuatorAgent;
-import com.smart_house.ActuCoffeeMachine;
+import com.smart_house.ActuAlarm;
 import com.smart_house.Actuator;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 
-public class CoffeeAgent extends ActuatorAgent {
+public class AlarmAgent extends ActuatorAgent {
 
     private String name;
     Rectangle r;
-    private ActuCoffeeMachine act;
+    private ActuAlarm act;
 
-    public CoffeeAgent(Actuator act) {
+    public AlarmAgent(Actuator act) {
         //System.out.println("LightAgent created");
         this.name = act.getName();
-        this.act = (ActuCoffeeMachine) act;
+        this.act = (ActuAlarm) act;
         act.makeFX(this);
 
         r = new Rectangle();
@@ -33,19 +32,21 @@ public class CoffeeAgent extends ActuatorAgent {
     }
 
     public void setBackColor() {
-        this.setBackColor(false);
+        this.setBackColor("off");
     }
-    public void setBackColor(Boolean on) {
-        if(on)
-            r.setFill(Color.BURLYWOOD);
-        else
-            r.setFill(Color.GRAY);
-
+    public void setBackColor(String state) {
+        switch (state){
+            case "off":r.setFill(Color.DARKGRAY); break;
+            case "on": r.setFill(Color.LIGHTGRAY); break;
+            case "bip" : r.setFill(Color.RED); break;
+        }
     }
 
     @Override
     public String getName() {
         return this.name;
     }
-}
 
+
+
+}

@@ -36,7 +36,7 @@ public class LightAgent extends ActuatorAgent {
 		if(act.getState())
 			r.setFill(Color.YELLOW); 
 		else
-			r.setFill(Color.GRAY);
+			r.setFill(Color.DARKGRAY);
 			
 	}
 

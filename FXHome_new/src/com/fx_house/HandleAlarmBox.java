@@ -1,16 +1,16 @@
 package com.fx_house;
 
-import com.smart_house.SensorThermo;
+import com.smart_house.SensorAlarmBox;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.TextField;
 
-public class HandleThermo implements EventHandler<ActionEvent>{
+public class HandleAlarmBox implements EventHandler<ActionEvent> {
 
-    private SensorThermo sensor;
+    private SensorAlarmBox sensor;
     private TextField textField;
 
-    public HandleThermo(SensorThermo sensor, TextField textField) {
+    public HandleAlarmBox(SensorAlarmBox sensor, TextField textField) {
         this.sensor = sensor;
         this.textField = textField;
     }
@@ -21,8 +21,7 @@ public class HandleThermo implements EventHandler<ActionEvent>{
             sensor.detect(value);
         }
         catch (Exception e){
-            System.out.println("Temperature detected must be an integer !");
+            System.out.println("Code must be an integer of 4 digits !");
         }
     }
-
 }
