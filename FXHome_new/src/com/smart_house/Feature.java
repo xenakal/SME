@@ -47,7 +47,7 @@ public abstract class Feature{
 
     public boolean isActivable(){
         isActivate = true;
-        boolean bo = check() && Param.getInstance().getMainFeature().checkDependences();
+        boolean bo = check(); //&& Param.getInstance().getMainFeature().checkDependences();
         isActivate = false;
         return bo;
     }

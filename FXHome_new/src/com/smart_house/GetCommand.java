@@ -68,7 +68,7 @@ public class GetCommand implements GeneralCommand{
     }
 
     public void usage(){
-        System.out.println("Usage : get room actuator_type attribute");
+        System.out.println("Usage GET : get room actuatorType attribute");
     }
 
 }

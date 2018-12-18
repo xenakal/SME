@@ -54,6 +54,6 @@ public class FeatureModelCommand implements GeneralCommand{
     }
 
     public void usage(){
-        System.out.println("Usage FEATURE_MODEL: feature_model isActivate/activate/disactivate   room/sensor/actuator/functionality  name");
+        System.out.println("Usage FEATURE_MODEL: featureModel isActivate/activate/disactivate   sensor/actuator/functionality  name");
     }
 }

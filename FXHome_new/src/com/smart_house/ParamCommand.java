@@ -72,7 +72,7 @@ public class ParamCommand implements GeneralCommand{
     }
 
     public void usage(){
-        System.out.println("Usage : param functionnality command_type room value");
+        System.out.println("Usage PARAM : param functionnality command_type room value");
         System.out.println("The command_type are :   lightControl : ");
         System.out.println("                   temperatureControl : setRequiredTemperature, setTolerance");
         System.out.println("                      securityControl : setCode");
